@@ -16,7 +16,31 @@ const router = createRouter({
         {
           path: '/dashboard',
           component: ()=> import("../views/Dashboard/DashboardView.vue")
-       }
+       },
+       {
+          path:'/admins',
+          component: () => import("../views/Admins/AdminView.vue")
+       },
+       {
+        path:'/users',
+        component: () => import("../views/Users/UserView.vue")
+       }, 
+       {
+        path : 'info',
+        component : () => import("../views/Info/InfoView.vue")
+       },
+       {
+        path : '/sellers',
+        component: () => import("../views/Sellers/SellerView.vue")
+       },
+       {
+        path : '/buyers',
+        component: () => import("../views/Buyers/BuyerView.vue")
+       },
+       {
+        path : '/storages',
+        component: () => import("../views/Storages/StorageView.vue")
+       },
       ]
     }
   ]
