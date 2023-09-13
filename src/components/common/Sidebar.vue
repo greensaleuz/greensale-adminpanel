@@ -1,4 +1,9 @@
 
+<script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
+</script>
+
 <template>
     <aside id="logo-sidebar"
         class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
@@ -10,7 +15,7 @@
                         <div
                             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <icon name="dashboard" class="text-gray-900 dark:text-white w-6 h-6"></icon>
-                            <span class="ml-3">Dashboard</span>
+                            <span class="ml-3">{{$t ("dashboard") }}</span>
                         </div>
                     </RouterLink>
                 </li>
@@ -19,7 +24,7 @@
                         <div
                             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <icon name="category" class="text-gray-900 dark:text-white w-6 h-6"></icon>
-                            <span class="flex-1 ml-3 whitespace-nowrap">Category</span>
+                            <span class="flex-1 ml-3 whitespace-nowrap">{{$t ("categories") }}</span>
                         </div>
                     </RouterLink>
                 </li>
@@ -28,7 +33,7 @@
                         <div
                             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <icon name="admin" class="text-gray-900 dark:text-white w-6 h-6"></icon>
-                            <span class="flex-1 ml-3 whitespace-nowrap">Admins</span>
+                            <span class="flex-1 ml-3 whitespace-nowrap">{{$t ("admins") }}</span>
                         </div>
                     </RouterLink>
                 </li>
@@ -37,7 +42,7 @@
                         <div
                             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <icon name="user" class="text-gray-900 dark:text-white w-6 h-6"></icon>
-                            <span class="flex-1 ml-3 whitespace-nowrap">Users</span>
+                            <span class="flex-1 ml-3 whitespace-nowrap">{{$t ("users") }}</span>
                         </div>
                     </RouterLink>
                 </li>
