@@ -1,0 +1,69 @@
+{
+    "dashboard": "Asosiy",
+    "admins": "Adminlar",
+    "users": "Foydalanuvchilar",
+    "announcements":"E'lonlar",
+    "buyerannouncements": "Oluvchilar e'loni",
+    "sellerannnouncements": "Sotuvchilar e'loni",
+    "storagsannouncements": "Yukxonalar e'loni",
+    "categories": "Toifalar",
+    "informations": "Ma'lumotlar",
+    "settings": "Sozlamalar",
+    
+    "theme":"Mavzu",
+
+    "en":"Inglizcha",
+    "ru":"Ruscha",
+    "uz":"O'zbekcha",
+
+    "edit":"Tahrirlash",
+    "delete":"O'chirish",
+    "create":"Qo'shish",
+
+    "enter_a_category_name":"Toifa nomini kiriting",
+    "add_a_category":"Toifani qo'shish",
+
+    "koproq_malumot":"Ko'proq ma'lumot"  ,
+    "categorydleteaccess":"Haqiqatan ham bu toifani oʻchirib tashlamoqchimisiz?",
+
+    "censel":"Chiqish",
+    "yes":"Ha",
+
+    "newCategoryName":"Toifa nomi",
+    "update":"Yangilash",
+
+    "fullname":"Ism familiya",
+    "phonenumber":"Telefon raqamlar",
+    "price":"Narx",
+    "description":"Izoh",
+    "title":"Sarlavha",
+    "capacity":"Miqor",
+    "capasitymeasure":"O'lchovi",
+    "region":"Viloyat",
+    "district":"Tuman",
+    "type":"Turi",
+    "createdAt":"Qo'shilgan vaqti",
+    "updated":"Yamgilangan vaqti",
+    "status":"Holati",
+
+    "sellerpostinformation":"Sotuvchi e'loni ma'lumotlari",
+    "buyerpostinformation":"Xarid qiluvchi E'loni ma'lumotlari",
+
+    "announcemment":"Barcha e'lonlar",
+    "xaridqiluvchilareloni":"Xarid qiluvchilar e'loni",
+    "newannouncements":"Yangi e'lonlar",
+    "kelishilganlar":"Kelishilganlar",
+
+    "firsName":"Ism",
+    "phone":"Telefon raqam",
+    "adress":"Manzil",
+    "lastname":"Familiya",
+
+    "a":"Bir yillik e'lonlar soni",
+    "b":"Bir yillik olingan e'lonlar soni",
+    "c":"Band qilinmagan e'lonlar soni",
+    "d":"Foydalanuvchilar soni",
+
+    "postdleteaccess":"Haqiqatan ham bu e'lonni oʻchirib tashlamoqchimisiz?",
+    "postinfoubdate":"E'lon ma'lumotlarini yangilash"
+    }
