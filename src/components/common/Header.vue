@@ -18,7 +18,7 @@ onMounted(() => {
             </svg>
          </button>
         <a class="flex ml-2 md:mr-24">
-          <img src="../../assets/logo/logo/SVG/Artboard.svg" class="h-11 mr-3" alt="" />
+          <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="FlowBite Logo" />
           <p class=" text-xl pt-1  font-bold sm:text-2xl whitespace-nowrap dark:text-white">Green Sale</p>
         </a>
       </div>
