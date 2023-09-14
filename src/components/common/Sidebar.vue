@@ -49,7 +49,7 @@ const { t } = useI18n()
                 <li>
                     <RouterLink to="/sellers">
                         <div class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                            <icon name="info" class="text-gray-900 dark:text-white w-6 h-6"></icon>
+                            <icon name="post" class="text-gray-900 dark:text-white w-6 h-6"></icon>
                             <span class="flex-1 ml-3 whitespace-nowrap">{{$t ("sellerannnouncements") }}</span>
                         </div>
                     </RouterLink>                
@@ -57,7 +57,7 @@ const { t } = useI18n()
                 <li>
                     <RouterLink to="/buyers">
                         <div class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                            <icon name="info" class="text-gray-900 dark:text-white w-6 h-6"></icon>
+                            <icon name="post" class="text-gray-900 dark:text-white w-6 h-6"></icon>
                             <span class="flex-1 ml-3 whitespace-nowrap">{{$t ("buyerannouncements") }}</span>
                         </div>
                     </RouterLink>                
@@ -65,7 +65,7 @@ const { t } = useI18n()
                 <li>
                     <RouterLink to="/storages">
                         <div class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                            <icon name="info" class="text-gray-900 dark:text-white w-6 h-6"></icon>
+                            <icon name="post" class="text-gray-900 dark:text-white w-6 h-6"></icon>
                             <span class="flex-1 ml-3 whitespace-nowrap">{{$t ("storagsannouncements") }}</span>
                         </div>
                     </RouterLink>                
