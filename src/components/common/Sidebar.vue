@@ -50,7 +50,7 @@ const { t } = useI18n()
                     <RouterLink to="/sellers">
                         <div class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <icon name="info" class="text-gray-900 dark:text-white w-6 h-6"></icon>
-                            <span class="flex-1 ml-3 whitespace-nowrap">Sellers</span>
+                            <span class="flex-1 ml-3 whitespace-nowrap">{{$t ("sellerannnouncements") }}</span>
                         </div>
                     </RouterLink>                
                 </li>
@@ -58,7 +58,7 @@ const { t } = useI18n()
                     <RouterLink to="/buyers">
                         <div class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <icon name="info" class="text-gray-900 dark:text-white w-6 h-6"></icon>
-                            <span class="flex-1 ml-3 whitespace-nowrap">Buyers</span>
+                            <span class="flex-1 ml-3 whitespace-nowrap">{{$t ("buyerannouncements") }}</span>
                         </div>
                     </RouterLink>                
                 </li>
@@ -66,7 +66,7 @@ const { t } = useI18n()
                     <RouterLink to="/storages">
                         <div class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <icon name="info" class="text-gray-900 dark:text-white w-6 h-6"></icon>
-                            <span class="flex-1 ml-3 whitespace-nowrap">Storages</span>
+                            <span class="flex-1 ml-3 whitespace-nowrap">{{$t ("storagsannouncements") }}</span>
                         </div>
                     </RouterLink>                
                 </li>
@@ -74,7 +74,7 @@ const { t } = useI18n()
                     <RouterLink to="/info">
                         <div class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <icon name="info" class="text-gray-900 dark:text-white w-6 h-6"></icon>
-                            <span class="flex-1 ml-3 whitespace-nowrap">Ma'lumot</span>
+                            <span class="flex-1 ml-3 whitespace-nowrap">{{$t ("informations") }}</span>
                         </div>
                     </RouterLink>                
                 </li>
