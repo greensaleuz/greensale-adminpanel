@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import LanguageSwitcher from './LanguageSwitcher.vue';
 import ThemeSwitcher from '../common/ThemeSwitcher.vue'
 import { onMounted } from 'vue'
 import { initFlowbite } from 'flowbite'
@@ -23,6 +24,7 @@ onMounted(() => {
         </a>
       </div>
       <div class="flex items-center">
+        <LanguageSwitcher></LanguageSwitcher>
           <ThemeSwitcher></ThemeSwitcher>
           <div class="flex items-center ml-3">
             <div>
@@ -61,6 +63,4 @@ onMounted(() => {
   </div>
 </nav>
 </template>
-
-
 
