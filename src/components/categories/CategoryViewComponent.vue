@@ -1,28 +1,30 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-
+import axios from 'axios';
 export default defineComponent({
   components: {
   },
   props: {
     id: Number,
     name: String,
-    imagePath: String,
-    description: String,
     createdAt: Date,
     updatedAt: Date
   },
   data() {
     return {
-      baseURL: '' as string,
-      createdAtString: '' as string,
-      updatedAtString: '' as string
+      baseURL:'' as string,
+      createdAtString: '' as String,
+      updatedAtString: '' as String
     }
   },
   methods: {
+    getBaseURL(){
+      this.baseURL = axios.defaults.baseURL!;
+      console.log(this.baseURL);
+    }
   },
   mounted() {
-    this.load()
+    this.getBaseURL();
   }
 })
 </script>
