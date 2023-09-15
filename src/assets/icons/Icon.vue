@@ -50,7 +50,7 @@
         </g>
     </svg>
     <svg v-else-if="name === 'info'" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-        width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="text-gray-900 dark:text-white w-5 h-5">
+         width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="text-gray-900 dark:text-white w-5 h-5">
         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
             <polygon points="0 0 24 0 24 24 0 24"></polygon>
             <rect fill="currentColor" opacity="0.3" x="2" y="5" width="20" height="2" rx="1"></rect>
