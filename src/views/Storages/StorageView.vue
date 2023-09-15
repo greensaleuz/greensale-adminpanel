@@ -36,25 +36,22 @@ export default defineComponent({
      <template v-for="element in postsList">
        
       <StorageAnnouncementViewComponent 
-        :id=element.id
-        :fullName=element.fullName
-        :userPhoneNumber=element.userPhoneNumber
-        :postPhoneNumber = element.postPhoneNumber
-        :categoryName=element.categoryName
-        :title=element.title
-        :info=element.info
-        :description=element.description
-        :price=element.price
-        :capacity=element.capacity
-        :capacityMeasure=element.capacityMeasure
-        :type=element.type
-        :region=element.region
-        :district=element.district
-        :address=element.address
-        :status=element.status
-        :createdAt=element.createdAt
-        :updatedAt=element.updatedAt
-        :imagePath=element.imagePath
+        :Id=element.Id
+        :UserId = element.UserId
+        :FullName=element.FullName
+        :UserPhoneNumber=element.PhoneNumber
+        :Info=element.Info
+        :Description=element.Description
+        :Region=element.Region
+        :District=element.District
+        :Address=element.Address
+        :CreatedAt=element.CreatedAt
+        :UpdatedAt=element.UpdatedAt
+        :ImagePath=element.ImagePath
+        :AverageStars=element.AverageStars
+        :UserStars = element.UserStars
+        :AddressLatitude = element.AddressLatitude
+        :AddressLongitude = element.AddressLongitude
       ></StorageAnnouncementViewComponent>
     
     </template>  
