@@ -65,5 +65,11 @@
     "d":"Number of users",
     
     "postdleteaccess":"Are you sure you want to delete this announcement?",
-    "postinfoubdate":"Update ad information"
+    "postinfoubdate":"Update ad information",
+
+    "TermsConditions":"Terms & Conditions",
+    "PrivacyPolicy":"Privacy Policy",
+    "About":"About",
+    "Telegram":"Telegram",
+    "SignOut":"Sign Out"
     }
