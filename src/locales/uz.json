@@ -65,5 +65,12 @@
     "d":"Foydalanuvchilar soni",
 
     "postdleteaccess":"Haqiqatan ham bu e'lonni oʻchirib tashlamoqchimisiz?",
-    "postinfoubdate":"E'lon ma'lumotlarini yangilash"
+    "postinfoubdate":"E'lon ma'lumotlarini yangilash",
+
+    "TermsConditions":"Foydalanish shartlari",
+    "PrivacyPolicy":"Maxfiylik siyosati",
+    "About":"Biz haqimizda",
+    "Telegram":"Telegram",
+    "SignOut":"Chiqish"
+
     }
