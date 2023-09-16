@@ -8,21 +8,22 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: () => import("../layouts/Layout.vue"),
+      redirect:"/auth/login",
       children :[
         {
-           path: '/categories',
+           path: 'categories',
            component: ()=> import("../views/Categories/CategoryView.vue")
         },
         {
-          path: '/dashboard',
+          path: 'dashboard',
           component: ()=> import("../views/Dashboard/DashboardView.vue")
        },
        {
-          path:'/admins',
+          path:'admins',
           component: () => import("../views/Admins/AdminView.vue")
        },
        {
-        path:'/users',
+        path:'users',
         component: () => import("../views/Users/UserView.vue")
        }, 
        {
@@ -30,17 +31,29 @@ const router = createRouter({
         component : () => import("../views/Info/InfoView.vue")
        },
        {
-        path : '/sellers',
+        path : 'sellers',
         component: () => import("../views/Sellers/SellerView.vue")
        },
        {
-        path : '/buyers',
+        path : 'buyers',
         component: () => import("../views/Buyers/BuyerView.vue")
        },
        {
-        path : '/storages',
+        path : 'storages',
         component: () => import("../views/Storages/StorageView.vue")
        },
+       {
+        path : 'auth',
+        component : () => import ("../layouts/AuthLayout.vue"),
+        redirect:"/auth/login",
+        children:
+        [
+          {
+            path:'login',
+            component: ()=> import ("../views/auth/LoginView.vue")
+          }
+        ]
+      }
       ]
     }
   ]

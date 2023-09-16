@@ -2,9 +2,8 @@
 import Header from "../components/common/Header.vue"
 import Sidebar from "../components/common/Sidebar.vue"
 import Footer from "../components/common/Footer.vue"
-import ThemeSwitcher from "@/components/common/ThemeSwitcher.vue";
-import ThemeSetter from "@/components/common/ThemeSetter.vue";
-import FlowbiteSetup from "@/FlowbiteSetup.vue";
+import ThemeSetter from "../components/common/ThemeSetter.vue";
+import FlowbiteSetup from "../FlowbiteSetup.vue";
 import { RouterView } from "vue-router";
 </script>
 
