@@ -1,6 +1,10 @@
-import axios from 'axios';
+import axios from "axios";
+import Cookies from 'js-cookie';
 const instance = axios.create({
-  baseURL: "http://128.199.140.234:3030/",//process.env.VUE_APP_BASE_URL // Set your base URL here
+    baseURL: "http://128.199.140.234:3030",
+    headers:{
+        ['Authorization'] : `Bearer ${Cookies.get("access_token")}`
+    }
 });
 // Interceptors for handling common scenarios
 instance.interceptors.response.use(

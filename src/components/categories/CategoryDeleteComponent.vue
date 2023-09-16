@@ -1,55 +1,53 @@
 <script lang="ts">
-import { defineComponent } from "vue";
-import axios from '../../plugins/axios';
-export default defineComponent({
-    components: {
+    import { defineComponent } from "vue";
+    import axios from '../../plugins/axios';
+    export default defineComponent({
+        components: {
 
-    },
-    props: {
-        idcategory: Number
-    },
-    data() {
-        return {
-            showDeleteModal: false
-        };
-    },
-    methods: {
-        openDeleteModal() {
-            this.showDeleteModal = true;
         },
-        closeDeleteModal() {
-            this.showDeleteModal = false;
+        props:{
+            idcategory:Number
         },
-        async confirmDelete() {
-            debugger;
-            const response = await axios.delete("/api/admin/categories/" + this.idcategory);
-            if (response && response.status) {
-                console.log(response.status.toString());
+        data() {
+            return {
+                showDeleteModal: false
+            };
+        },
+        methods: {
+            openDeleteModal() {
+                this.showDeleteModal = true;
+            },
+            closeDeleteModal() {
+                this.showDeleteModal = false;
+            },
+            async confirmDelete() {
+                debugger;
+                const response = await axios.delete("/api/admin/categories/"+this.idcategory);
+                console.log("mkkjnjhj"+response.status)
                 console.log("Deleting the category...");
                 this.$router.push('categories')
                 this.closeDeleteModal();
                 location.reload();
             }
-            else {
-                console.log("Response status is undefined or null.");
-            }
-
         }
-    }
-});
-</script>
+    });
+    </script>
 
 <template>
     <!--begin:: Delete Modal Button-->
-    <button type="button" @click="openDeleteModal" data-modal-target="staticModal" data-modal-toggle="staticModal"
-        class="text-white w-full py-2 px-1 my-1 mt-2 bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm text-center">
-        <div class="flex flex-wrap items-center">
-            <icon name="delete"></icon>
-            <p class="mx-2">{{ $t('delete') }}</p>
-        </div>
-    </button>
+    <button
+        type="button"
+        @click="openDeleteModal"
+        data-modal-target="staticModal" data-modal-toggle="staticModal"
+        class="text-white w-full py-2 px-1 my-1 mt-2 bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm text-center"
+      >
+      <div class="flex flex-wrap items-center">
+          <icon name="delete"></icon>
+          <p class="mx-2">{{ $t('delete') }}</p>
+     </div>
+        </button>
     <!--end:: Delete Modal Button-->
-
+    
     <!--begin:: Delete Modal Window-->
     <div v-if="showDeleteModal"
         class="fixed top-0 left-0 right-0 z-50 w-full h-screen flex items-center justify-center bg-black bg-opacity-50">
@@ -66,15 +64,15 @@ export default defineComponent({
                     <span class="sr-only mt-10">Close modal</span>
                 </button>
                 <div class="p-6 text-center">
-
+                   
                     <h3 class="my-5 text-lg font-normal text-gray-500 dark:text-gray-400 ">
-                        {{ $t('categorydleteaccess') }}</h3>
-                    <button @click="closeDeleteModal" type="button"
-                        class="text-gray-500 mr-6 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
-                        {{ $t('censel') }}</button>
-                    <button @click="confirmDelete" type="button"
+                       {{ $t('categorydleteaccess')}}</h3>
+                    <button  @click="closeDeleteModal" type="button"
+                             class="text-gray-500 mr-6 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                             {{$t('censel')}}</button>
+                    <button  @click="confirmDelete" type="button"
                         class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
-                        {{ $t('yes') }}
+                        {{$t('yes')}}
                     </button>
 
                 </div>
