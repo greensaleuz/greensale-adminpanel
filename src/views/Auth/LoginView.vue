@@ -13,6 +13,7 @@ export default defineComponent({
   },
   methods: {
     async loginAsync() {
+      debugger;
       var loginDto = new AuthDtos()
       loginDto.phoneNumber = this.phone?.toString() || ""
       loginDto.password = this.password?.toString() || ""
