@@ -13,3 +13,4 @@ export function formatDate(date: Date): string {
     if(minutes.length == 1) minutes = "0"+minutes;
     return day+"."+month+"."+year+' '+hours+':'+minutes;
 }
+
