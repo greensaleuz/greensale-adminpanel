@@ -10,7 +10,7 @@
                     <a href="#" class="mr-4 hover:underline md:mr-6 ">{{ $t("About") }}</a>
                 </li>
                 <li>
-                    <a href="#" class="mr-4 hover:underline md:mr-6">{{ $t("PrivacyPolicy") }}</a>
+                    <a href="https://github.com/SamandarYigitaliyev" class="mr-4 hover:underline md:mr-6">{{ $t("GitHub") }}</a>
                 </li>
                 <li>
                     <a href="#" class="mr-4 hover:underline md:mr-6">{{ $t("TermsConditions") }}</a>
