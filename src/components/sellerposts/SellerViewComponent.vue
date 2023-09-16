@@ -43,7 +43,7 @@ export default defineComponent({
       this.updatedAtString = formatDate(this.updatedAt!)
     },
     exit(){
-      localStorage.setItem("sellerById",this.id);
+      localStorage.setItem("sellerById",this.id?.toString() || "");
       this.$router.push('sellerinformation')
     }
   },
