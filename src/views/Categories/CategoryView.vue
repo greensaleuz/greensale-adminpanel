@@ -1,13 +1,16 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { CategoryViewModel } from '@/viewmodels/CategoryViewModels'
-import CategoryViewComponent from '@/components/categories/CategoryViewComponent.vue'
-import CategorySkeletonComponent from '@/components/categories/CategorySkeletonComponent.vue'
-import axios from '@/plugins/axios'
+import { CategoryViewModel } from '../../viewmodels/CategoryViewModels'
+import { CategoryDto } from '../../dtos/CategoryDto'
+import CategoryViewComponent from '../../components/categories/CategoryViewComponent.vue'
+import CategoryCreateComponent from '../../components/categories/CategoryCreateComponent.vue'
+import CategorySkeletonComponent from '../../components/categories/CategorySkeletonComponent.vue'
+import axios from '../../plugins/axios'
 
 export default defineComponent({
   components: {
-    CategoryViewComponent,CategorySkeletonComponent
+    CategoryViewComponent,CategorySkeletonComponent,
+    CategoryCreateComponent,CategoryDto
   },
   data() {
     return {
@@ -46,7 +49,11 @@ export default defineComponent({
     </template>
   </ul>
   <!--end:: Categories Skeletons-->
+
   <ul v-show="isLoaded==true">
+    <CategoryCreateComponent>
+      <icon name="create"></icon>
+    </CategoryCreateComponent>
     <template v-for="element in categoriesList">
       <CategoryViewComponent
         :id="element.id"
