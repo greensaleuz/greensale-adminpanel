@@ -42,19 +42,11 @@ const router = createRouter({
         path : 'storages',
         component: () => import("../views/Storages/StorageView.vue")
        },
-       {
-        path : 'auth',
-        component : () => import ("../layouts/AuthLayout.vue"),
-        redirect:"/auth/login",
-        children:
-        [
-          {
-            path:'login',
-            component: ()=> import ("../views/auth/LoginView.vue")
-          }
-        ]
-      }
-      ]
+      ],
+    },
+    {
+      path:"/auth/login",
+      component: ()=> import ("../views/auth/LoginView.vue")
     }
   ]
 })
