@@ -33,7 +33,6 @@ export default defineComponent({
             else {
                 console.log("Response status is undefined or null.");
             }
-
         }
     }
 });
@@ -42,9 +41,9 @@ export default defineComponent({
 <template>
     <!--begin:: Delete Modal Button-->
     <button type="button" @click="openDeleteModal" data-modal-target="staticModal" data-modal-toggle="staticModal"
-        class="text-white w-full py-2 px-1 my-1 mt-2 bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm text-center">
-        <div class="flex flex-wrap items-center">
-            <icon name="delete"></icon>
+        class="text-white py-2 px-1 my-1 mt-2 bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm text-center">
+        <div class="flex flex-nowrap items-center w-32 ">
+            <icon name="delete"></icon>            
             <p class="mx-2">{{ $t('delete') }}</p>
         </div>
     </button>

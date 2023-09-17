@@ -45,9 +45,9 @@ export default defineComponent({
     <button
         type="button"
         @click="openModal"
-        class="text-white w-full py-2 px-1 my-1 mt-7 bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm text-center"
+        class="text-white  py-2 px-1 my-1 mt-7 bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm text-center"
       >
-        <div class=" flex flex-wrap items-center">
+        <div class=" flex flex-nowrap items-center w-32">
           <icon name="edit"></icon>
           <p class="mx-2">{{ $t('edit') }}</p>
      </div>
