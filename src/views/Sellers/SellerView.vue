@@ -1,4 +1,4 @@
-<script lang="ts">
+<script  lang="ts">
 import { defineComponent } from 'vue';
 import { SellerAnnouncementViewModel } from '../../viewmodels/SellerViewModel';
 import SellerAnnouncementViewComponent from '../../../src/components/sellerposts/SellerViewComponent.vue';

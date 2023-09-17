@@ -42,6 +42,10 @@ const router = createRouter({
         path : 'storages',
         component: () => import("../views/Storages/StorageView.vue")
        },
+       {
+        path:'sellerinformation',
+        component:()=> import ("../views/Sellers/SellerGetByIdView.vue")
+      },
       ],
     },
     {

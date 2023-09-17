@@ -43,6 +43,7 @@ export default defineComponent({
       this.updatedAtString = formatDate(this.updatedAt!)
     },
     exit(){
+      
       localStorage.setItem("sellerById",this.id?.toString() || "");
       this.$router.push('sellerinformation')
     }
@@ -84,7 +85,7 @@ export default defineComponent({
       style="width: 290px;">{{ description }}</p>
       </div>
       <button 
-      @click="exit"
+      @click="exit" 
       type="button" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm  py-1  text-center px-2 mx-2  mt-1 mb-3">{{ $t('koproq_malumot') }}</button>
     </div>
   </div>

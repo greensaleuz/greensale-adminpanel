@@ -15,7 +15,7 @@ const { t } = useI18n()
                         <div
                             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <icon name="dashboard" class="text-gray-900 dark:text-white w-6 h-6"></icon>
-                            <span class="ml-3">{{$t ("dashboard") }}</span>
+                            <span class="ml-3">{{ $t("dashboard") }}</span>
                         </div>
                     </RouterLink>
                 </li>
@@ -24,7 +24,7 @@ const { t } = useI18n()
                         <div
                             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <icon name="category" class="text-gray-900 dark:text-white w-6 h-6"></icon>
-                            <span class="flex-1 ml-3 whitespace-nowrap">{{$t ("categories") }}</span>
+                            <span class="flex-1 ml-3 whitespace-nowrap">{{ $t("categories") }}</span>
                         </div>
                     </RouterLink>
                 </li>
@@ -33,7 +33,7 @@ const { t } = useI18n()
                         <div
                             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <icon name="admin" class="text-gray-900 dark:text-white w-6 h-6"></icon>
-                            <span class="flex-1 ml-3 whitespace-nowrap">{{$t ("admins") }}</span>
+                            <span class="flex-1 ml-3 whitespace-nowrap">{{ $t("admins") }}</span>
                         </div>
                     </RouterLink>
                 </li>
@@ -42,43 +42,47 @@ const { t } = useI18n()
                         <div
                             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <icon name="user" class="text-gray-900 dark:text-white w-6 h-6"></icon>
-                            <span class="flex-1 ml-3 whitespace-nowrap">{{$t ("users") }}</span>
+                            <span class="flex-1 ml-3 whitespace-nowrap">{{ $t("users") }}</span>
                         </div>
                     </RouterLink>
                 </li>
                 <li>
                     <RouterLink to="/sellers">
-                        <div class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <div
+                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <icon name="post" class="text-gray-900 dark:text-white w-6 h-6"></icon>
-                            <span class="flex-1 ml-3 whitespace-nowrap">{{$t ("sellerannnouncements") }}</span>
+                            <span class="flex-1 ml-3 whitespace-nowrap">{{ $t("sellerannnouncements") }}</span>
                         </div>
-                    </RouterLink>                
+                    </RouterLink>
                 </li>
                 <li>
                     <RouterLink to="/buyers">
-                        <div class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <div
+                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <icon name="post" class="text-gray-900 dark:text-white w-6 h-6"></icon>
-                            <span class="flex-1 ml-3 whitespace-nowrap">{{$t ("buyerannouncements") }}</span>
+                            <span class="flex-1 ml-3 whitespace-nowrap">{{ $t("buyerannouncements") }}</span>
                         </div>
-                    </RouterLink>                
+                    </RouterLink>
                 </li>
                 <li>
                     <RouterLink to="/storages">
-                        <div class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <div
+                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <icon name="post" class="text-gray-900 dark:text-white w-6 h-6"></icon>
-                            <span class="flex-1 ml-3 whitespace-nowrap">{{$t ("storagsannouncements") }}</span>
+                            <span class="flex-1 ml-3 whitespace-nowrap">{{ $t("storagsannouncements") }}</span>
                         </div>
-                    </RouterLink>                
+                    </RouterLink>
                 </li>
                 <li>
                     <RouterLink to="/info">
-                        <div class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <div
+                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <icon name="info" class="text-gray-900 dark:text-white w-6 h-6"></icon>
-                            <span class="flex-1 ml-3 whitespace-nowrap">{{$t ("informations") }}</span>
+                            <span class="flex-1 ml-3 whitespace-nowrap">{{ $t("informations") }}</span>
                         </div>
-                    </RouterLink>                
+                    </RouterLink>
                 </li>
-           
-        </ul>
+
+            </ul>
     </div>
 </aside></template>
