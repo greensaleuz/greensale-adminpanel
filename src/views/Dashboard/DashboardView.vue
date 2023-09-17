@@ -34,7 +34,6 @@ import { defineComponent } from 'vue'
 import DashboardViewComponent from '../../components/dashboard/DashboardViewComponent.vue'
 import axios from '../../plugins/axios'
 import { getToken } from '../../helpers/TokenHelper'
-import { read } from 'fs'
 
 export default defineComponent({
   components: {
