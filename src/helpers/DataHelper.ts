@@ -1,10 +1,11 @@
 export function formatDate(date: Date): string {
+    debugger;
     var date: Date = new Date();
 
     let year = date.getFullYear();
     let month = date.getMonth().toString();
     if(month.length == 1) month = "0"+month;
-    let day = date.getDay().toString();
+    let day = date.getDate().toString();
     if(day.length == 1) day = "0"+day;
 
     let hours = date.getHours().toString();
