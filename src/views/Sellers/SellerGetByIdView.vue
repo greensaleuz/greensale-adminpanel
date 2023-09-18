@@ -6,16 +6,14 @@ import type { PostViewModel } from '../../viewmodels/SellerGetByIdViewModel'
 // SellerGetByIdViewModels faylidan kelgan modulni ishlatishingiz mumkin
 import FlowbiteSetUp from '../../FlowbiteSetup.vue'
 //import InformationView from '../informations/InformationView.vue'
-//import deleteComponent from '@/components/annoncements/sellerannouncements/SellerDeleteComponent.vue'
-//import editComponent from '../../components/annoncements/sellerannouncements/SellerEditComponent.vue'
+import deleteComponent from '../../components/sellerposts/SellerDeleteComponent.vue'
+import editComponent from '../../components/sellerposts/SellerEditComponent.vue'
 export default defineComponent({
   components: {
     // InformationView,
-    FlowbiteSetUp
-    // deleteComponent,
-    // editComponent
-
-
+    FlowbiteSetUp,
+    deleteComponent,
+    editComponent
   },
   props: {
     createdAtString: Date,
@@ -147,10 +145,8 @@ export default defineComponent({
         </div>
         <!--begin:: buttons-->
         <div class="w-96 flex" style="gap: 10px">
-          <!-- <editComponent></editComponent>
-          <deleteComponent></deleteComponent> -->
-
-
+           <editComponent></editComponent>
+          <deleteComponent></deleteComponent>
           <!--end:: buttons-->
         </div>
       </div>
