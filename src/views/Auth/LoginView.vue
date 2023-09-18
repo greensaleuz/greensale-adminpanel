@@ -47,7 +47,7 @@ export default defineComponent({
       class="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0 for-form-width"
       style="width: 430px;">
     <a class="flex mx-20 md:mr-24 my-3 m">
-        <!-- <img src="../../assets/logo/SVG/Artboard.svg" class="h-12 mr-3 " alt="" /> -->
+          <img src="../../assets/logo/SVG/Artboard.svg" class="h-12 mr-3 " alt="" />
           <p class=" text-xl pt-2   font-bold sm:text-2xl whitespace-nowrap dark:text-white">Green Sale</p>
       </a>
       <div
