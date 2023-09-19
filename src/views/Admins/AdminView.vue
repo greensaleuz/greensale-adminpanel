@@ -38,8 +38,7 @@
 </template> -->
 
 <script lang="ts">
-import { UserViewModels } from '../../viewmodels/UserViewModels';
-import UserViewComponent from "../../components/users/UserViewComponent.vue";
+import { AdminViewModels } from '../../viewmodels/AdminViewModels';
 import AdminViewComponent from '../../components/admins/AdminViewComponent.vue';
 import axios from '../../plugins/axios'
 import { useI18n } from 'vue-i18n';
@@ -47,13 +46,13 @@ import { getToken } from '../../helpers/TokenHelper';
 import { defineComponent } from 'vue';
 export default defineComponent({
   components: {
-    UserViewComponent,AdminViewComponent
+    AdminViewModels
   },
   methods: {
     async getDataAsync() {
       this.isLoaded = false;
       const token = getToken();
-      var response = await axios.get<AdminViewComponent[]>("/api/admin/users?page=1", {
+      var response = await axios.get<AdminViewModels[]>("/api/admin/users/admin", {
         headers: {
           accept: "*/*",
           "Authorization": `Bearer ${token}`
@@ -65,8 +64,8 @@ export default defineComponent({
   },
   data() {
     return {
-      userList: [] as AdminViewComponent[],
-      defaultSkeletons: 3 as Number,
+      userList: [] as AdminViewModels[],
+      defaultSkeletons: 4 as Number,
       isLoaded: false as Boolean
     }
   },
@@ -80,26 +79,29 @@ export default defineComponent({
 </script>
 
 <template>
-  <!--begin:: User-->
+  <!--begin:: Admin-->
 
-  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-        <tr>
-          <th scope="col" class="px-6 py-3">
+  <div class="m-10 mb-4 relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full  text-sm text-left text-gray-500 dark:text-gray-400">
+      <thead class="text-xs  text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr class="h-16">
+            <th scope="col" class="w-4 px-6 py-3 text-gray-900 whitespace-nowrap dark:text-white">
+            {{ $t('#ID') }}
+          </th>
+          <th scope="col" class="w-40 px-6 py-3  text-gray-900 whitespace-nowrap dark:text-white">
             {{ $t('firsName') }}
           </th>
-          <th scope="col" class="px-6 py-3">
+          <th scope="col" class="w-40 px-6 py-3  text-gray-900 whitespace-nowrap dark:text-white">
             {{ $t('lastname') }}
           </th>
-          <th scope="col" class="px-6 py-3">
+          <th scope="col" class="w-32 px-6 py-3  text-gray-900 whitespace-nowrap dark:text-white">
             {{ $t('phone') }}
           </th>
-          <th scope="col" class="px-6 py-3">
+          <th scope="col" class="w-40 px-6 py-3  text-gray-900 whitespace-nowrap dark:text-white">
             {{ $t('adress') }}
           </th>
-          <th scope="col" class="px-6 py-3">
-            {{ $t('koproq_malumot') }}
+          <th scope="col" class="w-24 px-6 py-3 text-gray-900 whitespace-nowrap dark:text-white">
+            {{ $t('delete') }}
           </th>
         </tr>
       </thead>
@@ -107,34 +109,47 @@ export default defineComponent({
   </div>
   <div class="flex w-100 justify-end">
   </div>
-  <ul v-if="isLoaded == true">
-    <template v-for="element in userList">
-      <table class="w-full text-sm text-left text align-middle text-gray-500 dark:text-gray-400">
-        <tbody>
-          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-            <th scope="row" class="w-32 px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-              {{ element.firstName }}
-            </th>
-            <td class="w-32 px-6 py-4">
-              {{ element.lastName }}
-            </td>
-            <td class="w-32 px-6 py-4">
-              {{ element.phoneNumber }}
-            </td>
-            <td class="w-32 px-6 py-4">
-              {{ element.region }}
-            </td>
-            <!-- <td class="w-32 px-6 py-4">
-              <router-link :to="`users/${element.id}`"
-                class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-2 py-1 text-center mx-2 mt-2 mb-3">{{
-                  $t('koproq malumot') }}
-              </router-link>
-            </td> -->
-          </tr>
-        </tbody>
-      </table>
-      <!-- <UserViewComponent :user="element" class="mt-2 mb-3" /> -->
-    </template>
-  </ul>
+  <div >
+    <ul v-if="isLoaded == true" >
+        <template v-for="element in userList">
+        <table class=" mx-10 me-10 w-full border hover:bg-gray-100 text-sm text-left text align-middle text-gray-500 dark:text-gray-400"
+           style="width: 1135px;">
+            <tbody>
+            <tr class="  p-1 h-14 items-center bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-900"
+            style="border-radius: 10px; ">
+                <th scope="row" class=" px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                style="width: 10px;">
+                {{ "#01"}}
+                </th>
+                <td scope="row" class="w-40 px-6 py-4 ">
+                {{ element.firstName }}
+                </td>
+                <td class="w-40 px-6 py-4">
+                {{ element.lastName }}
+                </td>
+                <td class="w-32 px-6 py-4">
+                {{ element.phoneNumber }}
+                </td>
+                <td class="w-40 px-6 py-4">
+                {{ element.region }}
+                </td>
+                <td class="w-16 px-6 py-4">
+                    <button type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2  dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
+                        <icon name="delete" ></icon>
+                    </button>
+                </td>
+                <!-- <td class="w-32 px-6 py-4">
+                <router-link :to="`users/${element.id}`"
+                    class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-2 py-1 text-center mx-2 mt-2 mb-3">{{
+                    $t('koproq malumot') }}
+                </router-link>
+                </td> -->
+            </tr>
+            </tbody>
+        </table>
+        <!-- <UserViewComponent :user="element" class="mt-2 mb-3" /> -->
+        </template>
+    </ul>
+  </div>
   <!--end:: User-->
 </template>
