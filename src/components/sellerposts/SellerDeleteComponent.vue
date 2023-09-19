@@ -22,10 +22,12 @@ export default defineComponent({
             this.showDeleteModal = false;
         },
         async confirmDelete() {
+            debugger;
             const sellerId = localStorage.getItem('sellerById');
 
             if (sellerId !== null) {
-                const response = await axios.delete("/api/admin/seller/post/" + this.sellerId);
+                console.log("/api/admin/seller/post/" + sellerId)
+                const response = await axios.delete("/api/admin/seller/post/" + sellerId);
                 console.log(response);
                 this.$router.push('sellerannouncements');
                 this.closeDeleteModal();
