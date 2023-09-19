@@ -72,5 +72,9 @@
     "About":"About",
     "Telegram":"Telegram",
     "SignOut":"Sign Out",
-    "GitHub":"GitHub"
+    "GitHub":"GitHub",
+
+    "createnewpost":"Create new announcement",
+    "images":"Images",
+    "choose":"Choose"
     }
