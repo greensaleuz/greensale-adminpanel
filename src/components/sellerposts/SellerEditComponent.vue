@@ -66,7 +66,7 @@ export default defineComponent({
 
 
         openModal() {
-            debugger
+          
             this.postPhoneNumber = this.postList.postPhoneNumber
             this.price = this.postList.price
             this.capacity = this.postList.capacity
