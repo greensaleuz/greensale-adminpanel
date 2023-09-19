@@ -40,7 +40,7 @@ export default defineComponent({
 
 <template>
   <div
-    class="flex w-full px-5 bg-gray-50  my-5 divide-y divide-gray-100 rounded shadow dark:bg-gray-900 dark:divide-gray-600" style="border-radius: 10px;">
+    class="flex w-full px-5 bg-gray-80  my-5 divide-y divide-gray-100  shadow rounded-lg dark:bg-gray-900 dark:divide-gray-600" style="border-radius: 10px;">
     <div class="flex-auto p-4">
           <h3 class="mb-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-white">{{ name }}</h3>
           <div class="flex flex-wrap items-center mt-5 mb-5">
@@ -55,12 +55,14 @@ export default defineComponent({
     
     <div class="flex-none w-32" style="border-width: 0px;">
          
-          <editComponent :nameProp=name :idProp=id>
+          <editComponent 
+            :nameProp=name 
+            :idProp=id>
 
           </editComponent >
 
-          <deleteComponent  :idcategory=id>
-
+          <deleteComponent  
+            :idcategory=id>
           </deleteComponent>
         </div>
     </div>

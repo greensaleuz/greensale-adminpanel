@@ -24,8 +24,8 @@ export default defineComponent({
         phoneNumber: "" as String,
         region: "" as String,
         firstName: "" as String,
-        createdAt: "" as String,
-        updatedAt: "" as String
+        createdAtS: "" as String,
+        updatedAtS: "" as String
       }
     },
     methods: {
@@ -48,7 +48,7 @@ export default defineComponent({
             <tbody>
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                     <th scope="row" class="w-32 px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                         {{ firstName }}
+                        {{ firstName }}
                     </th>
                     <td class="w-48 px-6 py-4">
                         {{ lastName }}

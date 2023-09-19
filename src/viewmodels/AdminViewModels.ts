@@ -1,4 +1,4 @@
-export class AdminViewModel{
+export class AdminViewModels{
     id: number = 0;
     firstName: string = "";
     lastName: string = "";
