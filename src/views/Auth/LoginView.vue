@@ -12,6 +12,7 @@ export default defineComponent({
     }
   },
   methods: {
+   
     async loginAsync() {
       var loginDto = new AuthDtos()
       loginDto.phoneNumber = this.phone?.toString() || ''
@@ -23,11 +24,20 @@ export default defineComponent({
           'Content-Type': 'application/json'
         }
       })
-
+      
       if (response.status == 200) {
+      
         var token: string = response.data.token
         document.cookie = 'access_token=' + token + '; expires: SESSION; path=/'
+        
+        var result = await axios.get('/api/auth/userole');
+        if(result.data.roleId==2)
+        {
         this.$router.push('/dashboard')
+        }
+        else{
+          this.existsError = true
+        }
       } else {
         this.existsError = true
       }
