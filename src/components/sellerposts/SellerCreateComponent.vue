@@ -219,7 +219,7 @@ export default defineComponent({
     </div>
   
    
-</div>
+
               <div>
                 <img
                   class="h-auto max-w-full rounded-lg"
@@ -262,8 +262,10 @@ export default defineComponent({
               {{ $t('create') }}
             </button>
           </form>
-        </div>
-      </div>
     </div>
+      
+    </div>
+</div>
+
   </div>
 </template>

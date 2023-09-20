@@ -76,5 +76,8 @@
 
     "createnewpost":"Yangi e'lon qo'shish",
     "images":"Rasmlar",
-    "choose":"Tanlang"
+    "choose":"Tanlang",
+    "statustypezero":"Yangi",
+    "statustypeone":"kelishilgan",
+    "statustypetwo":"Sotilgan"
     }
