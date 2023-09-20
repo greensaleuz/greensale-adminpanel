@@ -14,7 +14,11 @@ export default defineComponent({
         firstName: String,
         lastName: String,
         phoneNumber: String,
-        region: String
+        region: String,
+        district: String,
+        address: String,
+        createdAt: Date,
+        updatedAt: Date
     },
     data() {
         return {
@@ -26,8 +30,6 @@ export default defineComponent({
     methods: {
         async load() {
             this.baseURL = axios.defaults.baseURL!;
-            this.createdAtS = formatDate(this.createdAt!);
-            this.updatedAtS = formatDate(this.updatedAt!);
         },
         openDeleteModal() {
             this.showDeleteModal = true;    
