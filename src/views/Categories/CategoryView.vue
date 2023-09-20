@@ -43,7 +43,7 @@ export default defineComponent({
   <ul v-show="isLoaded==false">
     <template v-for="element in defaultSkeletons">
       <CategorySkeletonComponent
-      class="mt 7 mb 3">
+      class="mt-10">
 
       </CategorySkeletonComponent>
     </template>

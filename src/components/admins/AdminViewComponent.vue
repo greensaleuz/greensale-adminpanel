@@ -11,8 +11,8 @@ export default defineComponent({
         firstName: String,
         lastName: String,
         phoneNumber: String,
-        phoneNumberConfirme: Boolean,
         region: String,
+        phoneNumberConfirme: Boolean,
         district: String,
         address: String,
         createdAt: Date,
@@ -21,52 +21,93 @@ export default defineComponent({
     data() {
       return{
         baseURL: "" as String,
-        phoneNumber: "" as String,
-        region: "" as String,
-        firstName: "" as String,
-        createdAtS: "" as String,
-        updatedAtS: "" as String
+        showDeleteModal: false
+
       }
     },
     methods: {
       load(){
         this.baseURL = axios.defaults.baseURL!;
-        this.createdAtS = formatDate(this.createdAt!);
-        this.updatedAtS = formatDate(this.updatedAt!);
       },
+      openDeleteModal() {
+            this.showDeleteModal = true;
+        },
+        closeDeleteModal() {
+            this.showDeleteModal = false;
+        },
+        async confirmDelete() {
+          debugger;
+            const response = await axios.delete("/api/admin/users/admin" + this.id);
+            if (response && response.status) {
+                console.log(response.status.toString());
+                console.log("Deleting the user...");
+                this.$router.push('users')
+                this.closeDeleteModal();
+                location.reload();
+            }
+            else {
+                console.log("Response status is undefined or null.");
+            }
+        },
     },
     mounted() {
         this.load();
     }
 });
 </script>
-<template>
-<div class="flex-wrap">
-    
-    <div  class="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table class="w-full text-sm text-left text align-middle text-gray-500 dark:text-gray-400">
-            <tbody>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <th scope="row" class="w-32 px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{ firstName }}
-                    </th>
-                    <td class="w-48 px-6 py-4">
-                        {{ lastName }}
-                    </td>
-                    <td class="w-32 px-6 py-4">
-                        {{ phoneNumber }}
-                    </td>
-                    <td class="w-32 px-6 py-4">
-                        {{ region }}
-                    </td>
-                    <td class="w-32 px-6 py-4">
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline"> {{ $t('koproq_malumot')}} </a>
-                    </td>
-                </tr>
-    
-            </tbody>
-        </table>
-    </div>
-    
-    </div>
+<template>    
+    <tbody>
+            <tr class="  p-1 h-14 items-center bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-900"
+            style="border-radius: 10px; ">
+                <th scope="row" class=" px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                style="width: 10px;">
+                {{ "#" + id}}
+                </th>
+                <td scope="row" class="w-40 px-6 py-4 ">
+                {{ firstName }}
+                </td>
+                <td class="w-40 px-6 py-4">
+                {{ lastName }}
+                </td>
+                <td class="w-32 px-6 py-4">
+                {{ phoneNumber }}
+                </td>
+                <td class="w-32 px-6 py-4">
+                {{ region }}
+                </td>
+                <td class="w-32 px-6 py-4">
+                {{ district }}
+                </td>
+            </tr>
+    </tbody>
+    <div v-if="showDeleteModal"
+                class="fixed top-0 left-0 right-0 z-50 w-full h-screen flex items-center justify-center bg-black bg-opacity-50">
+                <div class="relative w-full max-w-md max-h-full">
+                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                        <button @click="closeDeleteModal"
+                            class="absolute top-3  right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                            data-modal-hide="popup-modal">
+                            <svg class="w-3 h-3 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            </svg>
+                            <span class="sr-only mt-10">Close modal</span>
+                        </button>
+                        <div class="p-6 text-center">
+
+                            <h3 class="my-5 text-lg font-normal text-gray-500 dark:text-gray-400 ">
+                                {{ $t('categorydleteaccess') }}</h3>
+                            <button @click="closeDeleteModal" type="button"
+                                class="text-gray-500 mr-6 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                                {{ $t('censel') }}</button>
+                            <button @click="confirmDelete" type="button"
+                                class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
+                                {{ $t('yes') }}
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+    </div>        
 </template>
