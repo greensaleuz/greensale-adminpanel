@@ -66,6 +66,8 @@ export default defineComponent({
           :district="element.district"
           :address="element.address"
           :status="element.status"
+          :averageStars="element.status"
+          :userStars="element.userStars"
           :createdAt="element.createdAt"
           :updatedAt="element.updatedAt"
           :mainImage="element.mainImage"

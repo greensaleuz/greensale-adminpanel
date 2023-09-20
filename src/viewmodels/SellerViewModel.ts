@@ -14,6 +14,8 @@ export class SellerAnnouncementViewModel{
     district: string = "";
     address: string = "";
     status: number = 0;
+    averageStars : number=0;
+    userStars:number=0;
     createdAt: Date=new Date();
     updatedAt: Date=new Date();
     mainImage: string = "";

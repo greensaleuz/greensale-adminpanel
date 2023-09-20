@@ -29,9 +29,8 @@ export default defineComponent({
                 console.log("/api/admin/seller/post/" + sellerId)
                 const response = await axios.delete("/api/admin/seller/post/" + sellerId);
                 console.log(response);
-                this.$router.push('sellerannouncements');
                 this.closeDeleteModal();
-                location.reload();
+                this.$router.push('sellers');
             }
         }
     },

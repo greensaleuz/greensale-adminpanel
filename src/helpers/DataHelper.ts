@@ -1,5 +1,5 @@
 export function formatDate(date: Date): string {
-    debugger;
+
     var date: Date = new Date(date);
 
     let year = date.getFullYear();
