@@ -77,5 +77,8 @@
 
      "createnewpost":"Добавить новое объявление",
      "images":"Картинки",
-     "choose":"Выбирать"
+     "choose":"Выбирать",
+     "statustypezero":"Новые",
+    "statustypeone":"согласовано",
+    "statustypetwo":"Распроданный"
     }
