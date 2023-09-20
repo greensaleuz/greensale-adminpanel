@@ -7,23 +7,23 @@ export default defineComponent({
   components: {
   },
   props: {
-    Id:Number ,
-     UserId:Number, 
-     FullName:String, 
-     PhoneNumber:String,
-     StorageName:String,
-     Description:String,
-     Region:String,
-     District:String,
-     Address:String,
-     AddressLatitude:Number,
-     AddressLongitude:Number,
-     Info:String,
-     AverageStars:Number,
-     UserStars:Number,
-     ImagePath:String,
-     CreatedAt: Date,
-     UpdatedAt: Date 
+    id:Number ,
+     userId:Number, 
+     fullName:String, 
+     phoneNumber:String,
+     storageName:String,
+     description:String,
+     region:String,
+     district:String,
+     address:String,
+     addressLatitude:Number,
+     addressLongitude:Number,
+     info:String,
+     averageStars:Number,
+     userStars:Number,
+     imagePath:String,
+     createdAt: Date,
+     updatedAt: Date 
   },
   data() {
     return {
@@ -58,7 +58,7 @@ export default defineComponent({
 
 <div class="mb-4 ml-3 w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
     <a href="#">
-        <img class="p-8 rounded-t-lg" v-bind:src=imageFullPath alt="product image" />
+        <img class="p-8 rounded-t-lg" v-bind:src="imageFullPath" alt="product image" />
     </a>
     <div class="px-5 pb-5">
         <a href="#">
