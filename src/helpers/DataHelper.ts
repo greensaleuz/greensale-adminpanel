@@ -1,5 +1,5 @@
 export function formatDate(date: Date): string {
-    var date: Date = new Date();
+    var date: Date = new Date(date);
 
     let year = date.getFullYear();
     let month = date.getMonth().toString();
