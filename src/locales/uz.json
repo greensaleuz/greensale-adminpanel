@@ -74,6 +74,12 @@
     "SignOut":"Chiqish",
     "GitHub":"GitHub",
 
-    "SalesReport":"Sotuv Hisoboti"
+    "SalesReport":"Sotuv Hisoboti",
 
+    "createnewpost":"Yangi e'lon qo'shish",
+    "images":"Rasmlar",
+    "choose":"Tanlang",
+    "statustypezero":"Yangi",
+    "statustypeone":"kelishilgan",
+    "statustypetwo":"Sotilgan"
     }

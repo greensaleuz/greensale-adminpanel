@@ -75,6 +75,12 @@
      "SignOut":"выход",
      "GitHub": "Гитхаб",
 
-     "SalesReport":"Oтчеты О Продажах"
+     "SalesReport":"Oтчеты О Продажах",
 
+     "createnewpost":"Добавить новое объявление",
+     "images":"Картинки",
+     "choose":"Выбирать",
+     "statustypezero":"Новые",
+    "statustypeone":"согласовано",
+    "statustypetwo":"Распроданный"
     }

@@ -257,7 +257,7 @@
 
   <!--begin:Post GetAll-->
   <svg v-else-if="name === 'location'" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-    width="25px" height="25px" viewBox="0 0 24 24" version="1.1">
+    width="20px" height="20px" viewBox="0 0 24 24" version="1.1">
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       <rect x="0" y="0" width="24" height="24" />
       <path

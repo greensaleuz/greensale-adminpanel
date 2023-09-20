@@ -10,7 +10,26 @@ export default defineComponent({
   components: {
     UserViewComponent,UserSkeletonComponent
   },
-  methods: {    
+  methods: {
+    openDeleteModal() {
+            this.showDeleteModal = true;
+        },
+        closeDeleteModal() {
+            this.showDeleteModal = false;
+        },
+        async confirmDelete() {
+            const response = await axios.delete("/api/admin/users/" + this.userList);
+            if (response && response.status) {
+                console.log(response.status.toString());
+                console.log("Deleting the user...");
+                this.$router.push('users')
+                this.closeDeleteModal();
+                location.reload();
+            }
+            else {
+                console.log("Response status is undefined or null.");
+            }
+        },
     async getDataAsync() {
       this.isLoaded = false;
       const token = getToken();

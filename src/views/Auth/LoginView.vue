@@ -13,7 +13,6 @@ export default defineComponent({
   },
   methods: {
     async loginAsync() {
-      debugger
       var loginDto = new AuthDtos()
       loginDto.phoneNumber = this.phone?.toString() || ''
       loginDto.password = this.password?.toString() || ''
@@ -110,29 +109,13 @@ export default defineComponent({
               @click="loginAsync"
               class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 p-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
             >
-              Kirish
+              Kiring
             </button>
           </div>
         </div>
       </div>
-      <div
-        v-show="existsError"
-        class="mt-5 flex items-center p-4 mb-4 text-red-800 border-t-4 border-red-300 bg-red-50 dark:text-red-400 dark:bg-gray-800 dark:border-red-800"
-        role="alert"
-      >
-        <svg
-          class="flex-shrink-0 w-4 h-4"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-        >
-          <path
-            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
-          />
-        </svg>
-        <div class="ml-3 text-sm font-medium">phone number or password are incorrect!</div>
-
+     
+</div>
         <!-- begin :: alert-->
         <div
           v-show="existsError"
@@ -164,9 +147,8 @@ export default defineComponent({
               />
             </svg>
           </button>
-        </div>
       </div>
-    </div>
+  
 
     <!-- begin :: end-->
   </section>

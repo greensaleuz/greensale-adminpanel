@@ -110,7 +110,6 @@ export default defineComponent({
             this.showModal = false
         },
         async UpdateAsync() {
-            debugger
             const formData = new FormData()
             formData.append("Title", this.title)
             formData.append("Description", this.description)
