@@ -15,20 +15,13 @@ export default defineComponent({
   props : {
         id : Number 
     },
-  methods: {
-    openDeleteModal() {
-            this.showDeleteModal = true;
-        },
-        closeDeleteModal() {
-            this.showDeleteModal = false;
-        },
+  methods: {   
         async confirmDelete() {
             const response = await axios.delete("/api/admin/users/" + this.userList);
             if (response && response.status) {
                 console.log(response.status.toString());
                 console.log("Deleting the user...");
                 this.$router.push('users')
-                this.closeDeleteModal();
                 location.reload();
             }
             else {
