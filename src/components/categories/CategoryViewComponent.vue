@@ -28,7 +28,7 @@ export default defineComponent({
       debugger;
       this.baseURL = axios.defaults.baseURL!;
       this.createdAtString = formatDate(this.createdAt!);
-      this.updatedAtString = formatDate(this.createdAt!);
+      this.updatedAtString = formatDate(this.updatedAt!);
       console.log(this.baseURL);
     }
   },
