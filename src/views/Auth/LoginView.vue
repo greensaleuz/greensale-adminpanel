@@ -13,7 +13,6 @@ export default defineComponent({
   },
   methods: {
     async loginAsync() {
-      debugger
       var loginDto = new AuthDtos()
       loginDto.phoneNumber = this.phone?.toString() || ''
       loginDto.password = this.password?.toString() || ''
@@ -115,7 +114,8 @@ export default defineComponent({
           </div>
         </div>
       </div>
-    
+     
+
         <!-- begin :: alert-->
         <div
           v-show="existsError"
@@ -148,7 +148,7 @@ export default defineComponent({
             </svg>
           </button>
       </div>
-    </div>
+  
 
     <!-- begin :: end-->
   </section>

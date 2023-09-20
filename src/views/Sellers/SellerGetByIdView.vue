@@ -145,7 +145,7 @@ export default defineComponent({
         </div>
         <!--begin:: buttons-->
         <div class="w-96 flex" style="gap: 10px">
-           <editComponent></editComponent>
+          
           <deleteComponent></deleteComponent>
           <!--end:: buttons-->
         </div>

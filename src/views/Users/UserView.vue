@@ -80,7 +80,6 @@ export default defineComponent({
             this.showDeleteModal = false;
         },
         async confirmDelete() {
-          debugger;
             const response = await axios.delete("/api/admin/users/" + this.userList);
             if (response && response.status) {
                 console.log(response.status.toString());

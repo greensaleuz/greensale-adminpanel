@@ -24,7 +24,7 @@ export default defineComponent({
         async confirmDelete() {
             debugger;
             const sellerId = localStorage.getItem('sellerById');
-
+   
             if (sellerId !== null) {
                 console.log("/api/admin/seller/post/" + sellerId)
                 const response = await axios.delete("/api/admin/seller/post/" + sellerId);

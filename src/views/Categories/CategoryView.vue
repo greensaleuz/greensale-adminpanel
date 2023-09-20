@@ -2,7 +2,7 @@
 import { defineComponent } from 'vue'
 import { CategoryViewModel } from '../../viewmodels/CategoryViewModels'
 import { CategoryDto } from '../../dtos/CategoryDto'
-import CategoryViewComponent from '../../components/categories/CategoryViewComponent.vue'
+import CategoryViewComponent from '../../components/categories/categoryviewcomponent.vue'
 import CategoryCreateComponent from '../../components/categories/CategoryCreateComponent.vue'
 import CategorySkeletonComponent from '../../components/categories/CategorySkeletonComponent.vue'
 import axios from '../../plugins/axios'
@@ -15,7 +15,7 @@ export default defineComponent({
   data() {
     return {
       categoriesList: [] as CategoryViewModel[],
-      defaultSkeletons: 4 as Number,
+      defaultSkeletons: 6 as Number,
       isLoaded:false as Boolean
 
     }
@@ -43,7 +43,7 @@ export default defineComponent({
   <ul v-show="isLoaded==false">
     <template v-for="element in defaultSkeletons">
       <CategorySkeletonComponent
-      class="mt 7 mb 3">
+      class="my-5 mx-5">
 
       </CategorySkeletonComponent>
     </template>
