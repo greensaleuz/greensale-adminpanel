@@ -8,8 +8,8 @@ interface Image {
     id: number;
   }
   
-  interface PostViewModel {
-    id: number;
+ interface PostViewModel {
+    id: number ;
     fullName: string;
     userId: number;
     userPhoneNumber: string;
@@ -27,6 +27,8 @@ interface Image {
     updatedAt: Date ;
     createdAt: Date ;
     status: number;
+    userStars:number;
+    averageStars : number;
     postImages: Image[];
     mainImage: string;
   }

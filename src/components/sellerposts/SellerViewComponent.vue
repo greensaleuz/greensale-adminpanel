@@ -3,26 +3,10 @@ import axios from '../../plugins/axios'
 import { defineComponent } from 'vue'
 import { initFlowbite } from 'flowbite'
 import { formatDate } from '../../helpers/DataHelper'
-
+import type { PostViewModel }  from '../../viewmodels/SellerGetByIdViewModel'
 export default defineComponent({
   components: {},
-  data() {
-    return {
-      baseURL: '' as String,
-      createdAtString: '' as String,
-      updatedAtString: '' as String,
-      imageFullPath: '' as string,
-      statusstring: '' as string,
-      status_zero: false as boolean,
-      status_one: false as boolean,
-      status_two: false as boolean,
-      star_one: false as boolean,
-      star_two: false as boolean,
-      star_three: false as boolean,
-      star_fo: false as boolean,
-      star_five: false as boolean,
-    }
-  },
+ 
   props: {
     id: Number,
     fullName: String,
@@ -43,7 +27,26 @@ export default defineComponent({
     userStars:Number,
     createdAt: Date,
     updatedAt: Date,
-    mainImage: String
+    mainImage: String,
+  },
+  data() {
+    return {
+      baseURL: '' as String,
+      createdAtString: '' as String,
+      updatedAtString: '' as String,
+      imageFullPath: '' as string,
+      statusstring: '' as string,
+      status_zero: false as boolean,
+      status_one: false as boolean,
+      status_two: false as boolean,
+      star_one: false as boolean,
+      star_two: false as boolean,
+      star_three: false as boolean,
+      star_fo: false as boolean,
+      star_five: false as boolean,
+      postList: {} as PostViewModel,
+      AvarageStar: 0 as Number
+    }
   },
   methods: {
     load() {
@@ -51,7 +54,7 @@ export default defineComponent({
       this.imageFullPath = this.baseURL + '/' + this.mainImage
       this.createdAtString = formatDate(this.createdAt!)
       this.updatedAtString = formatDate(this.updatedAt!)
-
+      this.AvarageStar=this.averageStars
       if (this.status === 0) {
         this.status_zero = true
       } else if (this.status == 1) {
@@ -59,7 +62,7 @@ export default defineComponent({
       } else if ((this.status = 2)) {
         this.status_two = true
       }
-      console.log(this.userStars)
+      console.log(this.averageStars)
       if(this.userStars===0){
         this.star_one = false ;
         this.star_two = false ;
@@ -102,13 +105,67 @@ export default defineComponent({
         this.star_fo = true ;
         this.star_five =true;
       }
+
+
     },
     exit() {
       localStorage.setItem('sellerById', this.id?.toString() || '')
       this.$router.push('sellerinformation')
     },
-    stars(stars_number ){
-       console.log(stars_number)
+    async stars(stars_number ){
+      debugger;
+        const formData = new FormData();
+            formData.append("PostId", this.id);
+            formData.append("Stars", stars_number);
+            console.log(this.id);
+         const responsetwo = await axios.post("/api/admin/seller/post/star",formData);
+     
+     var response = await axios.get<PostViewModel>('/api/common/seller/post/'+Number(this.id));
+      this.postList = response.data || {};
+      
+
+      if(stars_number==1){
+        this.star_one = true ;
+        this.star_two = false ;
+        this.star_three = false ;
+        this.star_fo = false ;
+        this.star_five =false;
+        this.AvarageStar = this.postList.averageStars;
+      }
+      else if(stars_number==2){
+        this.star_one = true ;
+        this.star_two = true ;
+        this.star_three = false ;
+        this.star_fo = false ;
+        this.star_five =false;
+        this.AvarageStar = this.postList.averageStars;
+      }
+      else if(stars_number==3){
+        this.star_one = true ;
+        this.star_two = true ;
+        this.star_three = true ;
+        this.star_fo = false ;
+        this.star_five =false;
+        this.AvarageStar = this.postList.averageStars;
+      }
+       else if(stars_number==4){
+        this.star_one = true ;
+        this.star_two = true ;
+        this.star_three = true ;
+        this.star_fo = true ;
+        this.star_five =false;
+        this.AvarageStar = this.postList.averageStars;
+      }
+      else if(stars_number==5){
+        this.star_one = true ;
+        this.star_two = true ;
+        this.star_three = true ;
+        this.star_fo = true ;
+        this.star_five =true;
+        this.AvarageStar = this.postList.averageStars;
+      }
+      
+
     }
   },
   mounted() {
@@ -184,9 +241,11 @@ export default defineComponent({
         <div class="flex items-center mt-2.5 mb-2 mx-2">
           <!--One Star-->
          
-          <button  v-show="star_one==false">
+          <button
+            @click="stars(1)"
+            v-show="star_one==false">
             <svg
-              class="w-4 h-4 text-gray-200 dark:text-gray-600"
+              class="w-4 h-4 text-gray-200 dark:text-gray-600 mr-1"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
@@ -197,7 +256,9 @@ export default defineComponent({
               />
             </svg>
           </button>
-          <button  v-show="star_one==true">
+          <button
+            @click="stars(1)"
+            v-show="star_one==true">
             <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
                 <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
             </svg>
@@ -205,9 +266,11 @@ export default defineComponent({
         <!--One Star-->
            <!--Two Star-->
          
-          <button  v-show="star_two==false">
+          <button
+          @click="stars(2)"
+            v-show="star_two==false">
             <svg
-              class="w-4 h-4 text-gray-200 dark:text-gray-600"
+              class="w-4 h-4 text-gray-200 dark:text-gray-600 mr-1"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
@@ -218,7 +281,9 @@ export default defineComponent({
               />
             </svg>
           </button>
-          <button  v-show="star_two==true">
+          <button 
+          @click="stars(2)"
+           v-show="star_two==true">
             <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
                 <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
             </svg>
@@ -226,9 +291,11 @@ export default defineComponent({
         <!--Two Star-->
            <!--Three Star-->
          
-          <button  v-show="star_three==false">
+          <button
+          @click="stars(3)"
+            v-show="star_three==false">
             <svg
-              class="w-4 h-4 text-gray-200 dark:text-gray-600"
+              class="w-4 h-4 text-gray-200 dark:text-gray-600 mr-1"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
@@ -239,7 +306,9 @@ export default defineComponent({
               />
             </svg>
           </button>
-          <button  v-show="star_three==true">
+          <button
+          @click="stars(3)"
+            v-show="star_three==true">
             <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
                 <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
             </svg>
@@ -248,9 +317,11 @@ export default defineComponent({
 
            <!--Fo Star-->
           
-          <button  v-show="star_fo==false">
+          <button  
+          @click="stars(4)"
+          v-show="star_fo==false">
             <svg
-              class="w-4 h-4 text-gray-200 dark:text-gray-600"
+              class="w-4 h-4 text-gray-200 dark:text-gray-600 mr-1"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
@@ -261,7 +332,9 @@ export default defineComponent({
               />
             </svg>
           </button>
-          <button  v-show="star_fo==true">
+          <button 
+          @click="stars(4)"
+           v-show="star_fo==true">
             <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
                 <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
             </svg>
@@ -269,9 +342,11 @@ export default defineComponent({
         <!--Two Star-->
            <!--Two Star-->
          
-          <button  v-show="star_five==false">
+          <button 
+          @click="stars(5)"
+           v-show="star_five==false">
             <svg
-              class="w-4 h-4 text-gray-200 dark:text-gray-600"
+              class="w-4 h-4 text-gray-200 dark:text-gray-600 mr-1"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
@@ -281,7 +356,9 @@ export default defineComponent({
                 d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"
               />
             </svg>
-          </button> <button  v-show="star_five==true">
+          </button> <button 
+          @click="stars(5)"
+           v-show="star_five==true">
             <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
                 <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
             </svg>
@@ -289,7 +366,7 @@ export default defineComponent({
         <!--Five Star-->
           <span
             class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3"
-            >5.0</span
+         >{{ AvarageStar  }} </span
           >
         </div>
          <!--End::stars-->
