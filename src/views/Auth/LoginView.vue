@@ -29,7 +29,7 @@ export default defineComponent({
       
         var token: string = response.data.token
         document.cookie = 'access_token=' + token + '; expires: SESSION; path=/'
-        var result = await axios.get('/api/auth/userole');
+        var result = await axios.get('/api/auth/check/user/role');
         if(result.data.roleId==2)
         {
         this.$router.push('/dashboard')
