@@ -22,7 +22,7 @@ export default defineComponent({
       });
       this.isLoaded = true;
       this.userList = response.data;
-    }
+    }    
   },
   data() {
     return {
@@ -68,6 +68,7 @@ export default defineComponent({
             </li>
         </ol>
     </nav>
+    
   <!--begin:: Admin-->
 
   <div class="m-10 mb-4 relative overflow-x-auto shadow-md sm:rounded-lg">
