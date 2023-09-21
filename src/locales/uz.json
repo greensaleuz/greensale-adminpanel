@@ -26,6 +26,14 @@
     "koproq_malumot":"Ko'proq ma'lumot"  ,
     "categorydleteaccess":"Haqiqatan ham bu toifani oʻchirib tashlamoqchimisiz?",
 
+    "userdleteaccess":"Haqiqatan ham bu foydalanuvchini oʻchirib tashlamoqchimisiz ?",
+
+    "next":"keyingi",
+    "previous":"oldingi",
+    "show":"Ko'rsatilmoqda",
+    "of":"tadan",
+
+
     "censel":"Chiqish",
     "yes":"Ha",
 
@@ -81,5 +89,7 @@
     "choose":"Tanlang",
     "statustypezero":"Yangi",
     "statustypeone":"kelishilgan",
-    "statustypetwo":"Sotilgan"
+    "statustypetwo":"Sotilgan",
+    "admin":"+Admin",
+    "adminstration":"Haqiqatdan ham ushbu foydalanuvchiga administrator huquqlarini berishni xohlaysizmi"
     }

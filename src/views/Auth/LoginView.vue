@@ -2,7 +2,7 @@
 import { defineComponent } from 'vue'
 import axios from '../../plugins/axios'
 import { AuthDtos } from '../../../src/dtos/AuthDto'
-
+import Cookies from 'js-cookie'
 export default defineComponent({
   data() {
     return {
@@ -25,14 +25,16 @@ export default defineComponent({
         }
       })
       
+      debugger;
       if (response.status == 200) {
-      
         var token: string = response.data.token
-        document.cookie = 'access_token=' + token + '; expires: SESSION; path=/'
-        var result = await axios.get('/api/auth/check/user/role');
-
-        if(result.data.roleId==2)
+        
+        var result = await axios.get('/api/auth/check/user/role',{headers:{
+        ['Authorization'] : `Bearer ${token}`
+    }});
+        if(result.data.roleId==2 || result.data.roleId ==3)
         {
+        Cookies.set("access_token", token);
         this.$router.push('/dashboard')
         }
         else{

@@ -2,30 +2,47 @@
 import { defineComponent } from 'vue';
 import  { StorageViewModel }  from '../../viewmodels/StorageViewModels';
 import StorageAnnouncementViewComponent from '../../components/Storages/StorageViewComponent.vue';
-
+import { PaginationMetaData } from "../../Utils/PaginationUtils";
 import axios from '../../plugins/axios';
 
 export default defineComponent({
   components:{
-    StorageAnnouncementViewComponent
+    StorageAnnouncementViewComponent,
+    PaginationMetaData
   },
   data() {
     return {
-      postsList : [] as StorageViewModel[]
+      postsList : [] as StorageViewModel[],
+      metaData: new PaginationMetaData(),
+
+      hasNext: false,
+      hasPrevious: false,            
+      currentPage: 1 as number,
+      totalPages: 1 as number
     }
   },
   methods:{
-    async getDataAsync(){
-        var response = await axios.get<StorageViewModel[]>("/api/common/storage?page=1"); 
+    async getDataAsync(page:Number){
+      
+        var response = await axios.get<StorageViewModel[]>("/api/common/storage?page="+page); 
         this.postsList = response.data;
         console.log(this.postsList);
+
+        const paginationJson = JSON.parse(response.headers['x-pagination']);
+      this.metaData = new PaginationMetaData();
+      this.metaData.currentPage = paginationJson.CurrentPage;
+      this.metaData.totalPages = paginationJson.TotalPages;
+      this.metaData.hasNext = paginationJson.HasNext;
+      this.metaData.hasPrevious = paginationJson.HasPrevious;               
+      this.metaData.pageSize= paginationJson.PageSize;
+      this.metaData.totalItems = paginationJson.TotalItems;
     }
   },
   setup(){
  
   },
   async mounted() {
-      await this.getDataAsync();
+      await this.getDataAsync(1);
   },
 });
 </script>
@@ -52,7 +69,7 @@ export default defineComponent({
                     </svg>
                     <a href="#" style="font-size: 16px;"
                         class="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-white">
-                        {{ $t("storagsannouncements") }}</a>
+                        {{ ("storagsannounce") }}</a>
                 </div>
             </li>
         </ol>
@@ -62,53 +79,45 @@ export default defineComponent({
      <template v-for="element in postsList">
        
       <StorageAnnouncementViewComponent 
-        :Id=element.Id
-        :UserId = element.UserId
-        :FullName=element.FullName
-        :UserPhoneNumber=element.PhoneNumber
-        :Info=element.Info
-        :Description=element.Description
-        :Region=element.Region
-        :District=element.District
-        :Address=element.Address
-        :CreatedAt=element.CreatedAt
-        :UpdatedAt=element.UpdatedAt
-        :ImagePath=element.ImagePath
-        :AverageStars=element.AverageStars
-        :UserStars = element.UserStars
-        :AddressLatitude = element.AddressLatitude
-        :AddressLongitude = element.AddressLongitude
+        :Id=element.id
+        :UserId = element.userId
+        :FullName=element.fullName
+        :UserPhoneNumber=element.phoneNumber
+        :Info=element.info
+        :Description=element.description
+        :Region=element.region
+        :District=element.district
+        :Address=element.address
+        :CreatedAt=element.createdAt
+        :UpdatedAt=element.updatedAt
+        :ImagePath=element.imagePath
+        :AverageStars=element.averageStars
+        :UserStars = element.userStars
+        :AddressLatitude = element.addressLatitude
+        :AddressLongitude = element.addressLongitude
       ></StorageAnnouncementViewComponent>
     
     </template>  
    </div>
   </ul>
 
-  <nav aria-label="Page navigation example mx-80">
-    <ul class="inline-flex -space-x-px text-sm justify-center mx-72 my-5">
-      <li>
-        <a
-          href="#"
-          class="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-          >Previous</a
-        >
-      </li>
-      <li>
-        <a
-          href="#"
-          class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-          >1</a
-        >
-      </li>
-     <li>
-        <a
-          href="#"
-          class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-          >Next</a
-        >
-      </li>
-    </ul>
+  <!--begin:: Pagination-->
+  <nav class="flex items-center justify-between pe-2 pt-4" aria-label="Table navigation">
+            <span class="mx-1 text-sm font-normal text-gray-500 dark:text-gray-400">{{$t('show')}} <span class="font-semibold text-gray-900 dark:text-white">{{ metaData.hasPrevious ? (metaData.currentPage-1) * metaData.pageSize : 1 }}-{{ metaData.hasNext ? metaData.pageSize * metaData.currentPage : metaData.totalItems }}</span> {{$t('of')}} <span class="font-semibold text-gray-900 dark:text-white">{{metaData.totalItems}}</span></span>
+            <ul class="inline-flex -space-x-px text-sm h-8">
+                <li v-show="metaData.hasPrevious == true">
+                    <a href="#" class="flex items-center justify-center  px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{{$t('previous')}}</a>
+                </li>
+                <li v-for="el in metaData.totalPages">
+                    <button @click="getDataAsync(el)" href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                      {{ el }}</button>
+                </li>                               
+                <li v-show="metaData.hasNext == true">
+                    <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{{ $t('next')}}</a>
+                </li>
+            </ul>
   </nav>
+    <!--end:: Pagination-->
 </template>
 <style scoped>
 .cart_wrapper{
