@@ -12,7 +12,7 @@ export default defineComponent({
     }
   },
   methods: {
-   
+  
     async loginAsync() {
       var loginDto = new AuthDtos()
       loginDto.phoneNumber = this.phone?.toString() || ''

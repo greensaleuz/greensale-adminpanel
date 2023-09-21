@@ -122,8 +122,7 @@ export default defineComponent({
             console.log(this.id);
          const responsetwo = await axios.post("/api/admin/seller/post/star",formData);
      
-     var response = await axios.get<PostViewModel>('/api/common/seller/post/'+Number(this.id));
-      this.postList = response.data || {};
+    
       
 
       if(stars_number==1){
@@ -132,7 +131,6 @@ export default defineComponent({
         this.star_three = false ;
         this.star_fo = false ;
         this.star_five =false;
-        this.AvarageStar = this.postList.averageStars;
       }
       else if(stars_number==2){
         this.star_one = true ;
@@ -140,7 +138,6 @@ export default defineComponent({
         this.star_three = false ;
         this.star_fo = false ;
         this.star_five =false;
-        this.AvarageStar = this.postList.averageStars;
       }
       else if(stars_number==3){
         this.star_one = true ;
@@ -148,7 +145,6 @@ export default defineComponent({
         this.star_three = true ;
         this.star_fo = false ;
         this.star_five =false;
-        this.AvarageStar = this.postList.averageStars;
       }
        else if(stars_number==4){
         this.star_one = true ;
@@ -156,7 +152,6 @@ export default defineComponent({
         this.star_three = true ;
         this.star_fo = true ;
         this.star_five =false;
-        this.AvarageStar = this.postList.averageStars;
       }
       else if(stars_number==5){
         this.star_one = true ;
@@ -164,10 +159,10 @@ export default defineComponent({
         this.star_three = true ;
         this.star_fo = true ;
         this.star_five =true;
-        this.AvarageStar = this.postList.averageStars;
       }
-      
-
+      var response = await axios.get<PostViewModel>('/api/common/seller/post/'+Number(this.id));
+      this.postList = response.data || {};
+      this.AvarageStar = this.postList.averageStars;
     }
   },
   mounted() {
