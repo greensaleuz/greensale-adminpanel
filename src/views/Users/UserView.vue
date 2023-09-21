@@ -6,34 +6,32 @@ import axios from '../../plugins/axios'
 import { useI18n } from 'vue-i18n';
 import { getToken } from '../../helpers/TokenHelper';
 import { defineComponent } from 'vue';
+import { PaginationMetaData } from "../../Utils/PaginationUtils";
+
 export default defineComponent({
   components: {
     UserViewComponent,UserSkeletonComponent
   },
-  methods: {
-    openDeleteModal() {
-            this.showDeleteModal = true;
-        },
-        closeDeleteModal() {
-            this.showDeleteModal = false;
-        },
+  props : {
+        id : Number 
+    },
+  methods: {   
         async confirmDelete() {
             const response = await axios.delete("/api/admin/users/" + this.userList);
             if (response && response.status) {
                 console.log(response.status.toString());
                 console.log("Deleting the user...");
                 this.$router.push('users')
-                this.closeDeleteModal();
                 location.reload();
             }
             else {
                 console.log("Response status is undefined or null.");
             }
         },
-    async getDataAsync() {
+    async getDataAsync(page:Number) {
       this.isLoaded = false;
       const token = getToken();
-      var response = await axios.get<UserViewModels[]>("/api/admin/users?page=1", {
+      var response = await axios.get<UserViewModels[]>("/api/admin/users?page="+page, {
         headers: {
           accept: "*/*",
           "Authorization": `Bearer ${token}`
@@ -41,43 +39,59 @@ export default defineComponent({
       });
       this.isLoaded = true;
       this.userList = response.data;
-    },
-    async getSearch(search:any){
-            this.isLoaded = false;
-            var response = await axios.get<UserViewModels[]>("/api/common/doctors/search?search=" +search);
-            this.isLoaded = true;
-            this.doctorsList = response.data;
-            
-        },
-        handleEnterKey: function(search:any) {
-            debugger;
 
-            if(search==""){
-                this.getDataAsync();
-            }
-            else{
-                this.getSearch(search)
-            }
-         }
+      const paginationJson = JSON.parse(response.headers['x-pagination']);
+      this.metaData = new PaginationMetaData();
+      this.metaData.currentPage = paginationJson.CurrentPage;
+      this.metaData.totalPages = paginationJson.TotalPages;
+      this.metaData.hasNext = paginationJson.HasNext;
+      this.metaData.hasPrevious = paginationJson.HasPrevious;               
+      this.metaData.pageSize= paginationJson.PageSize;
+      this.metaData.totalItems = paginationJson.TotalItems; 
+    },
+    // async getSearch(search:any){
+    //         this.isLoaded = false;
+    //         var response = await axios.get<UserViewModels[]>("/api/common/doctors/search?search=" +search);
+    //         this.isLoaded = true;
+    //         this.doctorsList = response.data;
+            
+    //     },
+    //     handleEnterKey: function(search:any) {
+    //         debugger;
+
+    //         if(search==""){
+    //             this.getDataAsync();
+    //         }
+    //         else{
+    //             this.getSearch(search)
+    //         }
+    //      }
   },
   data() {
     return {
       userList: [] as UserViewModels[],
       defaultSkeletons: 5 as Number,
       isLoaded: false as Boolean,
-      search:"" as String
+      search:"" as String,
+      metaData: new PaginationMetaData(),
+
+      hasNext: false,
+      hasPrevious: false,            
+      currentPage: 1 as number,
+      totalPages: 1 as number
     }
   },
   setup() {
     const { t } = useI18n();
   },
   async mounted() {
-    await this.getDataAsync();
+    await this.getDataAsync(1);
   },
 });
 </script>
 
 <template>
+  
   <nav class="flex mb-5" aria-label="Breadcrumb">
         <ol class="inline-flex items-center space-x-1 md:space-x-3" > 
             <li class="inline-flex items-center ">
@@ -105,7 +119,8 @@ export default defineComponent({
             </li>
         </ol>
   </nav>
-  <div class="flex justify-end">
+  <!--begin search-->
+  <!-- <div class="flex justify-end">
             <div class="flex relative justify-end gap-5 right-0">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                     <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
@@ -122,7 +137,9 @@ export default defineComponent({
                     {{ $t("search") }}
                 </button>
             </div>        
-    </div>
+    </div> -->
+  <!--end search-->  
+
   <!--begin:: User-->
   <div class="m-10 mb-4 relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full  text-sm text-left text-gray-500 dark:text-gray-400">
@@ -174,4 +191,22 @@ export default defineComponent({
     </ul>    
   </div>
   <!--end:: User-->
+
+  <!--begin:: Pagination-->
+  <nav class="flex items-center justify-between pe-10 pt-4" aria-label="Table navigation">
+            <span class="mx-10 text-sm font-normal text-gray-500 dark:text-gray-400">Showing <span class="font-semibold text-gray-900 dark:text-white">1-10</span> of <span class="font-semibold text-gray-900 dark:text-white">1000</span></span>
+            <ul class="inline-flex -space-x-px text-sm h-8">
+                <li>
+                    <a href="#" class="flex items-center justify-center  px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
+                </li>
+                <li v-for="el in metaData.totalPages+1">
+                    <button @click="getDataAsync(el)" href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                      {{ el }}</button>
+                </li>                               
+                <li>
+                    <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
+                </li>
+            </ul>
+    </nav>
+    <!--end:: Pagination-->
 </template>
