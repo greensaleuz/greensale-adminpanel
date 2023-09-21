@@ -16,6 +16,7 @@ export default defineComponent({
   },
   methods:{
     async getDataAsync(){
+      
         var response = await axios.get<StorageViewModel[]>("/api/common/storage?page=1"); 
         this.postsList = response.data;
         console.log(this.postsList);
@@ -52,7 +53,7 @@ export default defineComponent({
                     </svg>
                     <a href="#" style="font-size: 16px;"
                         class="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-white">
-                        {{ $t("storagsannouncements") }}</a>
+                        {{ ("storagsannounce") }}</a>
                 </div>
             </li>
         </ol>
@@ -62,22 +63,22 @@ export default defineComponent({
      <template v-for="element in postsList">
        
       <StorageAnnouncementViewComponent 
-        :Id=element.Id
-        :UserId = element.UserId
-        :FullName=element.FullName
-        :UserPhoneNumber=element.PhoneNumber
-        :Info=element.Info
-        :Description=element.Description
-        :Region=element.Region
-        :District=element.District
-        :Address=element.Address
-        :CreatedAt=element.CreatedAt
-        :UpdatedAt=element.UpdatedAt
-        :ImagePath=element.ImagePath
-        :AverageStars=element.AverageStars
-        :UserStars = element.UserStars
-        :AddressLatitude = element.AddressLatitude
-        :AddressLongitude = element.AddressLongitude
+        :Id=element.id
+        :UserId = element.userId
+        :FullName=element.fullName
+        :UserPhoneNumber=element.phoneNumber
+        :Info=element.info
+        :Description=element.description
+        :Region=element.region
+        :District=element.district
+        :Address=element.address
+        :CreatedAt=element.createdAt
+        :UpdatedAt=element.updatedAt
+        :ImagePath=element.imagePath
+        :AverageStars=element.averageStars
+        :UserStars = element.userStars
+        :AddressLatitude = element.addressLatitude
+        :AddressLongitude = element.addressLongitude
       ></StorageAnnouncementViewComponent>
     
     </template>  

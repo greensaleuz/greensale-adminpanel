@@ -2,7 +2,9 @@
 import { defineComponent } from 'vue'
 import { SellerAnnouncementViewModel } from '../../viewmodels/SellerViewModel'
 import SellerAnnouncementViewComponent from '../../../src/components/sellerposts/SellerViewComponent.vue'
+
 import SellerAnnouncementViewSkelton from '../../components/sellerposts/SellerComponentSkeleton.vue'
+
 import axios from '../../plugins/axios'
 
 export default defineComponent({
