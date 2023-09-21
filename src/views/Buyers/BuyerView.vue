@@ -1,92 +1,144 @@
+<script  lang="ts">
+import { defineComponent } from 'vue'
+import { BuyerAnnouncementViewModel } from '../../viewmodels/BuyerAnnouncementViewModel'
+import SellerAnnouncementViewComponent from '../../../src/components/sellerposts/SellerViewComponent.vue'
+import SellerAnnouncementViewSkelton from '../../components/sellerposts/SellerComponentSkeleton.vue'
+import { PaginationMetaData } from "../../Utils/PaginationUtils";
+import axios from '../../plugins/axios'
+
+export default defineComponent({
+  components: {
+    SellerAnnouncementViewComponent,
+    SellerAnnouncementViewSkelton,
+    PaginationMetaData
+  },
+  data() {
+    return {
+      postsList: [] as BuyerAnnouncementViewModel[],
+      isLoaded: false as Boolean,
+      defaultSkeletons: 2 as Number,
+      metaData: new PaginationMetaData(),
+
+      hasNext: false,
+      hasPrevious: false,            
+      currentPage: 1 as number,
+      totalPages: 1 as number
+    }
+  },
+  methods: {
+    async getDataAsync(page:Number) {
+        debugger;
+      this.isLoaded = false
+      var response = await axios.get<BuyerAnnouncementViewModel[]>(
+        '/api/common/buyer/posts?page='+page
+      )
+      this.isLoaded = true
+      this.postsList = response.data
+      console.log(this.postsList)
+
+      const paginationJson = JSON.parse(response.headers['x-pagination']);
+      this.metaData = new PaginationMetaData();
+      this.metaData.currentPage = paginationJson.CurrentPage;
+      this.metaData.totalPages = paginationJson.TotalPages;
+      this.metaData.hasNext = paginationJson.HasNext;
+      this.metaData.hasPrevious = paginationJson.HasPrevious;               
+      this.metaData.pageSize= paginationJson.PageSize;
+      this.metaData.totalItems = paginationJson.TotalItems; 
+    }
+  },
+  setup() {},
+  async mounted() {
+    await this.getDataAsync(1)
+  }
+})
+</script>
+
 <template>
-    <div class="flex flex-wrap">
-        <div role="status" class="w-80 mt-5 mb-5 me-5 mx-5 max-w-sm p-4 border border-gray-200 rounded shadow animate-pulse md:p-6 dark:border-gray-700">
-    <div class="flex items-center justify-center h-48 mb-4 bg-gray-300 rounded dark:bg-gray-700">
-        <svg class="w-10 h-10 text-gray-200 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
-            <path d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2ZM10.5 6a1.5 1.5 0 1 1 0 2.999A1.5 1.5 0 0 1 10.5 6Zm2.221 10.515a1 1 0 0 1-.858.485h-8a1 1 0 0 1-.9-1.43L5.6 10.039a.978.978 0 0 1 .936-.57 1 1 0 0 1 .9.632l1.181 2.981.541-1a.945.945 0 0 1 .883-.522 1 1 0 0 1 .879.529l1.832 3.438a1 1 0 0 1-.031.988Z"/>
-            <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z"/>
-        </svg>
-    </div>
-    <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
-    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
-    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
-    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
-    <div class="flex items-center mt-4 space-x-3">
-       <svg class="w-10 h-10 text-gray-200 dark:text-gray-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z"/>
-        </svg>
-        <div>
-            <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32 mb-2"></div>
-            <div class="w-48 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
-        </div>
-    </div>
-    <span class="sr-only">Loading...</span>
-        </div>
-        <div role="status" class="w-80 mt-5 mb-5 me-5 mx-5 max-w-sm p-4 border border-gray-200 rounded shadow animate-pulse md:p-6 dark:border-gray-700">
-            <div class="flex items-center justify-center h-48 mb-4 bg-gray-300 rounded dark:bg-gray-700">
-                <svg class="w-10 h-10 text-gray-200 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
-                    <path d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2ZM10.5 6a1.5 1.5 0 1 1 0 2.999A1.5 1.5 0 0 1 10.5 6Zm2.221 10.515a1 1 0 0 1-.858.485h-8a1 1 0 0 1-.9-1.43L5.6 10.039a.978.978 0 0 1 .936-.57 1 1 0 0 1 .9.632l1.181 2.981.541-1a.945.945 0 0 1 .883-.522 1 1 0 0 1 .879.529l1.832 3.438a1 1 0 0 1-.031.988Z"/>
-                    <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z"/>
-                </svg>
-            </div>
-            <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
-            <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
-            <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
-            <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
-            <div class="flex items-center mt-4 space-x-3">
-            <svg class="w-10 h-10 text-gray-200 dark:text-gray-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z"/>
-                </svg>
-                <div>
-                    <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32 mb-2"></div>
-                    <div class="w-48 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+<nav class="flex mb-5" aria-label="Breadcrumb">
+        <ol class="inline-flex items-center space-x-1 md:space-x-3" > 
+            <li class="inline-flex items-center ">
+                <a href="/dashboard"  style="font-size: 16px;margin-left: 4px; font-weight: font-semibold;"
+                    class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                    <svg class="w-3 h-3 mr-3"  aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                        style="height: 13px; width: 13px;" viewBox="0 0 20 20">
+                        <path
+                            d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
+                    </svg>
+                    {{ $t("dashboard") }}
+                </a>
+            </li>
+            <li>
+                <div class="flex items-center">
+                    <svg class="w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 6 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 9 4-4-4-4" />
+                    </svg>
+                    <a href="#" style="font-size: 16px;"
+                        class="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-white">
+                        {{ $t("sellerannnouncements") }}</a>
                 </div>
-            </div>
-            <span class="sr-only">Loading...</span>
-        </div>
-        <div role="status" class="w-80 mt-5 mb-5 me-5 mx-5 max-w-sm p-4 border border-gray-200 rounded shadow animate-pulse md:p-6 dark:border-gray-700">
-            <div class="flex items-center justify-center h-48 mb-4 bg-gray-300 rounded dark:bg-gray-700">
-                <svg class="w-10 h-10 text-gray-200 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
-                    <path d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2ZM10.5 6a1.5 1.5 0 1 1 0 2.999A1.5 1.5 0 0 1 10.5 6Zm2.221 10.515a1 1 0 0 1-.858.485h-8a1 1 0 0 1-.9-1.43L5.6 10.039a.978.978 0 0 1 .936-.57 1 1 0 0 1 .9.632l1.181 2.981.541-1a.945.945 0 0 1 .883-.522 1 1 0 0 1 .879.529l1.832 3.438a1 1 0 0 1-.031.988Z"/>
-                    <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z"/>
-                </svg>
-            </div>
-            <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
-            <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
-            <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
-            <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
-            <div class="flex items-center mt-4 space-x-3">
-            <svg class="w-10 h-10 text-gray-200 dark:text-gray-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z"/>
-                </svg>
-                <div>
-                    <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32 mb-2"></div>
-                    <div class="w-48 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
-                </div>
-            </div>
-            <span class="sr-only">Loading...</span>
-        </div>
-        <div role="status" class="w-80 mt-5 mb-5 me-5 mx-5 max-w-sm p-4 border border-gray-200 rounded shadow animate-pulse md:p-6 dark:border-gray-700">
-            <div class="flex items-center justify-center h-48 mb-4 bg-gray-300 rounded dark:bg-gray-700">
-                <svg class="w-10 h-10 text-gray-200 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
-                    <path d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2ZM10.5 6a1.5 1.5 0 1 1 0 2.999A1.5 1.5 0 0 1 10.5 6Zm2.221 10.515a1 1 0 0 1-.858.485h-8a1 1 0 0 1-.9-1.43L5.6 10.039a.978.978 0 0 1 .936-.57 1 1 0 0 1 .9.632l1.181 2.981.541-1a.945.945 0 0 1 .883-.522 1 1 0 0 1 .879.529l1.832 3.438a1 1 0 0 1-.031.988Z"/>
-                    <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z"/>
-                </svg>
-            </div>
-            <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
-            <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
-            <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
-            <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
-            <div class="flex items-center mt-4 space-x-3">
-            <svg class="w-10 h-10 text-gray-200 dark:text-gray-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z"/>
-                </svg>
-                <div>
-                    <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32 mb-2"></div>
-                    <div class="w-48 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
-                </div>
-            </div>
-            <span class="sr-only">Loading...</span>
-        </div>
+            </li>
+        </ol>
+  </nav>
+  
+  <ul v-show="isLoaded == false">
+    <template v-for="element in defaultSkeletons" :key="element">
+      <SellerAnnouncementViewSkelton class="mt 7 mb 3"> </SellerAnnouncementViewSkelton>
+    </template>
+  </ul>
+
+  <ul>
+    <div class="cart_wrapper">
+      <template v-for="element in postsList" :key="element.id">
+        <SellerAnnouncementViewComponent
+          :id="element.id"
+          :fullName="element.fullName"
+          :userPhoneNumber="element.userPhoneNumber"
+          :postPhoneNumber="element.postPhoneNumber"
+          :categoryId="element.categoryId"
+          :title="element.title"
+          :description="element.description"
+          :price="element.price"
+          :capacity="element.capacity"
+          :capacityMeasure="element.capacityMeasure"
+          :type="element.type"
+          :region="element.region"
+          :district="element.district"
+          :address="element.address"
+          :status="element.status"
+          :averageStars="element.averageStars"
+          :userStars="element.userStars"
+          :createdAt="element.createdAt"
+          :updatedAt="element.updatedAt"
+          :mainImage="element.mainImage"
+        ></SellerAnnouncementViewComponent>
+      </template>
     </div>
+  </ul>
+
+  
+  <!--begin:: Pagination-->
+  <nav class="flex items-center justify-between pe-2 pt-4" aria-label="Table navigation">
+            <span class="mx-1 text-sm font-normal text-gray-500 dark:text-gray-400">{{$t('show')}} <span class="font-semibold text-gray-900 dark:text-white">{{ metaData.hasPrevious ? (metaData.currentPage-1) * metaData.pageSize : 1 }}-{{ metaData.hasNext ? metaData.pageSize * metaData.currentPage : metaData.totalItems }}</span> {{$t('of')}} <span class="font-semibold text-gray-900 dark:text-white">{{metaData.totalItems}}</span></span>
+            <ul class="inline-flex -space-x-px text-sm h-8">
+                <li v-show="metaData.hasPrevious == true">
+                    <a href="#" class="flex items-center justify-center  px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{{$t('previous')}}</a>
+                </li>
+                <li v-for="el in metaData.totalPages">
+                    <button @click="getDataAsync(el)" href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                      {{ el }}</button>
+                </li>                               
+                <li v-show="metaData.hasNext == true">
+                    <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{{ $t('next')}}</a>
+                </li>
+            </ul>
+  </nav>
+    <!--end:: Pagination-->
 </template>
+<style scoped>
+.cart_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+</style>

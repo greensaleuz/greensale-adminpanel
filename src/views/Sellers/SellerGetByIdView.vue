@@ -252,7 +252,9 @@ export default defineComponent({
   <div class="flex" style="gap: 20px">
     <!--Begin corusel-->
   <coroselItem 
-  :imagePath=ImageList ></coroselItem>
+  :imagePath=ImageList >
+  
+  </coroselItem>
 
     <!--End corusel-->
 
