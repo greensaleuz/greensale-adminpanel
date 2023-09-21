@@ -72,7 +72,7 @@ export default defineComponent({
 
   <ul>
     <div class="cart_wrapper">
-      <template v-for="element in postsList">
+      <template v-for="element in postsList" :key="element.id">
         <SellerAnnouncementViewComponent
           :id="element.id"
           :fullName="element.fullName"
