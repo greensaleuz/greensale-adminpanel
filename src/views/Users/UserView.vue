@@ -194,17 +194,17 @@ export default defineComponent({
 
   <!--begin:: Pagination-->
   <nav class="flex items-center justify-between pe-10 pt-4" aria-label="Table navigation">
-            <span class="mx-10 text-sm font-normal text-gray-500 dark:text-gray-400">Showing <span class="font-semibold text-gray-900 dark:text-white">1-10</span> of <span class="font-semibold text-gray-900 dark:text-white">1000</span></span>
+            <span class="mx-10 text-sm font-normal text-gray-500 dark:text-gray-400">Showing <span class="font-semibold text-gray-900 dark:text-white">{{ metaData.hasPrevious ? (metaData.currentPage-1) * metaData.pageSize : 1 }}-{{ metaData.hasNext ? metaData.pageSize * metaData.currentPage : metaData.totalItems }}</span> of <span class="font-semibold text-gray-900 dark:text-white">{{metaData.totalItems}}</span></span>
             <ul class="inline-flex -space-x-px text-sm h-8">
-                <li>
+                <li v-show="metaData.hasPrevious == true">
                     <a href="#" class="flex items-center justify-center  px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
                 </li>
-                <li v-for="el in metaData.totalPages+1">
+                <li v-for="el in metaData.totalPages">
                     <button @click="getDataAsync(el)" href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                       {{ el }}</button>
                 </li>                               
-                <li>
-                    <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
+                <li v-show="metaData.hasNext == true">
+                    <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{{'next'}}</a>
                 </li>
             </ul>
     </nav>
