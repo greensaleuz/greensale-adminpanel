@@ -2,15 +2,15 @@
 import { defineComponent } from 'vue'
 import { SellerAnnouncementViewModel } from '../../viewmodels/SellerViewModel'
 import SellerAnnouncementViewComponent from '../../../src/components/sellerposts/SellerViewComponent.vue'
-import SellerAnnouncementViewSkelton from '../../components/sellerposts/sellercomponentskeleton.vue'
-import SellerCreateComponent from '../../components/sellerposts/SellerCreateComponent.vue'
+
+import SellerAnnouncementViewSkelton from '../../components/sellerposts/SellerComponentSkeleton.vue'
+
 import axios from '../../plugins/axios'
 
 export default defineComponent({
   components: {
     SellerAnnouncementViewComponent,
-    SellerAnnouncementViewSkelton,
-    SellerCreateComponent
+    SellerAnnouncementViewSkelton
   },
   data() {
     return {
@@ -66,9 +66,6 @@ export default defineComponent({
         </ol>
   </nav>
   
-    <SellerCreateComponent>
-        
-    </SellerCreateComponent>
   <ul v-show="isLoaded == false">
     <template v-for="element in defaultSkeletons">
       <SellerAnnouncementViewSkelton class="mt 7 mb 3"> </SellerAnnouncementViewSkelton>

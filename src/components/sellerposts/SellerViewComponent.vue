@@ -42,6 +42,8 @@ export default defineComponent({
       star_one: false as boolean,
       star_two: false as boolean,
       star_three: false as boolean,
+
+
       star_fo: false as boolean,
       star_five: false as boolean,
       postList: {} as PostViewModel,
