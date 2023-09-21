@@ -25,7 +25,7 @@ export default defineComponent({
         }
       })
       
-      debugger
+      debugger;
       if (response.status == 200) {
         var token: string = response.data.token
         
