@@ -385,6 +385,8 @@ export default defineComponent({
   </div>
 </template>
 <style scoped>
+
+
 .line {
   width: 100%;
   height: 1px;
