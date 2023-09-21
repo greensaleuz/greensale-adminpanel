@@ -26,8 +26,7 @@ export default defineComponent({
       hasPrevious: false,            
       currentPage: 1 as number,
       totalPages: 1 as number,
-      list: [],
-      sellercount:1 as number
+      list: []
     }
   },
   methods: {
@@ -56,7 +55,6 @@ export default defineComponent({
             this.isLoaded = true;
             this.list = response.data;
             this.postsList = this.list.item2;
-           
            
         },
         handleEnterKey: function(search:any) {
