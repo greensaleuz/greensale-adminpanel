@@ -81,5 +81,7 @@
     "choose":"Tanlang",
     "statustypezero":"Yangi",
     "statustypeone":"kelishilgan",
-    "statustypetwo":"Sotilgan"
+    "statustypetwo":"Sotilgan",
+    "admin":"+Admin",
+    "adminstration":"Haqiqatdan ham ushbu foydalanuvchiga administrator huquqlarini berishni xohlaysizmi"
     }
