@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import jwtDecode from 'jwt-decode';
 import Cookies from 'js-cookie';
 
 const router = createRouter({
@@ -64,28 +64,36 @@ const router = createRouter({
   ]
 });
 
-// Avtorizatsiya tekshirish uchun middleware
-// router.beforeEach(async (to, from, next) => {
-//   if (to.matched.some((record) => record.meta.requiresAuth)) {
-//             const cooki = Cookies.get("access_token")
-// // Tokenni olish
-//     try {
-//       // Tokenni tekshirish uchun so'rovni yuborish
-//       if (cooki!=null ) {
-//         // Token to'g'ri keladi, sahifani o'zgartirish
-      
-//       } else {
-//         // Token yaroqsiz, login sahifasiga yo'naltirish
-//         next('/auth/login');
-//       }
-//     } catch (error) {
-//       // Xatolikni aniqlash va login sahifasiga yo'naltirish
-//       console.error('Serverdan xatolik:', error);
-//       next('/auth/login');
-//     }
-//   } else {
-//     // Avtorizatsiya tekshirilishi kerak bo'lmasa, sahifani o'zgartirish
-//     next();
-//   }
-// });
+debugger
+router.beforeEach((to, from, next) => {
+  const token = Cookies.get('access_token');
+  if (to.path !== '/auth/login') {
+    if (token) {
+      try {
+        const payload = jwtDecode(token)
+        const currentTime = Math.floor(Date.now() / 1000); // Current time in seconds
+        if (payload.exp < currentTime) {
+          // Token has expired, redirect to login
+          next('/auth/login');
+        } else {
+           // Kullanıcı rollerini ve sayfa erişimini kontrol et
+           if (payload['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] === 'SuperAdmin' || payload['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] === 'Admin') {
+            // Kullanıcının "User" rolü varsa, kimlik doğrulama sayfalarına erişim engelle
+            next(); // Sayfaya erişimi engelle
+          } else {
+            // Diğer roller için kimlik doğrulama sayfalarına erişimi sağla
+            next("/");
+          }
+        }
+      } catch (error) {
+        // Handle invalid token
+        next('/auth/login');
+      }
+    } else {
+      next('/auth/login');
+    }
+  } else {
+    next();
+  }
+});
 export default router
