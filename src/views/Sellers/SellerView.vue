@@ -1,6 +1,7 @@
 <script  lang="ts">
 import { defineComponent } from 'vue'
 import { SellerAnnouncementViewModel } from '../../viewmodels/SellerViewModel'
+import { GetSearchSellerViewModel } from '../../viewmodels/GetSearchSellerViewModel'
 import SellerAnnouncementViewComponent from '../../../src/components/sellerposts/SellerViewComponent.vue'
 import SellerAnnouncementViewSkelton from '../../components/sellerposts/SellerComponentSkeleton.vue'
 import { PaginationMetaData } from "../../Utils/PaginationUtils";
@@ -10,7 +11,8 @@ export default defineComponent({
   components: {
     SellerAnnouncementViewComponent,
     SellerAnnouncementViewSkelton,
-    PaginationMetaData
+    PaginationMetaData,
+    GetSearchSellerViewModel
   },
   data() {
     return {
@@ -23,12 +25,15 @@ export default defineComponent({
       hasNext: false,
       hasPrevious: false,            
       currentPage: 1 as number,
-      totalPages: 1 as number
+      totalPages: 1 as number,
+      list: [],
+      sellercount:1 as number
     }
   },
   methods: {
     async getDataAsync(page:Number) {
       this.isLoaded = false
+      this.postsList=[];
       var response = await axios.get<SellerAnnouncementViewModel[]>(
         '/api/common/seller/post?page='+page
       )
@@ -47,15 +52,17 @@ export default defineComponent({
     },
     async getSearch(search:any){
             this.isLoaded = false;
-            var response = await axios.get<SellerAnnouncementViewModel[]>("/api/common/seller/post/search/title?search=" + search);
+            var response = await axios.get<GetSearchSellerViewModel>("/api/common/seller/post/search/title?search=" + search);
             this.isLoaded = true;
-            this.postsList = response.data;
-            
+            this.list = response.data;
+            this.postsList = this.list.item2;
+           
+           
         },
         handleEnterKey: function(search:any) {
-            debugger;
+            // debugger;
 
-            if(search==""){
+            if(search == "" ){
                 this.getDataAsync(1);
             }
             else{
