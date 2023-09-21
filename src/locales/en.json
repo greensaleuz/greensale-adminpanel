@@ -80,5 +80,7 @@
     "choose":"Choose",
     "statustypezero":"New",
     "statustypeone":"Agreed",
-    "statustypetwo":"Buyed"
+    "statustypetwo":"Buyed",
+    "admin":"+Admin",
+    "adminstration":"Do you really want to give this user admin rights?"
     }
