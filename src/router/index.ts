@@ -64,7 +64,6 @@ const router = createRouter({
   ]
 });
 
-debugger
 router.beforeEach((to, from, next) => {
   const token = Cookies.get('access_token');
   if (to.path !== '/auth/login') {

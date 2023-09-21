@@ -25,13 +25,16 @@ export default defineComponent({
         }
       })
       
+      debugger
       if (response.status == 200) {
-      
         var token: string = response.data.token
-        Cookies.set("access_token", token);
-        var result = await axios.get('/api/auth/check/user/role');
+        
+        var result = await axios.get('/api/auth/check/user/role',{headers:{
+        ['Authorization'] : `Bearer ${token}`
+    }});
         if(result.data.roleId==2 || result.data.roleId ==3)
         {
+        Cookies.set("access_token", token);
         this.$router.push('/dashboard')
         }
         else{
