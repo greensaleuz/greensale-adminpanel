@@ -82,7 +82,7 @@ export default defineComponent({
   </nav>
   
   <ul v-show="isLoaded == false">
-    <template v-for="element in defaultSkeletons">
+    <template v-for="element in defaultSkeletons" :key="element">
       <SellerAnnouncementViewSkelton class="mt 7 mb 3"> </SellerAnnouncementViewSkelton>
     </template>
   </ul>
