@@ -53,7 +53,7 @@ export default defineComponent({
       this.createdAtString = formatDate(this.createdAt!)
       this.updatedAtString = formatDate(this.updatedAt!)
       
-      this.AvarageStar=this.averageStars
+      this.AvarageStar= Number(this.averageStars)
 
       if(this.userStars===0){
         this.star_one = false ;
