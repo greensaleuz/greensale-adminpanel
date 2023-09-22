@@ -124,6 +124,7 @@ export default defineComponent({
             </div>        
   </div>
   <!--end search--> 
+  
   <ul v-show="isLoaded == false">
     <template v-for="element in defaultSkeletons" :key="element">
       <SellerAnnouncementViewSkelton class="mt 7 mb 3"> </SellerAnnouncementViewSkelton>
