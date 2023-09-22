@@ -11,19 +11,14 @@ export default defineComponent({
     id: Number,
     fullName: String,
     info : String,
-    userPhoneNumber: String,
-    postPhoneNumber: String,
-    categoryName: String,
-    title: String,
+    phoneNumber: String,
     description: String,
     price: Number,
     capacity: Number,
     capacityMeasure: String,
-    type: String,
     region: String,
     district: String,
     address: String,
-    status: Number,
     averageStars : Number,
     userStars:Number,
     createdAt: Date,
@@ -121,6 +116,7 @@ export default defineComponent({
     },
     async stars(stars_number ){
       debugger;
+      console.log(this.capacity)
         const formData = new FormData();
             formData.append("PostId", this.id);
             formData.append("Stars", stars_number);

@@ -2,16 +2,14 @@
 import { defineComponent } from 'vue'
 import axios from '../../plugins/axios'
 import { formatDate } from '../../helpers//DataHelper'
-import type { postViewModel } from '../../viewmodels/BuyerGetByIdViewModels'
+import type { BuyerGetByIdPostViewModel } from '../../viewmodels/BuyerGetByIdViewModel'
 // SellerGetByIdViewModels faylidan kelgan modulni ishlatishingiz mumkin
 import FlowbiteSetUp from '../../FlowbiteSetup.vue'
 //import InformationView from '../informations/InformationView.vue'
 import deleteComponent from '../../components/buyerposts/BuyerDeleteComponent.vue'
 import editComponent from '../../components/sellerposts/SellerEditComponent.vue'
-import coroselItem from '../../components/sellerposts/SellerCoroselItemComponent.vue'
 export default defineComponent({
   components: {
-    coroselItem,
     FlowbiteSetUp,
     deleteComponent,
     editComponent
@@ -32,7 +30,12 @@ export default defineComponent({
       star_three: false as boolean,
       star_fo: false as boolean,
       star_five: false as boolean,
-      postList: {} as postViewModel,
+      image_one: false as boolean,
+      image_two: false as boolean,
+      image_three: false as boolean,
+      image_fo: false as boolean,
+      image_five: false as boolean,
+      postList: {} as BuyerGetByIdPostViewModel,
       AvarageStar: 0 as Number,
 
       fullName: '' as String,
@@ -54,9 +57,9 @@ export default defineComponent({
       createdAt: Date,
       adress:'' as String,
       status: 0 as Number,
-      buyerpostImages: [],
+      buyerPostsImages: [],
       test: false as boolean,
-
+      imagefullpath:'' as String,
       ImageList: [] as string[],
     }
   },
@@ -64,7 +67,7 @@ export default defineComponent({
     async getDataAsync() { 
         debugger;
       let BuyerId = localStorage.getItem('buyerrById')
-      var response = await axios.get<postViewModel>('/api/common/buyer/posts/' + Number(BuyerId))
+      var response = await axios.get<BuyerGetByIdPostViewModel>('/api/common/buyer/posts/' + Number(BuyerId))
       this.postList = response.data || {}
 
       if (this.postList.status! == 0) {
@@ -80,20 +83,31 @@ export default defineComponent({
         this.status_zero = false;
       }
       this.showModal = true
+debugger
+//       this.baseURL = axios.defaults.baseURL!
+ 
+// this.imagefullpath=this.baseURL + '/' + this.postList.buyerPostsImages[0].imagePath
+// console.log(this.imagefullpath)
 
-      this.baseURL = axios.defaults.baseURL!
-    // console.log(this.postList.buyerpostImages)
-    //   console.log(this.postList.buyerpostImages[0].imagePath+"lll")
+this.baseURL = axios.defaults.baseURL!;
+      var i = 0;
+      this.postList.buyerPostsImages.forEach((element) => {
+        this.ImageList.push(this.baseURL + "/" + this.postList.buyerPostsImages[i].imagePath);
+        i++;
+      });
+      console.log(this.ImageList);
+      if (this.ImageList.length === 1) {
+        this.image_one = true;
+      } else if (this.ImageList.length === 2) {
+        this.image_two = true;
+      } else if (this.ImageList.length === 3) {
+        this.image_three = true;
+      } else if (this.ImageList.length === 4) {
+        this.image_fo = true;
+      } else if (this.ImageList.length === 5) {
+        this.image_fo = true;
+      }
 
-    //   var i = 0
-    //   this.postList.buyerpostImages.forEach((element) => {
-    //     this.ImageList.push(this.baseURL + '/' + this.postList.buyerpostImages[i].imagePath)
-    //     i++
-    //   })
-
-   //   console.log(this.ImageList)
-
-      this.imageFullPath = this.baseURL
 
       //  this.updatedAtString = formatDate(this.postList.updatedAt!)
       this.AvarageStar = this.postList.status
@@ -156,7 +170,7 @@ export default defineComponent({
 
       const responsetwo = await axios.post('/api/admin/buyer/star', formData)
 
-      var response = await axios.get<postViewModel>('/api/common/buyer/posts/' + Number(BuyerId))
+      var response = await axios.get<BuyerGetByIdPostViewModel>('/api/common/buyer/posts/' + Number(BuyerId))
       this.postList = response.data || {}
 
       if (stars_number == 1) {
@@ -254,14 +268,400 @@ export default defineComponent({
     </ol>
   </nav>
   <div class="flex" style="gap: 20px">
-    <!--Begin corusel-->
-  <!-- <coroselItem 
-  :imagePath=ImageList >
-  
-  </coroselItem> -->
+  <!--Begin corusel one image-->
+  <div
+      v-show="image_one == true"
+      class="relative w-full my-5"
+    >
+      <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+        <div class=" duration-700 ease-in-out" >
+          <img
+            :src="ImageList[0]"
+            class="absolute block max-w-full h-full "
+            alt=""
+          />
+        </div>
+      </div>
+    </div>
+    <!--End corusel one image-->
 
-    <!--End corusel-->
-
+    <!--Begin corusel two image-->
+    <div
+      v-show="image_two == true"
+      id="gallery"
+      class="relative w-full my-5"
+      data-carousel="slide"
+    >
+      <!-- Carousel wrapper -->
+      <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+          <img
+            :src="ImageList[0]"
+            class="absolute block max-w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+            alt=""
+          />
+        </div>
+        <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
+          <img
+            :src="ImageList[1]"
+            class="absolute block max-w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+            alt=""
+          />
+        </div>
+      </div>
+      <button
+        type="button"
+        class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+        data-carousel-prev
+      >
+        <span
+          class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none"
+        >
+          <svg
+            class="w-4 h-4 text-white dark:text-gray-800"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 6 10"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 1 1 5l4 4"
+            />
+          </svg>
+          <span class="sr-only">Previous</span>
+        </span>
+      </button>
+      <button
+        type="button"
+        class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+        data-carousel-next
+      >
+        <span
+          class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none"
+        >
+          <svg
+            class="w-4 h-4 text-white dark:text-gray-800"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 6 10"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="m1 9 4-4-4-4"
+            />
+          </svg>
+          <span class="sr-only">Next</span>
+        </span>
+      </button>
+    </div>
+    <!--End corusel two image-->
+    <!--Begin corusel three image-->
+    <div
+      v-show="image_three == true"
+      id="gallery"
+      class="relative w-full my-5"
+      data-carousel="slide"
+    >
+      <!-- Carousel wrapper -->
+      <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+        <!-- Item 1 -->
+        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+          <img
+            :src="ImageList[0]"
+            class="absolute block max-w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+            alt=""
+          />
+        </div>
+        <!-- Item 2 -->
+        <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
+          <img
+            :src="ImageList[1]"
+            class="absolute block max-w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+            alt=""
+          />
+        </div>
+        <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
+          <img
+            :src="ImageList[2]"
+            class="absolute block max-w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+            alt=""
+          />
+        </div>
+        <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
+          <img
+            :src="ImageList[3]"
+            class="absolute block max-w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+            alt=""
+          />
+        </div>
+      </div>
+      <!-- Slider controls -->
+      <button
+        type="button"
+        class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+        data-carousel-prev
+      >
+        <span
+          class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none"
+        >
+          <svg
+            class="w-4 h-4 text-white dark:text-gray-800"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 6 10"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 1 1 5l4 4"
+            />
+          </svg>
+          <span class="sr-only">Previous</span>
+        </span>
+      </button>
+      <button
+        type="button"
+        class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+        data-carousel-next
+      >
+        <span
+          class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none"
+        >
+          <svg
+            class="w-4 h-4 text-white dark:text-gray-800"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 6 10"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="m1 9 4-4-4-4"
+            />
+          </svg>
+          <span class="sr-only">Next</span>
+        </span>
+      </button>
+    </div>
+    <!--End corusel three image-->
+  <!--Begin corusel fo image-->
+  <div
+      v-show="image_fo == true"
+      id="gallery"
+      class="relative w-full my-5"
+      data-carousel="slide"
+    >
+      <!-- Carousel wrapper -->
+      <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+        <!-- Item 1 -->
+        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+          <img
+            :src="ImageList[0]"
+            class="absolute block max-w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+            alt=""
+          />
+        </div>
+        <!-- Item 2 -->
+        <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
+          <img
+            :src="ImageList[1]"
+            class="absolute block max-w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+            alt=""
+          />
+        </div>
+        <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
+          <img
+            :src="ImageList[2]"
+            class="absolute block max-w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+            alt=""
+          />
+        </div>
+        <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
+          <img
+            :src="ImageList[3]"
+            class="absolute block max-w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+            alt=""
+          />
+        </div>
+        <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
+          <img
+            :src="ImageList[4]"
+            class="absolute block max-w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+            alt=""
+          />
+        </div>
+      </div>
+      <!-- Slider controls -->
+      <button
+        type="button"
+        class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+        data-carousel-prev
+      >
+        <span
+          class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none"
+        >
+          <svg
+            class="w-4 h-4 text-white dark:text-gray-800"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 6 10"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 1 1 5l4 4"
+            />
+          </svg>
+          <span class="sr-only">Previous</span>
+        </span>
+      </button>
+      <button
+        type="button"
+        class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+        data-carousel-next
+      >
+        <span
+          class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none"
+        >
+          <svg
+            class="w-4 h-4 text-white dark:text-gray-800"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 6 10"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="m1 9 4-4-4-4"
+            />
+          </svg>
+          <span class="sr-only">Next</span>
+        </span>
+      </button>
+    </div>
+    <!--End corusel fo image-->
+    <!--Begin corusel five image-->
+    <div
+      v-show="image_five == true"
+      id="gallery"
+      class="relative w-full my-5"
+      data-carousel="slide"
+    >
+      <!-- Carousel wrapper -->
+      <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+        <!-- Item 1 -->
+        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+          <img
+            :src="ImageList[0]"
+            class="absolute block max-w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+            alt=""
+          />
+        </div>
+        <!-- Item 2 -->
+        <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
+          <img
+            :src="ImageList[1]"
+            class="absolute block max-w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+            alt=""
+          />
+        </div>
+        <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
+          <img
+            :src="ImageList[2]"
+            class="absolute block max-w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+            alt=""
+          />
+        </div>
+        <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
+          <img
+            :src="ImageList[3]"
+            class="absolute block max-w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+            alt=""
+          />
+        </div>
+        <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
+          <img
+            :src="ImageList[4]"
+            class="absolute block max-w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+            alt=""
+          />
+        </div>
+      </div>
+      <!-- Slider controls -->
+      <button
+        type="button"
+        class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+        data-carousel-prev
+      >
+        <span
+          class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none"
+        >
+          <svg
+            class="w-4 h-4 text-white dark:text-gray-800"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 6 10"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 1 1 5l4 4"
+            />
+          </svg>
+          <span class="sr-only">Previous</span>
+        </span>
+      </button>
+      <button
+        type="button"
+        class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+        data-carousel-next
+      >
+        <span
+          class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none"
+        >
+          <svg
+            class="w-4 h-4 text-white dark:text-gray-800"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 6 10"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="m1 9 4-4-4-4"
+            />
+          </svg>
+          <span class="sr-only">Next</span>
+        </span>
+      </button>
+    </div>
+    <!--End corusel five image-->
     <div class="flex" style="display: flex">
       <div
         class="w-full h-96 my-5 flex text-gray-700 border border-gray-200 rounded-lg bg-gray-50 dark:text-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"

@@ -1,19 +1,19 @@
-// PostViewModel.ts
 
 interface Image {
-    buyerPostId: number;
+    sellerPostId: number;
     imagePath: string;
     createdAt: Date;
     updatedAt: Date ;
     id: number;
   }
   
- interface postViewModel {
+ interface PostViewModel {
     id: number ;
     fullName: string;
     userId: number;
     userPhoneNumber: string;
     postPhoneNumber: string;
+    userRegion: string;
     categoryId: number;
     title: string;
     description: string;
@@ -23,15 +23,13 @@ interface Image {
     type: string;
     region: string;
     district: string;
-    address:string;
     updatedAt: Date ;
     createdAt: Date ;
     status: number;
     userStars:number;
     averageStars : number;
-    buyerpostImages: Image[];
+    postImages: Image[];
     mainImage: string;
   }
   
-  export type {postViewModel}
-  
+  export type {PostViewModel}

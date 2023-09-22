@@ -96,7 +96,6 @@ export default defineComponent({
         this.ImageIndex.push(Number(i));
         i++;
       });
-      debugger;
       console.log(this.ImageList);
       if (this.ImageList.length === 1) {
         this.image_one = true;

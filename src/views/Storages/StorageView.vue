@@ -2,13 +2,13 @@
 import { defineComponent } from 'vue';
 import  { StorageViewModel }  from '../../viewmodels/StorageViewModels';
 import type { GetSearchSellerViewModel } from '../../viewmodels/GetSearchSellerViewModel'
-import StorageAnnouncementViewComponent from '../../components/Storages/StorageViewComponent.vue';
+import StorageViewComponent from '../../components/Storages/storageViewComponent.vue'
 import { PaginationMetaData } from "../../Utils/PaginationUtils";
 import axios from '../../plugins/axios';
 
 export default defineComponent({
   components:{
-    StorageAnnouncementViewComponent,
+    StorageViewComponent,
     PaginationMetaData,
   },
   data() {
@@ -24,12 +24,12 @@ export default defineComponent({
       currentPage: 1 as number,
       totalPages: 1 as number,
       list: {} as GetSearchSellerViewModel
-
     }
   },
   methods:{
     async getDataAsync(page:Number){
       debugger;
+      
         var response = await axios.get<StorageViewModel[]>("/api/common/storage?page="+page); 
         this.postsList = response.data;
         console.log(this.postsList);
@@ -123,7 +123,7 @@ export default defineComponent({
     <div class="cart_wrapper">
      <template v-for="element in postsList" :key="element.id">
        
-      <StorageAnnouncementViewComponent  
+      <StorageViewComponent  
         :id=element.id
         :UserId = element.userId
         :fullName=element.fullName
@@ -131,6 +131,8 @@ export default defineComponent({
         :info=element.info
         :description=element.description
         :price=element.price
+        :capacity=element.capacity
+        :capacityMeasure=element.capacityMeasure
         :region=element.region
         :district=element.district
         :address=element.address
@@ -141,7 +143,7 @@ export default defineComponent({
         :userStars = element.userStars
         :addressLatitude = element.addressLatitude
         :addressLongitude = element.addressLongitude
-      ></StorageAnnouncementViewComponent>
+      ></StorageViewComponent>
     
     </template>  
    </div>
