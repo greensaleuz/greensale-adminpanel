@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import  { StorageViewModel }  from '../../viewmodels/StorageViewModels';
-import { GetSearchSellerViewModel } from '../../viewmodels/GetSearchSellerViewModel'
+import type { GetSearchSellerViewModel } from '../../viewmodels/GetSearchSellerViewModel'
 import StorageAnnouncementViewComponent from '../../components/Storages/StorageViewComponent.vue';
 import { PaginationMetaData } from "../../Utils/PaginationUtils";
 import axios from '../../plugins/axios';
@@ -10,7 +10,6 @@ export default defineComponent({
   components:{
     StorageAnnouncementViewComponent,
     PaginationMetaData,
-    GetSearchSellerViewModel
   },
   data() {
     return {
@@ -24,7 +23,7 @@ export default defineComponent({
       hasPrevious: false,            
       currentPage: 1 as number,
       totalPages: 1 as number,
-      list: []
+      list: {} as GetSearchSellerViewModel
 
     }
   },

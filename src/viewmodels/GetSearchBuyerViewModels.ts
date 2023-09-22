@@ -1,18 +1,18 @@
-interface Image {
-    sellerPostId: number;
+interface BuyerImage {
+    buyerpostId: number;
     imagePath: string;
     createdAt: Date;
     updatedAt: Date ;
     id: number;
   }
   
- interface PostViewModel {
+ interface PostBuyerViewModel {
     id: number ;
     fullName: string;
     userId: number;
     userPhoneNumber: string;
     postPhoneNumber: string;
-    userRegion: string;
+    //userRegion: string;
     categoryId: number;
     title: string;
     description: string;
@@ -22,19 +22,20 @@ interface Image {
     type: string;
     region: string;
     district: string;
+    address : string;
+    status: number;
+    averageStars : number;
+    userStars:number;
     updatedAt: Date ;
     createdAt: Date ;
-    status: number;
-    userStars:number;
-    averageStars : number;
-    postImages: Image[];
+    buyerPostsImages: BuyerImage[];
     mainImage: string;
   }
   
- interface GetSearchSellerViewModel
+ interface GetSearchBuyerViewModels
 {
     iteamCount:number;
-    item2?: PostViewModel[] ;
+    item2: PostBuyerViewModel[] ;
 }
 
-export type {GetSearchSellerViewModel}
+export type {GetSearchBuyerViewModels}

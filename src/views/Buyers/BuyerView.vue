@@ -1,24 +1,22 @@
 <script  lang="ts">
 import { defineComponent } from 'vue'
 import { BuyerAnnouncementViewModel } from '../../viewmodels/BuyerAnnouncementViewModel'
-
-import BuyerAnnouncementViewComponent from '../../../src/components/buyerposts/BuyerViewComponent.vue'
-import BuyerAnnouncementViewSkelton from '../../components/buyerposts/BuyerComponentSkelton.vue'
-
+import type  { BuyerGetByIdPostViewModel} from '../../viewmodels/BuyerGetByIdViewModel'
+import  type  { GetSearchBuyerViewModels } from '../../viewmodels/GetSearchBuyerViewModels'
+import SellerAnnouncementViewComponent from '../../../src/components/sellerposts/SellerViewComponent.vue'
+import SellerAnnouncementViewSkelton from '../../components/sellerposts/SellerComponentSkeleton.vue'
 import { PaginationMetaData } from "../../Utils/PaginationUtils";
 import axios from '../../plugins/axios'
 
 export default defineComponent({
   components: {
-
-    BuyerAnnouncementViewComponent,
-    BuyerAnnouncementViewSkelton,
-    PaginationMetaData
-
+    SellerAnnouncementViewComponent,
+    SellerAnnouncementViewSkelton,
+    PaginationMetaData,
   },
   data() {
     return {
-      postsList: [] as BuyerAnnouncementViewModel[],
+      postsList: [] as BuyerGetByIdPostViewModel[],
       isLoaded: false as Boolean,
       defaultSkeletons: 2 as Number,
       search:"" as String,
@@ -28,7 +26,7 @@ export default defineComponent({
       hasPrevious: false,            
       currentPage: 1 as number,
       totalPages: 1 as number,
-      list: []
+      list: {} as GetSearchBuyerViewModels
 
     }
   },
@@ -36,12 +34,14 @@ export default defineComponent({
     async getDataAsync(page:Number) {
         debugger;
       this.isLoaded = false
-      var response = await axios.get<BuyerAnnouncementViewModel[]>(
+      //this.postsList = [];
+      debugger;
+      var response = await axios.get<BuyerGetByIdPostViewModel[]>(
         '/api/common/buyer/posts?page='+page
       )
+      debugger;
       this.isLoaded = true
-      this.postsList = response.data
-      console.log(this.postsList)
+      this.postsList = response.data || [];
 
       const paginationJson = JSON.parse(response.headers['x-pagination']);
       this.metaData = new PaginationMetaData();
@@ -54,10 +54,12 @@ export default defineComponent({
     },
     async getSearch(search:any){
             this.isLoaded = false;
-            var response = await axios.get<GetSearchSellerViewModel>("/api/common/buyer/posts/search/title?search=" + search);
+            debugger;
+            var response = await axios.get<GetSearchBuyerViewModels>("/api/common/buyer/posts/search/title?search=" + search);
+            debugger;
             this.isLoaded = true;
-            this.list = response.data;
-            this.postsList = this.list.item2;                      
+            this.list = response.data || [];
+            this.postsList = this.list.item2 || [];                      
         },
         handleEnterKey: function(search:any) {
             // debugger;
@@ -150,7 +152,7 @@ export default defineComponent({
           :type="element.type"
           :region="element.region"
           :district="element.district"
-          :address="element.address"
+          
           :status="element.status"
           :averageStars="element.averageStars"
           :userStars="element.userStars"
