@@ -63,6 +63,10 @@ export default defineComponent({
 
       ImageList: [] as string[],
       ImageIndex: [] as number[],
+
+      showDeleteModal: false,
+      sellerId: 0 as Number,
+
     };
   },
   watch: {
@@ -209,6 +213,25 @@ export default defineComponent({
       }
       this.AvarageStar = this.postList.averageStars;
     },
+    openDeleteModal() {
+            this.showDeleteModal = true;
+        },
+        closeDeleteModal() {
+            this.showDeleteModal = false;
+        },
+        async confirmDelete() {
+            debugger;
+            const sellerId = localStorage.getItem('sellerById');
+
+            if (sellerId !== null) {
+                console.log("/api/admin/seller/post/" + sellerId)
+                const response = await axios.delete("/api/admin/seller/post/" + sellerId);
+                console.log(response);
+                this.closeDeleteModal();
+                this.$router.push('sellers');
+            }
+        }
+
   },
   setup() {},
   async mounted() {
