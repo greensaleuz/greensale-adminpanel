@@ -1,7 +1,8 @@
 <script  lang="ts">
 import { defineComponent } from 'vue'
 import { SellerAnnouncementViewModel } from '../../viewmodels/SellerViewModel'
-import { GetSearchSellerViewModel } from '../../viewmodels/GetSearchSellerViewModel'
+import type { GetSearchSellerViewModel } from '../../viewmodels/GetSearchSellerViewModel'
+import type {PostViewModel} from '../../viewmodels/SellerGetByIdViewModel'
 import SellerAnnouncementViewComponent from '../../../src/components/sellerposts/SellerViewComponent.vue'
 import SellerAnnouncementViewSkelton from '../../components/sellerposts/SellerComponentSkeleton.vue'
 import { PaginationMetaData } from "../../Utils/PaginationUtils";
@@ -12,11 +13,10 @@ export default defineComponent({
     SellerAnnouncementViewComponent,
     SellerAnnouncementViewSkelton,
     PaginationMetaData,
-    GetSearchSellerViewModel
   },
   data() {
     return {
-      postsList: [] as SellerAnnouncementViewModel[],
+      postsList: [] as PostViewModel[],
       isLoaded: false as Boolean,
       defaultSkeletons: 2 as Number,
       search: "" as String,
@@ -26,8 +26,7 @@ export default defineComponent({
       hasPrevious: false,
       currentPage: 1 as number,
       totalPages: 1 as number,
-
-      list: [],
+      list:{} as GetSearchSellerViewModel,
       sellercount: 1 as number
 
     }
@@ -36,7 +35,7 @@ export default defineComponent({
     async getDataAsync(page: Number) {
       this.isLoaded = false
       this.postsList = [];
-      var response = await axios.get<SellerAnnouncementViewModel[]>(
+      var response = await axios.get<PostViewModel[]>(
         '/api/common/seller/post?page=' + page
       )
       this.isLoaded = true
@@ -54,10 +53,11 @@ export default defineComponent({
     },
     async getSearch(search: any) {
       this.isLoaded = false;
+      debugger;
       var response = await axios.get<GetSearchSellerViewModel>("/api/common/seller/post/search/title?search=" + search);
+      debugger;
       this.isLoaded = true;
-      debugger
-      this.list = response.data || new GetSearchSellerViewModel();
+      this.list = response.data;
       this.postsList = this.list.item2 || [];
 
 
@@ -143,7 +143,7 @@ export default defineComponent({
           :userPhoneNumber="element.userPhoneNumber" :postPhoneNumber="element.postPhoneNumber"
           :categoryId="element.categoryId" :title="element.title" :description="element.description"
           :price="element.price" :capacity="element.capacity" :capacityMeasure="element.capacityMeasure"
-          :type="element.type" :region="element.region" :district="element.district" :address="element.address"
+          :type="element.type" :region="element.region" :district="element.district" 
           :status="element.status" :averageStars="element.averageStars" :userStars="element.userStars"
           :createdAt="element.createdAt" :updatedAt="element.updatedAt" :mainImage="element.mainImage">
         </SellerAnnouncementViewComponent>

@@ -1,18 +1,20 @@
+// PostViewModel.ts
+
 interface Image {
-    sellerPostId: number;
+    buyerpostId: number;
     imagePath: string;
     createdAt: Date;
     updatedAt: Date ;
     id: number;
   }
   
- interface PostViewModel {
+ interface BuyerGetByIdPostViewModel {
     id: number ;
     fullName: string;
     userId: number;
     userPhoneNumber: string;
     postPhoneNumber: string;
-    userRegion: string;
+ //   userRegion: string;
     categoryId: number;
     title: string;
     description: string;
@@ -22,19 +24,14 @@ interface Image {
     type: string;
     region: string;
     district: string;
+    status: number;
+    averageStars : number;
+    userStars:number;
     updatedAt: Date ;
     createdAt: Date ;
-    status: number;
-    userStars:number;
-    averageStars : number;
-    postImages: Image[];
+    buyerPostsImages: Image[];
     mainImage: string;
   }
   
- interface GetSearchSellerViewModel
-{
-    iteamCount:number;
-    item2?: PostViewModel[] ;
-}
-
-export type {GetSearchSellerViewModel}
+  export type {BuyerGetByIdPostViewModel}
+  
