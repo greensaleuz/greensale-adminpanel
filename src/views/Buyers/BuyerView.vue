@@ -131,14 +131,14 @@ export default defineComponent({
   
   <ul v-show="isLoaded == false">
     <template v-for="element in defaultSkeletons" :key="element">
-      <SellerAnnouncementViewSkelton class="mt 7 mb 3"> </SellerAnnouncementViewSkelton>
+      <BuyerAnnouncementViewSkelton class="mt 7 mb 3"> </BuyerAnnouncementViewSkelton>
     </template>
   </ul>
 
   <ul>
     <div class="cart_wrapper">
       <template v-for="element in postsList" :key="element.id">
-        <SellerAnnouncementViewComponent
+        <BuyerAnnouncementViewComponent
           :id="element.id"
           :fullName="element.fullName"
           :userPhoneNumber="element.userPhoneNumber"
@@ -159,7 +159,7 @@ export default defineComponent({
           :createdAt="element.createdAt"
           :updatedAt="element.updatedAt"
           :mainImage="element.mainImage"
-        ></SellerAnnouncementViewComponent>
+        ></BuyerAnnouncementViewComponent>
       </template>
     </div>
   </ul>

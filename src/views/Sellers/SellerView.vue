@@ -28,7 +28,6 @@ export default defineComponent({
       totalPages: 1 as number,
       list:{} as GetSearchSellerViewModel,
       sellercount: 1 as number
-
     }
   },
   methods: {

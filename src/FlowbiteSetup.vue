@@ -14,7 +14,7 @@ import {
     initTooltips } from 'flowbite'
 
 // initialize components based on data attribute selectors
-onMounted(() => {
+ onMounted(() => {
     initAccordions();
     initCarousels();
     initCollapses();

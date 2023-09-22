@@ -29,7 +29,7 @@ export default defineComponent({
   },
   methods:{
     async getDataAsync(page:Number){
-      
+      debugger;
         var response = await axios.get<StorageViewModel[]>("/api/common/storage?page="+page); 
         this.postsList = response.data;
         console.log(this.postsList);
@@ -121,25 +121,26 @@ export default defineComponent({
 
   <ul> 
     <div class="cart_wrapper">
-     <template v-for="element in postsList">
+     <template v-for="element in postsList" :key="element.id">
        
-      <StorageAnnouncementViewComponent 
-        :Id=element.id
+      <StorageAnnouncementViewComponent  
+        :id=element.id
         :UserId = element.userId
-        :FullName=element.fullName
-        :UserPhoneNumber=element.phoneNumber
-        :Info=element.info
-        :Description=element.description
-        :Region=element.region
-        :District=element.district
-        :Address=element.address
-        :CreatedAt=element.createdAt
-        :UpdatedAt=element.updatedAt
-        :ImagePath=element.imagePath
-        :AverageStars=element.averageStars
-        :UserStars = element.userStars
-        :AddressLatitude = element.addressLatitude
-        :AddressLongitude = element.addressLongitude
+        :fullName=element.fullName
+        :userPhoneNumber=element.phoneNumber
+        :info=element.info
+        :description=element.description
+        :price=element.price
+        :region=element.region
+        :district=element.district
+        :address=element.address
+        :createdAt=element.createdAt
+        :updatedAt=element.updatedAt
+        :imagePath=element.imagePath
+        :vverageStars=element.averageStars
+        :userStars = element.userStars
+        :addressLatitude = element.addressLatitude
+        :addressLongitude = element.addressLongitude
       ></StorageAnnouncementViewComponent>
     
     </template>  
@@ -153,7 +154,7 @@ export default defineComponent({
                 <li v-show="metaData.hasPrevious == true">
                     <a href="#" class="flex items-center justify-center  px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{{$t('previous')}}</a>
                 </li>
-                <li v-for="el in metaData.totalPages">
+                <li v-for="el in metaData.totalPages" :key="el">
                     <button @click="getDataAsync(el)" href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                       {{ el }}</button>
                 </li>                               
@@ -166,7 +167,7 @@ export default defineComponent({
 </template>
 <style scoped>
 .cart_wrapper{
-    display: flex                                                                                    ;
+    display: flex;                                                                                    
     flex-wrap: wrap;
 }
 
