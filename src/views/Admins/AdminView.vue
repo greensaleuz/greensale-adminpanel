@@ -1,5 +1,5 @@
 <script lang="ts">
-import { AdminViewModels } from '../../viewmodels/AdminViewModels';
+import type { AdminViewModels } from '../../viewmodels/AdminViewModels';
 import AdminViewComponent from '../../components/admins/AdminViewComponent.vue';
 import AdminSkeletonComponent from "../../components/admins/AdminSkeletonComponent.vue"
 import axios from '../../plugins/axios'
