@@ -82,14 +82,14 @@ export default defineComponent({
       this.showModal = true
 
       this.baseURL = axios.defaults.baseURL!
-    // console.log(this.postList.buyerpostImages)
-    //   console.log(this.postList.buyerpostImages[0].imagePath+"lll")
+    console.log(this.postList.buyerpostImages)
+      console.log(this.postList.buyerpostImages[0].imagePath+"lll")
 
-    //   var i = 0
-    //   this.postList.buyerpostImages.forEach((element) => {
-    //     this.ImageList.push(this.baseURL + '/' + this.postList.buyerpostImages[i].imagePath)
-    //     i++
-    //   })
+      var i = 0
+      this.postList.buyerpostImages.forEach((element) => {
+        this.ImageList.push(this.baseURL + '/' + this.postList.buyerpostImages[i].imagePath)
+        i++
+      })
 
    //   console.log(this.ImageList)
 
@@ -259,7 +259,14 @@ export default defineComponent({
   :imagePath=ImageList >
   
   </coroselItem> -->
-
+  <div class="relative w-full my-5 rounded-lg" >
+      <div >
+        <div>
+          <img :src="ImageList[0]" class="absolute w-full h-full object-cover rounded-lg" alt="" />
+          
+        </div>
+      </div>
+      </div>
     <!--End corusel-->
 
     <div class="flex" style="display: flex">

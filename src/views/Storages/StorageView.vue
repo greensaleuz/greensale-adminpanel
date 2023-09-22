@@ -92,7 +92,7 @@ export default defineComponent({
         :createdAt=element.createdAt
         :updatedAt=element.updatedAt
         :imagePath=element.imagePath
-        :vverageStars=element.averageStars
+        :averageStars=element.averageStars
         :userStars = element.userStars
         :addressLatitude = element.addressLatitude
         :addressLongitude = element.addressLongitude

@@ -256,11 +256,35 @@ export default defineComponent({
   <div class="flex" style="gap: 20px">
     <!--Begin corusel-->
     
-  <coroselItem 
+  <!-- <coroselItem 
   :ImageList =ImageList>
   
-  </coroselItem> 
+  </coroselItem>  -->
 
+
+  <div class="relative w-full my-5 rounded-lg" >
+      <div >
+        <div>
+          <img :src="ImageList[0]" class="absolute w-full h-full object-cover rounded-lg" alt="" />
+          
+        </div>
+      </div>
+  
+  <!-- <div else id="gallery" class="w-full" data-carousel="slide">
+     
+        <div class="relative h-72 overflow-hidden rounded-lg">
+     
+          <div v-for="(element, index) in ImageList" :key="index">
+            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+              <img :src="computeImageUrl(element)" class="absolute  w-full h-full object-cover" alt="" />
+            </div>
+          </div>
+        </div>
+      </div> -->
+  
+      <!-- Slider controls -->
+     
+    </div>
     <!--End corusel-->
 
     <div class="flex" style="display: flex">
@@ -268,7 +292,7 @@ export default defineComponent({
         class="w-full h-96 my-5 flex text-gray-700 border border-gray-200 rounded-lg bg-gray-50 dark:text-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
         style="flex-direction: column"
       >
-        <div class="">
+        <div class=" rounded-lg">
           <div class="line"></div>
           <div class="flex">
             <h4 class="text-3xl tracking-tight text-black dark:text-white px-5 pt-2">

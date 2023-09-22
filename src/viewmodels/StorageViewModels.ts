@@ -3,7 +3,7 @@ export class StorageViewModel{
      userId:number = 0;
      fullName:string ="" 
      price:Number=0;
-     
+     averageStars:Number=0;
      phoneNumber:string ="";
      storageName:string ="";
      description:string="";
@@ -13,7 +13,6 @@ export class StorageViewModel{
      addressLatitude:number=0;
      addressLongitude:number=0;
      info:string ="";
-     averageStars:number =0;
      userStars:number =0;
      imagePath:string ="";
      createdAt: Date = new Date();
