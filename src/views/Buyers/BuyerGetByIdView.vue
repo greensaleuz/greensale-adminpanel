@@ -20,6 +20,8 @@ export default defineComponent({
   },
   data() {
     return {
+      baseURL:'' as string,
+
       showModal: false,
       statusString: '' as string | null,
       status_zero: true as boolean,
@@ -83,13 +85,9 @@ export default defineComponent({
         this.status_zero = false;
       }
       this.showModal = true
-debugger
-//       this.baseURL = axios.defaults.baseURL!
- 
-// this.imagefullpath=this.baseURL + '/' + this.postList.buyerPostsImages[0].imagePath
-// console.log(this.imagefullpath)
 
-this.baseURL = axios.defaults.baseURL!;
+      this.baseURL = axios.defaults.baseURL!;
+      console.log(this.postList.buyerPostsImages[0].imagePath);
       var i = 0;
       this.postList.buyerPostsImages.forEach((element) => {
         this.ImageList.push(this.baseURL + "/" + this.postList.buyerPostsImages[i].imagePath);
@@ -108,17 +106,9 @@ this.baseURL = axios.defaults.baseURL!;
         this.image_fo = true;
       }
 
-
       //  this.updatedAtString = formatDate(this.postList.updatedAt!)
       this.AvarageStar = this.postList.status
-      if (this.postList.status === 0) {
-        this.status_zero = true
-      } else if (this.postList.status == 1) {
-        this.status_one = true
-      } else if ((this.postList.status = 2)) {
-        this.status_two = true
-      }
-      console.log(this.averageStars)
+   
 
       if (this.postList.userStars === 0) {
         this.star_one = false
@@ -161,12 +151,17 @@ this.baseURL = axios.defaults.baseURL!;
       this.AvarageStar = this.postList.averageStars
     },
 
-    async stars(stars_number) {
-        debugger;
+    async stars(stars_number:Number) {
+
       const formData = new FormData()
       let BuyerId = localStorage.getItem('buyerrById')
-      formData.append('PostId', this.id)
-      formData.append('Stars', stars_number)
+      if (typeof this.id === 'number') {
+        formData.append("PostId", this.id.toString());
+      } else {
+        console.error('Invalid ID type');
+        // Qanday ishlash kerakligini belgilang yoki xato xabarni ko'rsating.
+      }
+      formData.append('Stars', stars_number.toString())
 
       const responsetwo = await axios.post('/api/admin/buyer/star', formData)
 
