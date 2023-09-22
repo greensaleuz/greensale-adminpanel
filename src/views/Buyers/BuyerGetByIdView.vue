@@ -948,6 +948,7 @@ export default defineComponent({
          </div>
          <h4 class="text-sm tracking-tight black dark:text-gray-400">Manzil</h4>
        </div>
+       
        <div> <h4 class="text-sm tracking-tight black dark:text-gray-100 px-5">
          {{ postList.region }} {{ postList.district }}
        </h4>
