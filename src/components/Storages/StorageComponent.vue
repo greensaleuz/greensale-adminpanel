@@ -10,16 +10,16 @@ export default defineComponent({
   props: {
     id: Number,
     fullName: String,
-    
-    info : String,
+
+    info: String,
     phoneNumber: String,
     description: String,
     region: String,
     district: String,
     address: String,
-    
-    averageStars : Number,
-    userStars:Number,
+
+    averageStars: Number,
+    userStars: Number,
     createdAt: Date,
     updatedAt: Date,
     imagePath: String,
@@ -33,7 +33,7 @@ export default defineComponent({
       updatedAtString: '' as String,
       imageFullPath: '' as string,
       statusstring: '' as string,
-     
+
       star_one: false as boolean,
       star_two: false as boolean,
       star_three: false as boolean,
@@ -47,20 +47,21 @@ export default defineComponent({
   },
   methods: {
     load() {
-        
+
       this.baseURL = axios.defaults.baseURL!
       this.imageFullPath = this.baseURL + '/' + this.imagePath
       this.createdAtString = formatDate(this.createdAt!)
       this.updatedAtString = formatDate(this.updatedAt!)
-      
-      this.AvarageStar=this.averageStars
+     
 
-      if(this.userStars===0){
-        this.star_one = false ;
-        this.star_two = false ;
-        this.star_three = false ;
-        this.star_fo = false ;
-        this.star_five =false;
+      this.AvarageStar = Number(this.averageStars)
+
+      if (this.userStars === 0) {
+        this.star_one = false;
+        this.star_two = false;
+        this.star_three = false;
+        this.star_fo = false;
+        this.star_five = false;
 
       }
       else if (this.userStars == 1) {
@@ -201,7 +202,7 @@ export default defineComponent({
           <div class="mr-2" style="margin-left: auto">
           </div>
         </div>
-       
+
 
         <!--Begin::stars-->
         <div class="flex items-center mt-2.5 mb-2 mx-2">

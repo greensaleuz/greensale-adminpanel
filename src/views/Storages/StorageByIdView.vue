@@ -2,7 +2,7 @@
 import { defineComponent } from "vue";
 import axios from "../../plugins/axios";
 import { formatDate } from "../../helpers//DataHelper";
-import type { PostViewModel } from "../../viewmodels/SellerGetByIdViewModel";
+import type { StorageViewModel } from "../../viewmodels/StorageViewModels";
 
 import FlowbiteSetUp from "../../FlowbiteSetup.vue";
 
@@ -20,7 +20,7 @@ export default defineComponent({
     data() {
         return {
             baseURL: "",
-            imageFullPath: "",
+            imageFullPath: "" as string,
 
             star_one: false as boolean,
             star_two: false as boolean,
@@ -28,7 +28,7 @@ export default defineComponent({
             star_fo: false as boolean,
             star_five: false as boolean,
 
-            postList: {} as PostViewModel,
+            postList: {} as StorageViewModel,
             AvarageStar: 0 as Number,
 
             showDeleteModal: false,
@@ -55,7 +55,7 @@ export default defineComponent({
         async getDataAsync() {
             debugger;
             let SellerId = localStorage.getItem("storageById");
-            var response = await axios.get<PostViewModel>(
+            var response = await axios.get<StorageViewModel>(
                 "/api/common/storage/" + Number(SellerId)
             );
             this.postList = response.data || {};
@@ -121,7 +121,7 @@ export default defineComponent({
 
             const responsetwo = await axios.post("api/admin/storage/post/star", formData);
 
-            var response = await axios.get<PostViewModel>(
+            var response = await axios.get<StorageViewModel>(
                 "/api/common/storage/" + Number(StorageId)
             );
 

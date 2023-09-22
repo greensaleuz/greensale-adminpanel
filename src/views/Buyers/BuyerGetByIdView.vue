@@ -523,7 +523,6 @@ export default defineComponent({
           />
         </div>
       </div>
-      <!-- Slider controls -->
       <button
         type="button"
         class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
@@ -898,6 +897,7 @@ export default defineComponent({
           </p>
         </div>
         <div class="w-96 flex my-3 pt-2" style="gap: 10px; margin-top: auto">
+
           <div>
             <div class="flex" style="gap: 5px">
               <div class="pl-4">
@@ -949,9 +949,9 @@ export default defineComponent({
             <h4 class="text-sm tracking-tight black dark:text-gray-100 px-5">
               {{ postList.region }} {{ postList.district }}
             </h4>
-            <h4 class="text-sm tracking-tight black dark:text-gray-200 px-5">
+            <!-- <h4 class="text-sm tracking-tight black dark:text-gray-200 px-5">
              {{postList.address}}
-            </h4>
+            </h4> -->
           </div>
 
           <div></div>
