@@ -62,6 +62,10 @@ export default defineComponent({
       ImageIndex: [] as number[]
     }
   },
+  watch:
+    {
+      ImageList:"load"
+    },
   methods: {
     async getDataAsync() {
       let SellerId = localStorage.getItem('sellerById')
@@ -90,7 +94,7 @@ export default defineComponent({
         i++
       })
 
-      console.log(this.ImageList)
+      console.log(this.ImageList+"lll")
 
       this.imageFullPath = this.baseURL
 
@@ -231,9 +235,12 @@ export default defineComponent({
   </nav>
   <div class="flex" style="gap: 20px">
     <!--Begin corusel-->
-    <coroselItem :imagePath[]=ImageList>
+    
+  <coroselItem 
+  :ImageList =ImageList>
+  
+  </coroselItem> 
 
-    </coroselItem>
 
     <!--End corusel-->
 
