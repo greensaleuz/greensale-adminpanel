@@ -261,8 +261,6 @@ export default defineComponent({
     :ImageList =ImageList>
   
   </coroselItem> 
-
-
     <!--End corusel-->
 
     <div class="flex" style="display: flex">
@@ -459,7 +457,6 @@ export default defineComponent({
       </div>
     </div>
   </div>
-  <!-- <deleteComponent></deleteComponent> -->
 
   <!--begin:: Delete Modal Button-->
   <button type="button" @click="openDeleteModal" data-modal-target="staticModal" data-modal-toggle="staticModal"
