@@ -1,5 +1,7 @@
 <script lang="ts">
 import { UserViewModels } from '../../viewmodels/UserViewModels';
+import { UserGetSearchViewModels } from '../../viewmodels/UserGetSearchModels';
+
 import UserViewComponent from "../../components/users/UserViewComponent.vue";
 import UserSkeletonComponent from "../../components/users/UserSkeletonComponent.vue"
 import axios from '../../plugins/axios'
@@ -10,7 +12,7 @@ import { PaginationMetaData } from "../../Utils/PaginationUtils";
 
 export default defineComponent({
   components: {
-    UserViewComponent,UserSkeletonComponent
+    UserViewComponent,UserSkeletonComponent,UserGetSearchViewModels
   },
   props : {
         id : Number 
@@ -49,23 +51,21 @@ export default defineComponent({
       this.metaData.pageSize= paginationJson.PageSize;
       this.metaData.totalItems = paginationJson.TotalItems; 
     },
-    // async getSearch(search:any){
-    //         this.isLoaded = false;
-    //         var response = await axios.get<UserViewModels[]>("/api/common/doctors/search?search=" +search);
-    //         this.isLoaded = true;
-    //         this.doctorsList = response.data;
-            
-    //     },
-    //     handleEnterKey: function(search:any) {
-    //         debugger;
-
-    //         if(search==""){
-    //             this.getDataAsync();
-    //         }
-    //         else{
-    //             this.getSearch(search)
-    //         }
-    //      }
+    async getSearch(search:any){
+            this.isLoaded = false;
+            var response = await axios.get<UserGetSearchViewModels>("/api/admin/users/search?search=" + search);
+            this.isLoaded = true;
+            this.list = response.data;
+            this.userList = this.list.item2;                      
+        },
+        handleEnterKey: function(search:any) {
+            if(search == "" ){
+                this.getDataAsync(1);
+            }
+            else{
+                this.getSearch(search)
+            }
+         }
   },
   data() {
     return {
@@ -78,7 +78,9 @@ export default defineComponent({
       hasNext: false,
       hasPrevious: false,            
       currentPage: 1 as number,
-      totalPages: 1 as number
+      totalPages: 1 as number,
+      list: []
+
     }
   },
   setup() {
@@ -120,7 +122,7 @@ export default defineComponent({
         </ol>
   </nav>
   <!--begin search-->
-  <!-- <div class="flex justify-end">
+  <div class="flex justify-end">
             <div class="flex relative justify-end gap-5 right-0">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                     <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
@@ -137,7 +139,7 @@ export default defineComponent({
                     {{ $t("search") }}
                 </button>
             </div>        
-    </div> -->
+    </div>
   <!--end search-->  
 
   <!--begin:: User-->
@@ -157,11 +159,11 @@ export default defineComponent({
           <th scope="col" class="w-32 px-6 py-3  text-gray-900 whitespace-nowrap dark:text-white">
             {{ $t('phone') }}
           </th>
-          <th scope="col" class="w-40 px-6 py-3  text-gray-900 whitespace-nowrap dark:text-white">
+          <th scope="col" class="w-44 px-6 py-3  text-gray-900 whitespace-nowrap dark:text-white">
             {{ $t('adress') }}
           </th>
-          <th scope="col" class="w-24 px-6 py-3 text-gray-900 whitespace-nowrap dark:text-white">
-            {{ $t('delete') }}
+          <th scope="col" class="w-48 px-6 py-3 text-gray-900 whitespace-nowrap dark:text-white">
+            {{ $t('operations') }}
           </th>
         </tr>
       </thead>

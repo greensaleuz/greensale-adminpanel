@@ -117,7 +117,7 @@ export default defineComponent({
                     {{ $t("search") }}
                 </button>
             </div>        
-  </div>
+ </div>
   <!--end search--> 
 
   <ul> 
