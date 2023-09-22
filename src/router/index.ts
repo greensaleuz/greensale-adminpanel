@@ -70,22 +70,17 @@ router.beforeEach((to, from, next) => {
     if (token) {
       try {
         const payload = jwtDecode(token)
-        const currentTime = Math.floor(Date.now() / 1000); // Current time in seconds
-        if (payload.exp < currentTime) {
-          // Token has expired, redirect to login
+        const currentTime = Math.floor(Date.now() / 1000); 
+        if ((payload as any).exp < currentTime) {
           next('/auth/login');
         } else {
-           // Kullanıcı rollerini ve sayfa erişimini kontrol et
-           if (payload['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] === 'SuperAdmin' || payload['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] === 'Admin') {
-            // Kullanıcının "User" rolü varsa, kimlik doğrulama sayfalarına erişim engelle
-            next(); // Sayfaya erişimi engelle
+           if ((payload as { [key: string]: string })['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] === 'SuperAdmin' || (payload as { [key: string]: string })['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] === 'Admin') {
+            next(); 
           } else {
-            // Diğer roller için kimlik doğrulama sayfalarına erişimi sağla
             next("/");
           }
         }
       } catch (error) {
-        // Handle invalid token
         next('/auth/login');
       }
     } else {
