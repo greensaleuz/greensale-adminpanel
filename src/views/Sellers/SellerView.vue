@@ -26,8 +26,10 @@ export default defineComponent({
       hasPrevious: false,
       currentPage: 1 as number,
       totalPages: 1 as number,
+
       list: [],
       sellercount: 1 as number
+
     }
   },
   methods: {
@@ -57,6 +59,7 @@ export default defineComponent({
       debugger
       this.list = response.data || new GetSearchSellerViewModel();
       this.postsList = this.list.item2 || [];
+
 
     },
     handleEnterKey: function (search: any) {

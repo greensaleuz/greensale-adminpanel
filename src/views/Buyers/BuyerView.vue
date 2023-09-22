@@ -1,6 +1,7 @@
 <script  lang="ts">
 import { defineComponent } from 'vue'
 import { BuyerAnnouncementViewModel } from '../../viewmodels/BuyerAnnouncementViewModel'
+import { GetSearchSellerViewModel } from '../../viewmodels/GetSearchSellerViewModel'
 import SellerAnnouncementViewComponent from '../../../src/components/sellerposts/SellerViewComponent.vue'
 import SellerAnnouncementViewSkelton from '../../components/sellerposts/SellerComponentSkeleton.vue'
 import { PaginationMetaData } from "../../Utils/PaginationUtils";
@@ -10,19 +11,23 @@ export default defineComponent({
   components: {
     SellerAnnouncementViewComponent,
     SellerAnnouncementViewSkelton,
-    PaginationMetaData
+    PaginationMetaData,
+    GetSearchSellerViewModel
   },
   data() {
     return {
       postsList: [] as BuyerAnnouncementViewModel[],
       isLoaded: false as Boolean,
       defaultSkeletons: 2 as Number,
+      search:"" as String,
       metaData: new PaginationMetaData(),
 
       hasNext: false,
       hasPrevious: false,            
       currentPage: 1 as number,
-      totalPages: 1 as number
+      totalPages: 1 as number,
+      list: []
+
     }
   },
   methods: {
@@ -44,7 +49,24 @@ export default defineComponent({
       this.metaData.hasPrevious = paginationJson.HasPrevious;               
       this.metaData.pageSize= paginationJson.PageSize;
       this.metaData.totalItems = paginationJson.TotalItems; 
-    }
+    },
+    async getSearch(search:any){
+            this.isLoaded = false;
+            var response = await axios.get<GetSearchSellerViewModel>("/api/common/buyer/posts/search/title?search=" + search);
+            this.isLoaded = true;
+            this.list = response.data;
+            this.postsList = this.list.item2;                      
+        },
+        handleEnterKey: function(search:any) {
+            // debugger;
+
+            if(search == "" ){
+                this.getDataAsync(1);
+            }
+            else{
+                this.getSearch(search)
+            }
+         }
   },
   setup() {},
   async mounted() {
@@ -81,6 +103,27 @@ export default defineComponent({
             </li>
         </ol>
   </nav>
+  
+  <!--begin search-->
+  <div class="flex justify-end mb-10">
+            <div class="flex relative justify-end gap-5 right-0">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                    </svg>
+                </div>
+                <input type="search" v-model="search" @keyup.enter="handleEnterKey(search)" id="default-search"
+                    style="height: 45px; width: 300px;"
+                    class="flex end w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                <button @click="handleEnterKey(search)" type="submit" style="font-size: 14px;"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-7 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    {{ $t("search") }}
+                </button>
+            </div>        
+  </div>
+  <!--end search--> 
   
   <ul v-show="isLoaded == false">
     <template v-for="element in defaultSkeletons" :key="element">
