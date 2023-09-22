@@ -3,15 +3,15 @@ import { defineComponent } from 'vue'
 import { BuyerAnnouncementViewModel } from '../../viewmodels/BuyerAnnouncementViewModel'
 import type  { BuyerGetByIdPostViewModel} from '../../viewmodels/BuyerGetByIdViewModel'
 import  type  { GetSearchBuyerViewModels } from '../../viewmodels/GetSearchBuyerViewModels'
-import SellerAnnouncementViewComponent from '../../../src/components/sellerposts/SellerViewComponent.vue'
-import SellerAnnouncementViewSkelton from '../../components/sellerposts/SellerComponentSkeleton.vue'
+import BuyerAnnouncementViewComponent from '../../../src/components/buyerposts/BuyerViewComponent.vue'
+import BuyerAnnouncementViewSkelton from '../../components/buyerposts/BuyerComponentSkelton.vue'
 import { PaginationMetaData } from "../../Utils/PaginationUtils";
 import axios from '../../plugins/axios'
 
 export default defineComponent({
   components: {
-    SellerAnnouncementViewComponent,
-    SellerAnnouncementViewSkelton,
+    BuyerAnnouncementViewComponent,
+    BuyerAnnouncementViewSkelton,
     PaginationMetaData,
   },
   data() {
