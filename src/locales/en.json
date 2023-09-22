@@ -65,6 +65,7 @@
     "lastname":"Last name",
     "phone":"Phone number",
     "adress":"Adress",
+    "operations":"Operations",
     
     "a":"Number of announcements per year",
     "b":"Number of ads received per year",
