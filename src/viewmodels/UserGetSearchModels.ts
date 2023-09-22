@@ -10,8 +10,10 @@ interface Users{
     createdAt: Date ;
     updatedAt: Date ;
 }
-export class UserGetSearchViewModels
+interface UserGetSearchViewModels
 {
-    iteamCount:number=0 ;
-    item2!: Users[];
+    iteamCount:number ;
+    item2: Users[];
 }
+
+export type {UserGetSearchViewModels}

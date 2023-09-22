@@ -22,6 +22,8 @@ export default defineComponent({
   },
   data() {
     return {
+      baseURL:'' as string,
+
       showModal: false,
       statusString: '' as string | null,
       status_zero: true as boolean,
@@ -93,7 +95,7 @@ export default defineComponent({
 
    //   console.log(this.ImageList)
 
-      this.imageFullPath = this.baseURL
+      this.imageFullPath = this.ImageList || ''
 
       //  this.updatedAtString = formatDate(this.postList.updatedAt!)
       this.AvarageStar = this.postList.status
@@ -104,7 +106,6 @@ export default defineComponent({
       } else if ((this.postList.status = 2)) {
         this.status_two = true
       }
-      console.log(this.averageStars)
 
       if (this.postList.userStars === 0) {
         this.star_one = false
@@ -147,12 +148,17 @@ export default defineComponent({
       this.AvarageStar = this.postList.averageStars
     },
 
-    async stars(stars_number) {
+    async stars(stars_number:Number) {
         debugger;
       const formData = new FormData()
       let BuyerId = localStorage.getItem('buyerrById')
-      formData.append('PostId', this.id)
-      formData.append('Stars', stars_number)
+      if (typeof this.id === 'number') {
+        formData.append("PostId", this.id.toString());
+      } else {
+        console.error('Invalid ID type');
+        // Qanday ishlash kerakligini belgilang yoki xato xabarni ko'rsating.
+      }
+      formData.append('Stars', stars_number.toString())
 
       const responsetwo = await axios.post('/api/admin/buyer/star', formData)
 
