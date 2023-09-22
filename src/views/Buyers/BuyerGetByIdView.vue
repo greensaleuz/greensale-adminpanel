@@ -52,17 +52,17 @@ export default defineComponent({
       district: '' as String,
       updatedAt: Date,
       createdAt: Date,
-      adress:'' as String,
+      adress: '' as String,
       status: 0 as Number,
       buyerpostImages: [],
       test: false as boolean,
 
-      ImageList: [] as string[],
+      ImageList: [] as string[]
     }
   },
   methods: {
-    async getDataAsync() { 
-        debugger;
+    async getDataAsync() {
+      debugger
       let BuyerId = localStorage.getItem('buyerrById')
       var response = await axios.get<postViewModel>('/api/common/buyer/posts/' + Number(BuyerId))
       this.postList = response.data || {}
@@ -72,18 +72,18 @@ export default defineComponent({
         this.status_zero = true
       } else if (this.postList.status! == 1) {
         this.statusString = 'Kelishilgan'
-        this.status_one = true;
-        this.status_zero = false;
+        this.status_one = true
+        this.status_zero = false
       } else if (this.postList.status! == 2) {
         this.statusString = 'Olingan'
-        this.status_two = true;
-        this.status_zero = false;
+        this.status_two = true
+        this.status_zero = false
       }
       this.showModal = true
 
       this.baseURL = axios.defaults.baseURL!
-    console.log(this.postList.buyerpostImages)
-      console.log(this.postList.buyerpostImages[0].imagePath+"lll")
+      console.log(this.postList.buyerpostImages)
+      console.log(this.postList.buyerpostImages[0].imagePath + 'lll')
 
       var i = 0
       this.postList.buyerpostImages.forEach((element) => {
@@ -91,7 +91,7 @@ export default defineComponent({
         i++
       })
 
-   //   console.log(this.ImageList)
+      //   console.log(this.ImageList)
 
       this.imageFullPath = this.baseURL
 
@@ -148,7 +148,7 @@ export default defineComponent({
     },
 
     async stars(stars_number) {
-        debugger;
+      debugger
       const formData = new FormData()
       let BuyerId = localStorage.getItem('buyerrById')
       formData.append('PostId', this.id)
@@ -255,18 +255,17 @@ export default defineComponent({
   </nav>
   <div class="flex" style="gap: 20px">
     <!--Begin corusel-->
-  <!-- <coroselItem 
+    <!-- <coroselItem 
   :imagePath=ImageList >
   
   </coroselItem> -->
-  <div class="relative w-full my-5 rounded-lg" >
-      <div >
+    <div class="relative w-full my-5 rounded-lg">
+      <div>
         <div>
           <img :src="ImageList[0]" class="absolute w-full h-full object-cover rounded-lg" alt="" />
-          
         </div>
       </div>
-      </div>
+    </div>
     <!--End corusel-->
 
     <div class="flex" style="display: flex">
@@ -539,7 +538,7 @@ export default defineComponent({
               {{ postList.region }} {{ postList.district }}
             </h4>
             <h4 class="text-sm tracking-tight black dark:text-gray-200 px-5">
-             {{postList.address}}
+              {{ postList.address }}
             </h4>
           </div>
 
