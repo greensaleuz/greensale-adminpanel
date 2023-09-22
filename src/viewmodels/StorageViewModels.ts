@@ -3,7 +3,8 @@ export class StorageViewModel{
      userId:number = 0;
      fullName:string ="" 
      price:Number=0;
-     
+     capacityMeasure:string="";
+     capacity:string='';
      phoneNumber:string ="";
      storageName:string ="";
      description:string="";

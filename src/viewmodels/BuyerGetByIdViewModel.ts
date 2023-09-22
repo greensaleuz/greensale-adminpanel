@@ -1,6 +1,6 @@
 // PostViewModel.ts
 
-interface Image {
+interface buyerPostsImages {
     buyerpostId: number;
     imagePath: string;
     createdAt: Date;
@@ -29,7 +29,7 @@ interface Image {
     userStars:number;
     updatedAt: Date ;
     createdAt: Date ;
-    buyerPostsImages: Image[];
+    buyerPostsImages: buyerPostsImages[];
     mainImage: string;
   }
   

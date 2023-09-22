@@ -1,7 +1,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from '../../plugins/axios';
-
 export default defineComponent({
     components: {
 
@@ -12,7 +11,7 @@ export default defineComponent({
     data() {
         return {
             showDeleteModal: false,
-            sellerId: 0 as Number
+            sellerId: 0 as Number,
         };
     },
     methods: {
@@ -24,14 +23,14 @@ export default defineComponent({
         },
         async confirmDelete() {
             debugger;
-            const buyerId = localStorage.getItem('buyerrById');
-   
-            if (buyerId !== null) {
+            const sellerId = localStorage.getItem('sellerById');
 
-                const response = await axios.delete("/api/admin/buyer/post/" + buyerId);
+            if (sellerId !== null) {
+                console.log("/api/admin/seller/post/" + sellerId)
+                const response = await axios.delete("/api/admin/seller/post/" + sellerId);
                 console.log(response);
                 this.closeDeleteModal();
-                this.$router.push('buyers');
+                this.$router.push('sellers');
             }
         }
     },
