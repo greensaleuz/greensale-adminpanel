@@ -108,7 +108,7 @@ export default defineComponent({
       } else if (this.ImageList.length === 4) {
         this.image_fo = true;
       } else if (this.ImageList.length === 5) {
-        this.image_fo = true;
+        this.image_five = true;
       }
 
       console.log(this.image_one);
@@ -118,8 +118,8 @@ export default defineComponent({
         this.status_zero = true;
       } else if (this.postList.status == 1) {
         this.status_one = true;
-      } else if ((this.postList.status = 2)) {
-        this.status_five = true;
+      } else if ((this.postList.status == 2)) {
+        this.status_two = true;
       }
 
       if (this.postList.userStars === 0) {

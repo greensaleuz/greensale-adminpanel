@@ -949,9 +949,9 @@ export default defineComponent({
             <h4 class="text-sm tracking-tight black dark:text-gray-100 px-5">
               {{ postList.region }} {{ postList.district }}
             </h4>
-            <h4 class="text-sm tracking-tight black dark:text-gray-200 px-5">
+            <!-- <h4 class="text-sm tracking-tight black dark:text-gray-200 px-5">
              {{postList.address}}
-            </h4>
+            </h4> -->
           </div>
 
           <div></div>

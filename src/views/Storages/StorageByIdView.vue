@@ -20,7 +20,7 @@ export default defineComponent({
     data() {
         return {
             baseURL: "",
-            imageFullPath: "",
+            imageFullPath: "" as string,
 
             star_one: false as boolean,
             star_two: false as boolean,
