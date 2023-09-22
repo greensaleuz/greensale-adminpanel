@@ -61,6 +61,11 @@ const router = createRouter({
         path:'buyerinformation',
         component:()=> import ("../views/Buyers/BuyerGetByIdView.vue")
        // meta: { requiresAuth: true }
+      },
+      {
+        path:'storageinformation',
+        component:()=> import ("../views/Storages/StorageByIdView.vue")
+       // meta: { requiresAuth: true }
       }
       ],
     },

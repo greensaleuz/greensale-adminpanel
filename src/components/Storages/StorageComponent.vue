@@ -13,9 +13,6 @@ export default defineComponent({
     info : String,
     phoneNumber: String,
     description: String,
-    price: Number,
-    capacity: Number,
-    capacityMeasure: String,
     region: String,
     district: String,
     address: String,
@@ -34,9 +31,7 @@ export default defineComponent({
       updatedAtString: '' as String,
       imageFullPath: '' as string,
       statusstring: '' as string,
-      status_zero: false as boolean,
-      status_one: false as boolean,
-      status_two: false as boolean,
+     
       star_one: false as boolean,
       star_two: false as boolean,
       star_three: false as boolean,
@@ -50,21 +45,13 @@ export default defineComponent({
   },
   methods: {
     load() {
-      debugger
+        
       this.baseURL = axios.defaults.baseURL!
       this.imageFullPath = this.baseURL + '/' + this.imagePath
       this.createdAtString = formatDate(this.createdAt!)
       this.updatedAtString = formatDate(this.updatedAt!)
       this.AvarageStar=this.averageStars
-      // if (this.status === 0) {
-      //   this.status_zero = true
-      // } else if (this.status == 1) {
-      //   this.status_one = true
-      // } else if ((this.status = 2)) {
-      //   this.status_two = true
-      // }
-      console.log(this.userStars+"kjhgfdxghj")
-      console.log(this.averageStars)
+
       if(this.userStars===0){
         this.star_one = false ;
         this.star_two = false ;
@@ -201,39 +188,17 @@ export default defineComponent({
       <div>
         <div class="flex">
           <h4 class="text-lg tracking-tight text-black dark:text-white px-2 pt-2">{{ info }}</h4>
-          <div class="mt-2 mr-2" style="margin-left: auto">
-            <div
-              v-show="status_zero == true"
-              class="px-3 py-1.5 text-xs font-medium leading-none text-center text-green-800 bg-green-400 rounded-full animate-pulse dark:bg-green-900 dark:text-green-200"
-            >
-              {{ $t('statustypezero') }}
-            </div>
-            <div
-              v-show="status_one == true"
-              class="px-3 py-1.5 text-xs font-medium leading-none text-center text-yellow-800 bg-yellow-400 rounded-full animate-pulse dark:bg-yellow-900 dark:text-yellow-200"
-            >
-              {{ $t('statustypeone') }}
-            </div>
-            <div
-              v-show="status_two == true"
-              class="px-3 py-1.5 text-xs font-medium leading-none text-center text-red-800 bg-red-400 rounded-full animate-pulse dark:bg-red-900 dark:text-red-200"
-            >
-              {{ $t('statustypetwo') }}
-            </div>
-          </div>
+         
         </div>
         <div class="flex">
           <h4 class="text-base tracking-tight black dark:text-white px-2">
-            {{ capacity }}{{ capacityMeasure }}
+            {{ description }}
           </h4>
 
           <div class="mr-2" style="margin-left: auto">
-            <h4 class="text-base tracking-tight black dark:text-white px-2">{{ price }}UZS</h4>
           </div>
         </div>
-        <p class="font-normal text-xs text-gray-700 dark:text-gray-400 px-2" style="width: 290px">
-          {{ description }}
-        </p>
+       
 
         <!--Begin::stars-->
         <div class="flex items-center mt-2.5 mb-2 mx-2">

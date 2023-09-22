@@ -2,7 +2,7 @@
 import { defineComponent } from 'vue';
 import  { StorageViewModel }  from '../../viewmodels/StorageViewModels';
 import type { GetSearchSellerViewModel } from '../../viewmodels/GetSearchSellerViewModel'
-import StorageViewComponent from '../../components/Storages/storageViewComponent.vue'
+import StorageViewComponent from '../../components/Storages/StorageComponent.vue'
 import { PaginationMetaData } from "../../Utils/PaginationUtils";
 import axios from '../../plugins/axios';
 
@@ -32,7 +32,6 @@ export default defineComponent({
       
         var response = await axios.get<StorageViewModel[]>("/api/common/storage?page="+page); 
         this.postsList = response.data;
-        console.log(this.postsList);
 
         const paginationJson = JSON.parse(response.headers['x-pagination']);
       this.metaData = new PaginationMetaData();
@@ -130,7 +129,7 @@ export default defineComponent({
         :userPhoneNumber=element.phoneNumber
         :info=element.info
         :description=element.description
-        :price=element.price
+        :pricee=element.price
         :capacity=element.capacity
         :capacityMeasure=element.capacityMeasure
         :region=element.region
@@ -139,7 +138,7 @@ export default defineComponent({
         :createdAt=element.createdAt
         :updatedAt=element.updatedAt
         :imagePath=element.imagePath
-        :vverageStars=element.averageStars
+        :averageStars=element.averageStars
         :userStars = element.userStars
         :addressLatitude = element.addressLatitude
         :addressLongitude = element.addressLongitude
