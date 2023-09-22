@@ -1,15 +1,15 @@
 <script  lang="ts">
 import { defineComponent } from 'vue'
 import { BuyerAnnouncementViewModel } from '../../viewmodels/BuyerAnnouncementViewModel'
-import SellerAnnouncementViewComponent from '../../../src/components/sellerposts/SellerViewComponent.vue'
-import SellerAnnouncementViewSkelton from '../../components/sellerposts/SellerComponentSkeleton.vue'
+import BuyerAnnouncementViewComponent from '../../../src/components/buyerposts/BuyerViewComponent.vue'
+import BuyerAnnouncementViewSkelton from '../../components/buyerposts/BuyerComponentSkelton.vue'
 import { PaginationMetaData } from "../../Utils/PaginationUtils";
 import axios from '../../plugins/axios'
 
 export default defineComponent({
   components: {
-    SellerAnnouncementViewComponent,
-    SellerAnnouncementViewSkelton,
+    BuyerAnnouncementViewComponent,
+    BuyerAnnouncementViewSkelton,
     PaginationMetaData
   },
   data() {
@@ -84,14 +84,14 @@ export default defineComponent({
   
   <ul v-show="isLoaded == false">
     <template v-for="element in defaultSkeletons" :key="element">
-      <SellerAnnouncementViewSkelton class="mt 7 mb 3"> </SellerAnnouncementViewSkelton>
+      <BuyerAnnouncementViewSkelton class="mt 7 mb 3"> </BuyerAnnouncementViewSkelton>
     </template>
   </ul>
 
   <ul>
     <div class="cart_wrapper">
       <template v-for="element in postsList" :key="element.id">
-        <SellerAnnouncementViewComponent
+        <BuyerAnnouncementViewComponent
           :id="element.id"
           :fullName="element.fullName"
           :userPhoneNumber="element.userPhoneNumber"
@@ -112,7 +112,7 @@ export default defineComponent({
           :createdAt="element.createdAt"
           :updatedAt="element.updatedAt"
           :mainImage="element.mainImage"
-        ></SellerAnnouncementViewComponent>
+        ></BuyerAnnouncementViewComponent>
       </template>
     </div>
   </ul>

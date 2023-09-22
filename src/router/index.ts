@@ -52,9 +52,16 @@ const router = createRouter({
        },
        {
         path:'sellerinformation',
-        component:()=> import ("../views/Sellers/SellerGetByIdView.vue")
+        component:()=> import ("../views/Sellers/SellerGetByIdView.vue"),
+        props:true
        // meta: { requiresAuth: true }
       },
+      
+       {
+        path:'buyerinformation',
+        component:()=> import ("../views/Buyers/BuyerGetByIdView.vue")
+       // meta: { requiresAuth: true }
+      }
       ],
     },
     { 

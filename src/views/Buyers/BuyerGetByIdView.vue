@@ -2,11 +2,11 @@
 import { defineComponent } from 'vue'
 import axios from '../../plugins/axios'
 import { formatDate } from '../../helpers//DataHelper'
-import type { PostViewModel } from '../../viewmodels/SellerGetByIdViewModel'
+import type { postViewModel } from '../../viewmodels/BuyerGetByIdViewModels'
 // SellerGetByIdViewModels faylidan kelgan modulni ishlatishingiz mumkin
 import FlowbiteSetUp from '../../FlowbiteSetup.vue'
 //import InformationView from '../informations/InformationView.vue'
-import deleteComponent from '../../components/sellerposts/SellerDeleteComponent.vue'
+import deleteComponent from '../../components/buyerposts/BuyerDeleteComponent.vue'
 import editComponent from '../../components/sellerposts/SellerEditComponent.vue'
 import coroselItem from '../../components/sellerposts/SellerCoroselItemComponent.vue'
 export default defineComponent({
@@ -24,7 +24,7 @@ export default defineComponent({
     return {
       showModal: false,
       statusString: '' as string | null,
-      status_zero: false as boolean,
+      status_zero: true as boolean,
       status_one: false as boolean,
       status_two: false as boolean,
       star_one: false as boolean,
@@ -32,7 +32,7 @@ export default defineComponent({
       star_three: false as boolean,
       star_fo: false as boolean,
       star_five: false as boolean,
-      postList: {} as PostViewModel,
+      postList: {} as postViewModel,
       AvarageStar: 0 as Number,
 
       fullName: '' as String,
@@ -52,22 +52,19 @@ export default defineComponent({
       district: '' as String,
       updatedAt: Date,
       createdAt: Date,
+      adress:'' as String,
       status: 0 as Number,
-      postImages: [],
+      buyerpostImages: [],
       test: false as boolean,
 
       ImageList: [] as string[],
-      ImageIndex: [] as number[]
     }
   },
-  watch:
-    {
-      ImageList:"load"
-    },
   methods: {
-    async getDataAsync() {
-      let SellerId = localStorage.getItem('sellerById')
-      var response = await axios.get<PostViewModel>('/api/common/seller/post/' + Number(SellerId))
+    async getDataAsync() { 
+        debugger;
+      let BuyerId = localStorage.getItem('buyerrById')
+      var response = await axios.get<postViewModel>('/api/common/buyer/posts/' + Number(BuyerId))
       this.postList = response.data || {}
 
       if (this.postList.status! == 0) {
@@ -75,24 +72,26 @@ export default defineComponent({
         this.status_zero = true
       } else if (this.postList.status! == 1) {
         this.statusString = 'Kelishilgan'
-        this.status_one = true
+        this.status_one = true;
+        this.status_zero = false;
       } else if (this.postList.status! == 2) {
         this.statusString = 'Olingan'
-        this.status_two = true
+        this.status_two = true;
+        this.status_zero = false;
       }
       this.showModal = true
 
-      debugger
       this.baseURL = axios.defaults.baseURL!
-      console.log(this.postList.postImages[0].imagePath)
-      var i = 0
-      this.postList.postImages.forEach((element) => {
-        this.ImageList.push(this.baseURL + '/' + this.postList.postImages[i].imagePath)
-        this.ImageIndex.push(Number(i))
-        i++
-      })
+    // console.log(this.postList.buyerpostImages)
+    //   console.log(this.postList.buyerpostImages[0].imagePath+"lll")
 
-      console.log(this.ImageList+"lll")
+    //   var i = 0
+    //   this.postList.buyerpostImages.forEach((element) => {
+    //     this.ImageList.push(this.baseURL + '/' + this.postList.buyerpostImages[i].imagePath)
+    //     i++
+    //   })
+
+   //   console.log(this.ImageList)
 
       this.imageFullPath = this.baseURL
 
@@ -149,14 +148,15 @@ export default defineComponent({
     },
 
     async stars(stars_number) {
+        debugger;
       const formData = new FormData()
-      let SellerId = localStorage.getItem('sellerById')
-      formData.append('PostId', SellerId)
+      let BuyerId = localStorage.getItem('buyerrById')
+      formData.append('PostId', this.id)
       formData.append('Stars', stars_number)
 
-      const responsetwo = await axios.post('/api/admin/seller/post/star', formData)
+      const responsetwo = await axios.post('/api/admin/buyer/star', formData)
 
-      var response = await axios.get<PostViewModel>('/api/common/seller/post/' + Number(SellerId))
+      var response = await axios.get<postViewModel>('/api/common/buyer/posts/' + Number(BuyerId))
       this.postList = response.data || {}
 
       if (stars_number == 1) {
@@ -247,7 +247,7 @@ export default defineComponent({
             style="font-size: 16px"
             class="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-white"
           >
-            {{ $t('sellerannnouncements') }}</a
+            {{ $t('buyerannnouncements') }}</a
           >
         </div>
       </li>
@@ -255,11 +255,10 @@ export default defineComponent({
   </nav>
   <div class="flex" style="gap: 20px">
     <!--Begin corusel-->
-    
-  <coroselItem 
-  :ImageList =ImageList>
+  <!-- <coroselItem 
+  :imagePath=ImageList >
   
-  </coroselItem> 
+  </coroselItem> -->
 
     <!--End corusel-->
 
@@ -533,7 +532,7 @@ export default defineComponent({
               {{ postList.region }} {{ postList.district }}
             </h4>
             <h4 class="text-sm tracking-tight black dark:text-gray-200 px-5">
-              Yangiturmush MFY Tursinzoda 45-Uy
+             {{postList.address}}
             </h4>
           </div>
 
