@@ -52,6 +52,7 @@ export default defineComponent({
       this.imageFullPath = this.baseURL + '/' + this.imagePath
       this.createdAtString = formatDate(this.createdAt!)
       this.updatedAtString = formatDate(this.updatedAt!)
+     
 
       this.AvarageStar = Number(this.averageStars)
 
