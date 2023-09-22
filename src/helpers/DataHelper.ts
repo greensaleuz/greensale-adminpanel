@@ -8,7 +8,7 @@ export function formatDate(date: Date): string {
     let day = date.getDate().toString();
     if(day.length == 1) day = "0"+day;
 
-    let hours = (date.getHours()+5).toString();
+    let hours = (date.getHours()).toString();
     if(hours.length==1) hours = "0"+hours;
     let minutes = date.getMinutes().toString();
     if(minutes.length == 1) minutes = "0"+minutes;
