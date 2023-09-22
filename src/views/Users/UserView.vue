@@ -31,7 +31,7 @@ export default defineComponent({
     async getDataAsync(page:Number) {
       this.isLoaded = false;
       const token = getToken();
-      var response = await axios.get<UserViewModels[]>("/api/admin/users?page="+page, {
+      var response = await axios.get<UserViewModels[]>("/api/admin/users/only/users?page="+page, {
         headers: {
           accept: "*/*",
           "Authorization": `Bearer ${token}`
@@ -39,7 +39,6 @@ export default defineComponent({
       });
       this.isLoaded = true;
       this.userList = response.data;
-
       const paginationJson = JSON.parse(response.headers['x-pagination']);
       this.metaData = new PaginationMetaData();
       this.metaData.currentPage = paginationJson.CurrentPage;

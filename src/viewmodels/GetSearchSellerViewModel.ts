@@ -23,5 +23,5 @@ interface Posts{
 export class GetSearchSellerViewModel
 {
     iteamCount:number=0 ;
-    item2!: Posts[];
+    item2?: Posts[] ;
 }

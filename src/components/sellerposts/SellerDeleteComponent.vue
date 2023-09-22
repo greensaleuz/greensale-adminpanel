@@ -11,7 +11,7 @@ export default defineComponent({
     data() {
         return {
             showDeleteModal: false,
-            sellerId: 0 as Number
+            sellerId: 0 as Number,
         };
     },
     methods: {
@@ -24,7 +24,7 @@ export default defineComponent({
         async confirmDelete() {
             debugger;
             const sellerId = localStorage.getItem('sellerById');
-   
+
             if (sellerId !== null) {
                 console.log("/api/admin/seller/post/" + sellerId)
                 const response = await axios.delete("/api/admin/seller/post/" + sellerId);
