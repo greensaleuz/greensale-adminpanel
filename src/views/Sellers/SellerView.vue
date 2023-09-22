@@ -26,10 +26,8 @@ export default defineComponent({
       hasPrevious: false,
       currentPage: 1 as number,
       totalPages: 1 as number,
-
       list: [],
       sellercount: 1 as number
-
     }
   },
   methods: {
