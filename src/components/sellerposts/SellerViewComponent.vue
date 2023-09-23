@@ -117,7 +117,6 @@ export default defineComponent({
       this.$router.push('sellerinformation')
     },
     async stars(stars_number: Number) {
-      debugger;
       const formData = new FormData();
       if (typeof this.id === 'number') {
         formData.append("PostId", this.id.toString());

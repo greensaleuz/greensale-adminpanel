@@ -111,7 +111,6 @@ localStorage.setItem('sellerById', this.id?.toString() || '');
 this.$router.push('sellerinformation');
 },
 async stars(stars_number) {
-debugger;
 const formData = new FormData();
 formData.append("PostId", this.id);
 formData.append("Stars", stars_number);

@@ -1,18 +1,20 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+import  '../../assets/main.css'
 const { t } = useI18n()
+
+
 </script>
 
 <template>
     <aside id="logo-sidebar"
         class="fixed top-0 left-0 z-40  h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
-        aria-label="Sidebar"
-        style="width: 270px;">
+        aria-label="Sidebar" style="width: 270px;">
         <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
             <ul class="space-y-2 font-medium">
                 <li>
-                    <RouterLink to="/dashboard">
+                    <RouterLink to="/dashboard" class="sidebar_item">
                         <div
                             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <icon name="dashboard" class="text-gray-900 dark:text-white w-6 h-6"></icon>
@@ -21,7 +23,7 @@ const { t } = useI18n()
                     </RouterLink>
                 </li>
                 <li>
-                    <RouterLink to="/categories">
+                    <RouterLink to="/categories" class="sidebar_item">
                         <div
                             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <icon name="category" class="text-gray-900 dark:text-white w-6 h-6"></icon>
@@ -30,7 +32,7 @@ const { t } = useI18n()
                     </RouterLink>
                 </li>
                 <li>
-                    <RouterLink to="/admins">
+                    <RouterLink to="/admins" class="sidebar_item">
                         <div
                             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <icon name="admin" class="text-gray-900 dark:text-white w-6 h-6"></icon>
@@ -39,7 +41,7 @@ const { t } = useI18n()
                     </RouterLink>
                 </li>
                 <li>
-                    <RouterLink to="/users">
+                    <RouterLink to="/users" class="sidebar_item">
                         <div
                             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <icon name="user" class="text-gray-900 dark:text-white w-6 h-6"></icon>
@@ -48,7 +50,7 @@ const { t } = useI18n()
                     </RouterLink>
                 </li>
                 <li>
-                    <RouterLink to="/sellers">
+                    <RouterLink to="/sellers" class="sidebar_item">
                         <div
                             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <icon name="post" class="text-gray-900 dark:text-white w-6 h-6"></icon>
@@ -57,7 +59,7 @@ const { t } = useI18n()
                     </RouterLink>
                 </li>
                 <li>
-                    <RouterLink to="/buyers">
+                    <RouterLink to="/buyers" class="sidebar_item">
                         <div
                             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <icon name="post" class="text-gray-900 dark:text-white w-6 h-6"></icon>
@@ -66,7 +68,7 @@ const { t } = useI18n()
                     </RouterLink>
                 </li>
                 <li>
-                    <RouterLink to="/storages">
+                    <RouterLink to="/storages" class="sidebar_item">
                         <div
                             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <icon name="post" class="text-gray-900 dark:text-white w-6 h-6"></icon>
@@ -75,7 +77,7 @@ const { t } = useI18n()
                     </RouterLink>
                 </li>
                 <li>
-                    <RouterLink to="/info">
+                    <RouterLink to="/info" class="sidebar_item">
                         <div
                             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <icon name="info" class="text-gray-900 dark:text-white w-6 h-6"></icon>
@@ -85,5 +87,26 @@ const { t } = useI18n()
                 </li>
 
             </ul>
-    </div>
-</aside></template>
+        </div>
+    </aside>
+</template>
+
+<script lang="ts">
+export default {
+    mounted() {
+        // This code will run after the component is mounted
+        const sidebarItems = document.querySelectorAll(".sidebar_item");
+        sidebarItems.forEach(element => {
+            element.addEventListener("click", () => {
+                // Remove "active" class from all elements with the "active" class
+                document.querySelectorAll(".sidebar_item div.active").forEach(item => {
+                    item.classList.remove("active");
+                });
+
+                // Add "active" class to the clicked div element
+                element.querySelector("div").classList.add("active");
+            })
+        });
+    }
+}
+</script>

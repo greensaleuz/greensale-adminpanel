@@ -43,7 +43,7 @@ export default defineComponent({
             this.showUpdateRole = false;
         },
         async confirmDelete() {
-          debugger;
+        
             const response = await axios.delete("/api/admin/users/admin" + this.id);
             if (response && response.status) {
                 console.log(response.status.toString());

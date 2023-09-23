@@ -53,7 +53,6 @@ export default defineComponent({
     },
     methods: {
         async getDataAsync() {
-            debugger;
             let SellerId = localStorage.getItem("storageById");
             var response = await axios.get<StorageViewModel>(
                 "/api/common/storage/" + Number(SellerId)
@@ -166,7 +165,6 @@ export default defineComponent({
             this.showDeleteModal = false;
         },
         async confirmDelete() {
-            debugger;
             const sellerId = localStorage.getItem('storageById');
 
             if (sellerId !== null) {
