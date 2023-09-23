@@ -829,7 +829,6 @@ export default defineComponent({
               </button>
               <!--Two Star-->
               <!--Two Star-->
-
               <button @click="stars(5)" v-show="star_five == false">
                 <svg
                   class="w-4 h-4 text-gray-200 dark:text-gray-600 mr-1"
