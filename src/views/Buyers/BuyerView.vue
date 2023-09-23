@@ -18,7 +18,7 @@ export default defineComponent({
     return {
       postsList: [] as BuyerGetByIdPostViewModel[],
       isLoaded: false as Boolean,
-      defaultSkeletons: 2 as Number,
+      defaultSkeletons: 4 as Number,
       search:"" as String,
       metaData: new PaginationMetaData(),
 
@@ -96,7 +96,7 @@ export default defineComponent({
                     </svg>
                     <a href="#" style="font-size: 16px;"
                         class="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-white">
-                        {{ $t("sellerannnouncements") }}</a>
+                        {{ $t("buyerannouncements") }}</a>
                 </div>
             </li>
         </ol>

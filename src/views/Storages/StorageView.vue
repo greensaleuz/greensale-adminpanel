@@ -3,6 +3,7 @@ import { defineComponent } from 'vue';
 import { StorageViewModel } from '../../viewmodels/StorageViewModels';
 import type { GetSearchSellerViewModel } from '../../viewmodels/GetSearchSellerViewModel'
 import StorageViewComponent from '../../components/Storages/StorageComponent.vue'
+import BuyerAnnouncementViewSkelton from '../../components/buyerposts/BuyerComponentSkelton.vue'
 import { PaginationMetaData } from "../../Utils/PaginationUtils";
 import type {GetSearchStorageViewModel} from '../../viewmodels/../viewmodels/GetSearchStorage'
 import axios from '../../plugins/axios';
@@ -11,6 +12,7 @@ export default defineComponent({
   components: {
     StorageViewComponent,
     PaginationMetaData,
+    BuyerAnnouncementViewSkelton
   },
   data() {
     return {
@@ -29,9 +31,9 @@ export default defineComponent({
   },
   methods: {
     async getDataAsync(page: Number) {
-      
-
+      this.isLoaded = false
       var response = await axios.get<StorageViewModel[]>("/api/common/storage?page=" + page);
+      this.isLoaded = true
       this.postsList = response.data;
 
       const paginationJson = JSON.parse(response.headers['x-pagination']);
@@ -91,7 +93,7 @@ export default defineComponent({
           </svg>
           <a href="#" style="font-size: 16px;"
             class="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-white">
-            {{ ("storagsannounce") }}</a>
+            {{ $t("storagsannouncements") }}</a>
         </div>
       </li>
     </ol>
@@ -117,6 +119,12 @@ export default defineComponent({
     </div>
   </div>
   <!--end search-->
+  
+  <ul v-show="isLoaded == false">
+    <template v-for="element in defaultSkeletons" :key="element">
+      <BuyerAnnouncementViewSkelton class="mt 7 mb 3"> </BuyerAnnouncementViewSkelton>
+    </template>
+  </ul>
 
   <ul>
     <div class="cart_wrapper">
