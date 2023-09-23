@@ -1,7 +1,7 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import  '../../assets/main.css'
+import '../../assets/main.css'
 const { t } = useI18n()
 
 
@@ -104,7 +104,14 @@ export default {
                 });
 
                 // Add "active" class to the clicked div element
-                element.querySelector("div").classList.add("active");
+                // element.querySelector("div").classList.add("active");
+
+                const elementt = element.querySelector("div"); // Replace "your-selector" with the actual CSS selector
+
+                if (elementt) {
+                    // Check if element is not null
+                    elementt.classList.add("active");
+                }
             })
         });
     }
