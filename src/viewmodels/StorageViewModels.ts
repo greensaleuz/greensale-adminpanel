@@ -2,7 +2,6 @@ export class StorageViewModel{
      id:number = 0;
      userId:number = 0;
      fullName:string ="" 
-     price:Number=0;
      capacityMeasure:string="";
      capacity:string='';
      phoneNumber:string ="";
