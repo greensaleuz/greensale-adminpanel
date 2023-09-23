@@ -62,9 +62,8 @@ export default defineComponent({
             this.imageFullPath = this.baseURL + "/" + this.postList.imagePath
 
 
-            console.log(this.image_one);
             //  this.updatedAtString = formatDate(this.postList.updatedAt!)
-            this.AvarageStar = this.postList.status;
+            this.AvarageStar = this.postList.averageStars
 
 
             if (this.postList.userStars === 0) {
