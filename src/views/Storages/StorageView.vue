@@ -31,7 +31,6 @@ export default defineComponent({
   },
   methods: {
     async getDataAsync(page: Number) {
-      debugger;
       this.isLoaded = false
       var response = await axios.get<StorageViewModel[]>("/api/common/storage?page=" + page);
       this.isLoaded = true
@@ -54,7 +53,6 @@ export default defineComponent({
       this.postsList = this.list.item2;
     },
     handleEnterKey: function (search: any) {
-      // debugger;
 
       if (search == "") {
         this.getDataAsync(1);

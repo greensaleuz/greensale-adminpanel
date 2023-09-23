@@ -72,7 +72,6 @@ export default defineComponent({
   },
   methods: {
     async getDataAsync() { 
-        debugger;
       let BuyerId = localStorage.getItem('buyerrById')
       var response = await axios.get<BuyerGetByIdPostViewModel>('/api/common/buyer/posts/' + Number(BuyerId))
       this.postList = response.data || {}
@@ -213,7 +212,6 @@ export default defineComponent({
             this.showDeleteModal = false;
         },
         async confirmDelete() {
-            debugger;
             const buyerId = localStorage.getItem('buyerrById');
    
             if (buyerId !== null) {

@@ -32,13 +32,11 @@ export default defineComponent({
   },
   methods: {
     async getDataAsync(page:Number) {
-        debugger;
       this.isLoaded = false
       //this.postsList = [];
-      debugger;
       var response = await axios.get<BuyerGetByIdPostViewModel[]>(
-        '/api/common/buyer/posts?page='+page)
-      debugger;
+        '/api/common/buyer/posts?page='+page
+      )
       this.isLoaded = true
       this.postsList = response.data || [];
 
@@ -53,15 +51,12 @@ export default defineComponent({
     },
     async getSearch(search:any){
             this.isLoaded = false;
-            debugger;
             var response = await axios.get<GetSearchBuyerViewModels>("/api/common/buyer/posts/search/title?search=" + search);
-            debugger;
             this.isLoaded = true;
             this.list = response.data || [];
             this.postsList = this.list.item2 || [];                      
         },
         handleEnterKey: function(search:any) {
-            // debugger;
 
             if(search == "" ){
                 this.getDataAsync(1);

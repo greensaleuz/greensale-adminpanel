@@ -25,7 +25,7 @@ export default defineComponent({
   },
   methods: {    
     getBaseURL(){
-      debugger;
+     
       this.baseURL = axios.defaults.baseURL!;
       this.createdAtString = formatDate(this.createdAt!);
       this.updatedAtString = formatDate(this.updatedAt!);

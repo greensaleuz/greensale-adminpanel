@@ -220,7 +220,6 @@ export default defineComponent({
             this.showDeleteModal = false;
         },
         async confirmDelete() {
-            debugger;
             const sellerId = localStorage.getItem('sellerById');
 
             if (sellerId !== null) {

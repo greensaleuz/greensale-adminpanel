@@ -125,10 +125,6 @@ export default defineComponent({
       formData.append("Stars", stars_number.toString());
       console.log(this.id);
       const responsetwo = await axios.post("/api/admin/buyer/star", formData);
-
-
-
-
       if (stars_number == 1) {
         this.star_one = true;
         this.star_two = false;

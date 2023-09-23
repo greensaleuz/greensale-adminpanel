@@ -107,7 +107,7 @@ export default defineComponent({
       this.$router.push('storageinformation')
     },
     async stars(stars_number: Number) {
-      debugger;
+     
 
       const formData = new FormData();
       if (typeof this.id === 'number') {
