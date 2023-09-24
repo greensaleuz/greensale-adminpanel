@@ -1,9 +1,10 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
+import spinner from '../dashboard/Spinner.vue'
 import ApexCharts from 'apexcharts'
 export default defineComponent({
   components: {
-    
+    spinner,
   },
   props: {
     apiData: Number,
@@ -12,6 +13,13 @@ export default defineComponent({
     countAgreed: Number,
     countBuyer: Number,
     summaAnnouncemet: Number
+  },
+  data() {
+    return {
+      defaultSkeletons: 6 as Number,
+      isLoaded:false as Boolean
+
+    }
   },
   methods: {
 

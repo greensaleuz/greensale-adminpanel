@@ -2,7 +2,7 @@
 import { defineComponent } from 'vue'
 import { CategoryViewModel } from '../../viewmodels/CategoryViewModels'
 import { CategoryDto } from '../../dtos/CategoryDto'
-import CategoryViewComponent from '../../components/categories/categoryviewcomponent.vue'
+import CategoryViewComponent from '../../components/categories/CategoryViewComponent.vue'
 import CategoryCreateComponent from '../../components/categories/CategoryCreateComponent.vue'
 import CategorySkeletonComponent from '../../components/categories/CategorySkeletonComponent.vue'
 import axios from '../../plugins/axios'
