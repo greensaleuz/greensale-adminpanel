@@ -5,13 +5,14 @@ import { formatDate } from "../../helpers//DataHelper";
 import type { StorageViewModel } from "../../viewmodels/StorageViewModels";
 
 import FlowbiteSetUp from "../../FlowbiteSetup.vue";
-
+import PostSkeleton from '../../components/posts/PostGetBySkeleton.vue'
 import deleteComponent from "../../components/Storages/StorageDeleteComponent.vue";
 
 export default defineComponent({
     components: {
         FlowbiteSetUp,
-        deleteComponent
+        deleteComponent,
+        PostSkeleton
     },
     props: {
         createdAtString: Date,
@@ -19,6 +20,8 @@ export default defineComponent({
     },
     data() {
         return {
+            skeleton : 1 as number,
+            isLoaded:false as boolean,
             baseURL: "",
             imageFullPath: "" as string,
 
@@ -53,10 +56,12 @@ export default defineComponent({
     },
     methods: {
         async getDataAsync() {
+            this.isLoaded = false
             let SellerId = localStorage.getItem("storageById");
             var response = await axios.get<StorageViewModel>(
                 "/api/common/storage/" + Number(SellerId)
             );
+            this.isLoaded = true
             this.postList = response.data || {};
 
 
@@ -206,16 +211,25 @@ export default defineComponent({
                             d="m1 9 4-4-4-4" />
                     </svg>
                     <a href="#" style="font-size: 16px"
-                        class="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-white"
-                        >
+                        class="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-white">
                         {{ $t("storagsannouncements") }} </a>
                 </div>
             </li>
         </ol>
     </nav>
+      <!--begin:: Post Skeletons-->
+  <ul v-show="isLoaded==false">
+    <template v-for="element in skeleton">
+      <PostSkeleton
+      class="my-5 mx-5">
+
+      </PostSkeleton>
+    </template>
+  </ul>
+  <!--end:: Post Skeletons-->
     <div class="flex" style="gap: 20px">
         <!--Begin corusel one image-->
-        <div class="relative w-full my-5">
+        <div v-show="isLoaded==true" class="relative w-full my-5">
             <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
                 <div class=" duration-700 ease-in-out">
                     <img :src="imageFullPath" class="absolute block max-w-full h-full " alt="" />
@@ -228,7 +242,7 @@ export default defineComponent({
 
 
 
-        <div class="flex" style="display: flex">
+        <div v-show="isLoaded==true" class="flex" style="display: flex">
             <div class="w-full h-96 my-5 flex text-gray-700 border border-gray-200 rounded-lg bg-gray-50 dark:text-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                 style="flex-direction: column">
                 <div class="">
@@ -348,7 +362,7 @@ export default defineComponent({
                     </p>
 
                 </div>
-                
+
                 <div class="w-96 flex my-3 pt-2" style="gap: 10px; margin-top: auto">
 
                     <div class="flex" style="gap: 5px mt-20">
@@ -383,28 +397,28 @@ export default defineComponent({
                 </div>
 
                 <div class="w-96 flex  mb-6 mt-3" style="gap: 10px; ">
-                   
-                        <div class="flex" style="gap: 5px">
-                            <div class="pl-4">
-                                <icon name="location" class="py-2" style=""></icon>
-                            </div>
 
-                            <h4 class="text-sm tracking-tight black dark:text-gray-400">Manzil:</h4>
+                    <div class="flex" style="gap: 5px">
+                        <div class="pl-4">
+                            <icon name="location" class="py-2" style=""></icon>
                         </div>
 
-                        <div>
-                            <h4 class="text-sm tracking-tight black dark:text-gray-100 px-2">
-                                {{ postList.region }} {{ postList.district }}
-                            </h4>
-                            <h4 class="text-sm tracking-tight black dark:text-gray-200 px-2">
-                                Yangiturmush MFY Tursinzoda 45-Uy
-                            </h4>
-                        </div>
+                        <h4 class="text-sm tracking-tight black dark:text-gray-400">Manzil:</h4>
+                    </div>
+
+                    <div>
+                        <h4 class="text-sm tracking-tight black dark:text-gray-100 px-2">
+                            {{ postList.region }} {{ postList.district }}
+                        </h4>
+                        <h4 class="text-sm tracking-tight black dark:text-gray-200 px-2">
+                            Yangiturmush MFY Tursinzoda 45-Uy
+                        </h4>
                     </div>
                 </div>
             </div>
         </div>
- 
+    </div>
+
     <!--begin:: Delete Modal Button-->
     <button type="button" @click="openDeleteModal" data-modal-target="staticModal" data-modal-toggle="staticModal"
         class="my-5 w-40 text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2">
@@ -441,5 +455,4 @@ export default defineComponent({
         </div>
     </div>
     <!--end:: Delete Modal Window-->
-
 </template>

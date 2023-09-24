@@ -134,7 +134,7 @@ export default defineComponent({
           :userPhoneNumber=element.phoneNumber :info=element.info :description=element.description 
           :capacity=element.capacity :capacityMeasure=element.capacityMeasure :region=element.region
           :district=element.district :address=element.address :createdAt=element.createdAt :updatedAt=element.updatedAt
-          :imagePath=element.imagePath :averageStars=element.averageStars :userStars=element.userStars
+           :imagePath=element.imagePath :averageStars=element.averageStars :userStars=element.userStars
           :addressLatitude=element.addressLatitude :addressLongitude=element.addressLongitude></StorageViewComponent>
 
       </template>
