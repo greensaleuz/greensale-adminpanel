@@ -94,6 +94,10 @@
     "statustypezero":"Yangi",
     "statustypeone":"kelishilgan",
     "statustypetwo":"Sotilgan",
-    "admin":"+Admin",
-    "adminstration":"Haqiqatdan ham ushbu foydalanuvchiga administrator huquqlarini berishni xohlaysizmi"
-    }
+    "admin":"+ Admin",
+    "adminback":"- Admin",
+    
+    "adminstration":"Haqiqatdan ham ushbu foydalanuvchiga administrator huquqlarini berishni xohlaysizmi",
+    "adminstrationback":"Haqiqatdan ham ushbu administratorni huquqlarini bekor qilishni xohlaysizmi"
+
+}
