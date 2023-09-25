@@ -22,14 +22,16 @@ export default defineComponent({
             this.showDeleteModal = false;
         },
         async confirmDelete() {
-            const sellerId = localStorage.getItem('sellerById');
+
+            debugger;
+            const sellerId = localStorage.getItem('storageById');
+
 
             if (sellerId !== null) {
-                console.log("/api/admin/seller/post/" + sellerId)
-                const response = await axios.delete("/api/admin/seller/post/" + sellerId);
+                const response = await axios.delete("/api/admin/storage/" + sellerId);
                 console.log(response);
                 this.closeDeleteModal();
-                this.$router.push('sellers');
+                this.$router.push('storages');
             }
         }
     },
