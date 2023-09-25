@@ -31,7 +31,7 @@ export default defineComponent({
           'Content-Type': 'application/json'
         }
       })
-
+      debugger;
 
       if (response.status == 200) {
         var token: string = response.data.token
