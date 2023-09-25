@@ -76,15 +76,7 @@ const { t } = useI18n()
                         </div>
                     </RouterLink>
                 </li>
-                <li>
-                    <RouterLink to="/info" class="sidebar_item">
-                        <div
-                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                            <icon name="info" class="text-gray-900 dark:text-white w-6 h-6"></icon>
-                            <span class="flex-1 ml-3 whitespace-nowrap">{{ $t("informations") }}</span>
-                        </div>
-                    </RouterLink>
-                </li>
+                
 
             </ul>
         </div>
