@@ -22,8 +22,10 @@ export default defineComponent({
             this.showDeleteModal = false;
         },
         async confirmDelete() {
+
             debugger;
             const sellerId = localStorage.getItem('storageById');
+
 
             if (sellerId !== null) {
                 const response = await axios.delete("/api/admin/storage/" + sellerId);

@@ -46,11 +46,11 @@ export default defineComponent({
       id="dropdown-user">
       <div class="px-4 py-3" role="none">
         <p class="text-sm text-gray-900 dark:text-white" role="none">
-          {{ this.list.firstName }}
-          {{ this.list.lastName }}
+          {{ list.firstName }}
+          {{ list.lastName }}
         </p>
         <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
-          {{ this.list.phoneNumber }}
+          {{ list.phoneNumber }}
         </p>
       </div>
       <ul class="py-1" role="none">

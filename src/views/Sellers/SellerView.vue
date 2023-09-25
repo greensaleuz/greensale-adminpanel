@@ -52,9 +52,7 @@ export default defineComponent({
     },
     async getSearch(search: any) {
       this.isLoaded = false;
-      debugger;
       var response = await axios.get<GetSearchSellerViewModel>("/api/common/seller/post/search/title?search=" + search);
-      debugger;
       this.isLoaded = true;
       this.list = response.data;
       this.postsList = this.list.item2 || [];
@@ -62,7 +60,6 @@ export default defineComponent({
 
     },
     handleEnterKey: function (search: any) {
-      // debugger;
 
       if (search == "") {
         this.getDataAsync(1);

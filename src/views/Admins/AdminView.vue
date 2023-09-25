@@ -90,8 +90,11 @@ export default defineComponent({
           <th scope="col" class="w-32 px-6 py-3  text-gray-900 whitespace-nowrap dark:text-white">
             {{ $t('region') }}
           </th>
-          <th scope="col" class="w-32 px-6 py-3 text-gray-900 whitespace-nowrap dark:text-white">
+          <th scope="col" class="w-28 px-6 py-3 text-gray-900 whitespace-nowrap dark:text-white">
             {{ $t('district') }}
+          </th>
+          <th scope="col" class="w-32 px-6 py-3 text-gray-900 whitespace-nowrap dark:text-white">
+            {{ $t('operations') }}
           </th>
         </tr>
       </thead>

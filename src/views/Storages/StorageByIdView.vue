@@ -2,16 +2,17 @@
 import { defineComponent } from "vue";
 import axios from "../../plugins/axios";
 import { formatDate } from "../../helpers//DataHelper";
-import type { PostViewModel } from "../../viewmodels/SellerGetByIdViewModel";
+import type { StorageViewModel } from "../../viewmodels/StorageViewModels";
 
 import FlowbiteSetUp from "../../FlowbiteSetup.vue";
-
+import PostSkeleton from '../../components/posts/PostGetBySkeleton.vue'
 import deleteComponent from "../../components/Storages/StorageDeleteComponent.vue";
 
 export default defineComponent({
     components: {
         FlowbiteSetUp,
-        deleteComponent
+        deleteComponent,
+        PostSkeleton
     },
     props: {
         createdAtString: Date,
@@ -19,8 +20,10 @@ export default defineComponent({
     },
     data() {
         return {
+            skeleton : 1 as number,
+            isLoaded:false as boolean,
             baseURL: "",
-            imageFullPath: "",
+            imageFullPath: "" as string,
 
             star_one: false as boolean,
             star_two: false as boolean,
@@ -28,8 +31,11 @@ export default defineComponent({
             star_fo: false as boolean,
             star_five: false as boolean,
 
-            postList: {} as PostViewModel,
+            postList: {} as StorageViewModel,
             AvarageStar: 0 as Number,
+
+            showDeleteModal: false,
+            sellerId: 0 as Number,
 
             //   fullName: "" as String,
             //   id: 0 as Number,
@@ -50,11 +56,12 @@ export default defineComponent({
     },
     methods: {
         async getDataAsync() {
-            debugger;
+            this.isLoaded = false
             let SellerId = localStorage.getItem("storageById");
-            var response = await axios.get<PostViewModel>(
+            var response = await axios.get<StorageViewModel>(
                 "/api/common/storage/" + Number(SellerId)
             );
+            this.isLoaded = true
             this.postList = response.data || {};
 
 
@@ -62,9 +69,8 @@ export default defineComponent({
             this.imageFullPath = this.baseURL + "/" + this.postList.imagePath
 
 
-            console.log(this.image_one);
             //  this.updatedAtString = formatDate(this.postList.updatedAt!)
-            this.AvarageStar = this.postList.status;
+            this.AvarageStar = this.postList.averageStars
 
 
             if (this.postList.userStars === 0) {
@@ -118,7 +124,7 @@ export default defineComponent({
 
             const responsetwo = await axios.post("api/admin/storage/post/star", formData);
 
-            var response = await axios.get<PostViewModel>(
+            var response = await axios.get<StorageViewModel>(
                 "/api/common/storage/" + Number(StorageId)
             );
 
@@ -157,6 +163,23 @@ export default defineComponent({
             }
             this.AvarageStar = this.postList.averageStars;
         },
+        openDeleteModal() {
+            this.showDeleteModal = true;
+        },
+        closeDeleteModal() {
+            this.showDeleteModal = false;
+        },
+        async confirmDelete() {
+            const sellerId = localStorage.getItem('storageById');
+
+            if (sellerId !== null) {
+                console.log("api/admin/storage/" + sellerId)
+                const response = await axios.delete("/api/admin/storage/" + sellerId);
+                console.log(response);
+                this.closeDeleteModal();
+                this.$router.push('storages');
+            }
+        }
     },
     setup() { },
     async mounted() {
@@ -189,14 +212,24 @@ export default defineComponent({
                     </svg>
                     <a href="#" style="font-size: 16px"
                         class="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-white">
-                        {{ $t("buyerannouncements") }}</a>
+                        {{ $t("storagsannouncements") }} </a>
                 </div>
             </li>
         </ol>
     </nav>
+      <!--begin:: Post Skeletons-->
+  <ul v-show="isLoaded==false">
+    <template v-for="element in skeleton">
+      <PostSkeleton
+      class="my-5 mx-5">
+
+      </PostSkeleton>
+    </template>
+  </ul>
+  <!--end:: Post Skeletons-->
     <div class="flex" style="gap: 20px">
         <!--Begin corusel one image-->
-        <div class="relative w-full my-5">
+        <div v-show="isLoaded==true" class="relative w-full my-5">
             <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
                 <div class=" duration-700 ease-in-out">
                     <img :src="imageFullPath" class="absolute block max-w-full h-full " alt="" />
@@ -209,7 +242,7 @@ export default defineComponent({
 
 
 
-        <div class="flex" style="display: flex">
+        <div v-show="isLoaded==true" class="flex" style="display: flex">
             <div class="w-full h-96 my-5 flex text-gray-700 border border-gray-200 rounded-lg bg-gray-50 dark:text-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                 style="flex-direction: column">
                 <div class="">
@@ -329,7 +362,7 @@ export default defineComponent({
                     </p>
 
                 </div>
-                
+
                 <div class="w-96 flex my-3 pt-2" style="gap: 10px; margin-top: auto">
 
                     <div class="flex" style="gap: 5px mt-20">
@@ -364,27 +397,62 @@ export default defineComponent({
                 </div>
 
                 <div class="w-96 flex  mb-6 mt-3" style="gap: 10px; ">
-                   
-                        <div class="flex" style="gap: 5px">
-                            <div class="pl-4">
-                                <icon name="location" class="py-2" style=""></icon>
-                            </div>
 
-                            <h4 class="text-sm tracking-tight black dark:text-gray-400">Manzil:</h4>
+                    <div class="flex" style="gap: 5px">
+                        <div class="pl-4">
+                            <icon name="location" class="py-2" style=""></icon>
                         </div>
 
-                        <div>
-                            <h4 class="text-sm tracking-tight black dark:text-gray-100 px-2">
-                                {{ postList.region }} {{ postList.district }}
-                            </h4>
-                            <h4 class="text-sm tracking-tight black dark:text-gray-200 px-2">
-                                Yangiturmush MFY Tursinzoda 45-Uy
-                            </h4>
-                        </div>
+                        <h4 class="text-sm tracking-tight black dark:text-gray-400">Manzil:</h4>
+                    </div>
+
+                    <div>
+                        <h4 class="text-sm tracking-tight black dark:text-gray-100 px-2">
+                            {{ postList.region }} {{ postList.district }}
+                        </h4>
+                        <h4 class="text-sm tracking-tight black dark:text-gray-200 px-2">
+                            Yangiturmush MFY Tursinzoda 45-Uy
+                        </h4>
                     </div>
                 </div>
             </div>
         </div>
- 
-    <deleteComponent></deleteComponent>
+    </div>
+
+    <!--begin:: Delete Modal Button-->
+    <button type="button" @click="openDeleteModal" data-modal-target="staticModal" data-modal-toggle="staticModal"
+        class="my-5 w-40 text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2">
+        {{ $t('delete') }}
+    </button>
+    <!--end:: Delete Modal Button-->
+    <!--begin:: Delete Modal Window-->
+    <div v-if="showDeleteModal"
+        class="fixed top-0 left-0 right-0 z-50 w-full h-screen flex items-center justify-center bg-black bg-opacity-50">
+        <div class="relative w-full max-w-md max-h-full">
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <button @click="closeDeleteModal"
+                    class="absolute top-3  right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                    data-modal-hide="popup-modal">
+                    <svg class="w-3 h-3 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                    </svg>
+                    <span class="sr-only mt-10">Close modal</span>
+                </button>
+                <div class="p-6 text-center">
+                    <h3 class="my-5 text-lg font-normal text-gray-500 dark:text-gray-400 ">
+                        {{ $t('postdleteaccess') }}</h3>
+                    <button @click="closeDeleteModal" type="button"
+                        class="text-gray-500 mr-6 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                        {{ $t('censel') }}</button>
+                    <button @click="confirmDelete" type="button"
+                        class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
+                        {{ $t('yes') }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end:: Delete Modal Window-->
 </template>

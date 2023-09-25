@@ -23,7 +23,6 @@ export default defineComponent({
             this.showDeleteModal = false;
         },
         async confirmDelete() {
-            debugger;
             const buyerId = localStorage.getItem('buyerrById');
    
             if (buyerId !== null) {

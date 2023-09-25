@@ -43,7 +43,7 @@ export default defineComponent({
             this.showUpdateRole = false;
         },
         async confirmDelete() {
-          debugger;
+        
             const response = await axios.delete("/api/admin/users/admin" + this.id);
             if (response && response.status) {
                 console.log(response.status.toString());
@@ -57,15 +57,15 @@ export default defineComponent({
             }
         },
         async cofirmUpdate() {
-            const response = await axios.put("/api/superadmin/user/roles/" + this.id, { roleId: 2 }, {
+            const response = await axios.put("/api/superadmin/user/roles/" + this.id, { roleId: 1 }, {
                 headers: {
                     'Content-Type': 'application/json', // Ma'lumotni JSON formatida yuborish
                 },
             });
             if (response && response.status) {
                 console.log(response.status.toString());
-                console.log("UpdatingRole the user...");
-                this.$router.push('users')
+                console.log("UpdatingRole the admin...");
+                this.$router.push('admins')
                 this.closeUpdateRole();
                 location.reload();
             }
@@ -109,12 +109,11 @@ export default defineComponent({
                     <icon name="delete"></icon>
                 </button>
                 </td> -->
-            <!-- <td class="w-32 px-0 py-4">
-                <button type="button" @click="openUpdateRole"
-                    class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900">
-                    {{ $t('admin') }}
+            <td class="w-32 px-0 py-4">
+                <button type="button" @click="openUpdateRole" class="px-3 py-2 text-sm font-medium text-center inline-flex items-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <h2 class="mx-2 mb-1 ">{{$t("adminback") }}</h2>
                 </button>
-                </td> -->
+           </td>
             </tr>
     </tbody>
     <div v-if="showDeleteModal"
@@ -164,7 +163,7 @@ export default defineComponent({
                 <div class="p-6 text-center">
 
                     <h3 class="my-5 text-lg font-normal text-gray-500 dark:text-gray-400 ">
-                        {{ $t('adminstration') }}</h3>
+                        {{ $t('adminstrationback') }}</h3>
                     <button @click="closeUpdateRole" type="button"
                         class="text-gray-500 mr-6 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                         {{ $t('censel') }}</button>

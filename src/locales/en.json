@@ -19,6 +19,7 @@
     "edit":"Edit",
     "delete":"Delete",
     "create":"Create",
+    "search":"Search",
     
     "enter_a_category_name":"Enter a category name",
     "add_a_category":"Add a category",
@@ -89,6 +90,10 @@
     "statustypezero":"New",
     "statustypeone":"Agreed",
     "statustypetwo":"Buyed",
-    "admin":"+Admin",
-    "adminstration":"Do you really want to give this user admin rights?"
+    "admin":"+ Admin",
+    "adminback":"- Admin",
+    "adminstration":"Do you really want to give this user admin rights?",
+    "adminstrationback":"Are you sure you want to revoke this administrator's rights?"
+
+
     }
