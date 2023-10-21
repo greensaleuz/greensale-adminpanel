@@ -1,10 +1,30 @@
-# greensale-adminpanel
 
 This template should help get you started developing with Vue 3 in Vite.
 
 #Login
 
 ![image](https://github.com/greensaleuz/greensale-adminpanel/assets/121451433/f935521c-9a27-4622-b0ae-6f8b87c90928)
+
+# Dashboard Reload 
+
+![image](https://github.com/greensaleuz/greensale-adminpanel/assets/121451433/62139eea-916d-411d-83a5-7bcf51cc72a5)
+
+# Dashboard
+
+![image](https://github.com/greensaleuz/greensale-adminpanel/assets/121451433/040dd362-5c23-4d9f-8241-626d64ad234a)
+
+# Categories LightMod
+
+![image](https://github.com/greensaleuz/greensale-adminpanel/assets/121451433/bbfbf56a-d5b4-4bf2-a73b-cf1b7c521ae5)
+
+#Categories DarkMod
+
+![image](https://github.com/greensaleuz/greensale-adminpanel/assets/121451433/e4eebfe1-8ad4-4d99-acc7-fdd178a710f9)
+
+
+
+
+
 
 
 
