@@ -1,5 +1,5 @@
 <h3>Green Sale Admin Panel</h3>
-
+This company ensures that agricultural products reach the customer faster and with better quality. Therefore, we provide communication between our farmers and traders.
 
 #Login
 
