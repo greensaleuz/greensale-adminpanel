@@ -1,7 +1,7 @@
 <h3>Green Sale Admin Panel</h3>
 This company ensures that agricultural products reach the customer faster and with better quality. Therefore, we provide communication between our farmers and traders.
 
-#Login
+# Login
 
 ![image](https://github.com/greensaleuz/greensale-adminpanel/assets/121451433/f935521c-9a27-4622-b0ae-6f8b87c90928)
 
@@ -17,7 +17,7 @@ This company ensures that agricultural products reach the customer faster and wi
 
 ![image](https://github.com/greensaleuz/greensale-adminpanel/assets/121451433/bbfbf56a-d5b4-4bf2-a73b-cf1b7c521ae5)
 
-#Categories DarkMod
+# Categories DarkMod
 
 ![image](https://github.com/greensaleuz/greensale-adminpanel/assets/121451433/e4eebfe1-8ad4-4d99-acc7-fdd178a710f9)
 
@@ -45,7 +45,12 @@ This company ensures that agricultural products reach the customer faster and wi
 
 ![image](https://github.com/greensaleuz/greensale-adminpanel/assets/121451433/e6c942a4-1e99-4c34-b2a8-be16774a3b95)
 
-#Seller Post (GetById)
+# Seller Post (GetById)
 
 ![image](https://github.com/greensaleuz/greensale-adminpanel/assets/121451433/db324374-0b2f-4a38-a74b-4e9939dd3c49)
+
+# Seller Post Delete
+
+![image](https://github.com/greensaleuz/greensale-adminpanel/assets/121451433/d94157ea-1bf2-4faa-b0a0-5680dbf51438)
+
 
